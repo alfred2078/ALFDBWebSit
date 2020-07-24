@@ -1,0 +1,910 @@
+const listmenu = [
+          {
+            redirect: null,
+            path: "/dashboard/dashmain",
+            component: "dashboard/DashMainExp",
+            route: "1",
+            hidden: false,
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              icon: "store",
+              title: "首页"
+            },
+            name: "dashboard-dashmain",
+            id: "9502685863ab87f0ad1134142788a385"
+          },
+          {
+            redirect: null,
+            path: "/systemset",
+            component: "layouts/RouteView",
+            route: "1",
+            hidden: false,
+            children: [
+              {
+                path: "/systemset/user",
+                component: "systemset/UserList",
+                route: "1",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "用户管理"
+                },
+                name: "systemset-user",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              {
+                path: "/systemset/role",
+                component: "systemset/RoleList",
+                route: "2",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "角色管理"
+                },
+                name: "systemset-role",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              // {
+              //   "path": "/systemset/auth",
+              //   "component": "systemset/AuthList",
+              //   "route": "2",
+              //   "hidden": false,
+              //   "meta": {
+              //     "keepAlive": false,
+              //     "internalOrExternal": false,
+              //     "title": "权限管理"
+              //   },
+              //   "name": "systemset-auth",
+              //   "id": "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/systemset/menu",
+              //   component: "systemset/MenuList",
+              //   route: "3",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "菜单管理"
+              //   },
+              //   name: "systemset-menu",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/systemset/log",
+              //   component: "systemset/LogList",
+              //   route: "4",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "日志管理"
+              //   },
+              //   name: "systemset-log",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // }
+              // {
+              //   "path": "/systemset/logincount",
+              //   "component": "systemset/LoginCountList",
+              //   "route": "2",
+              //   "hidden": false,
+              //   "meta": {
+              //     "keepAlive": false,
+              //     "internalOrExternal": false,
+              //     "title": "登录账户数设置"
+              //   },
+              //   "name": "systemset-logincount",
+              //   "id": "3f915b2769fc80648e92d04e84ca059d"
+              // }
+            ],
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              icon: "set",
+              title: "系统管理"
+            },
+            name: "systemset",
+            id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          },
+          {
+            redirect: null,
+            path: "/databaseset",
+            component: "layouts/RouteView",
+            route: "1",
+            hidden: false,
+            children: [
+              // {
+              //   path: "/databaseset/material",
+              //   component: "databaseset/MaterialList",
+              //   route: "1",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "物料管理"
+              //   },
+              //   name: "databaseset-material",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              {
+                path: "/databaseset/warehouse",
+                component: "databaseset/WarehouseList",
+                route: "2",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "仓库管理"
+                },
+                name: "database-warehouse",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              {
+                path: "/databaseset/house",
+                component: "databaseset/HouseList",
+                route: "3",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "库区管理"
+                },
+                name: "databaseset-house",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              {
+                path: "/databaseset/area",
+                component: "databaseset/AreaList",
+                route: "4",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "库位管理"
+                },
+                name: "databaseset-area",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              // {
+              //   path: "/databaseset/materialfile",
+              //   component: "databaseset/MaterialFile",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "编辑物料"
+              //   },
+              //   name: "databaseset-materialfile",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // }
+            ],
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              icon: "database",
+              title: "基础数据"
+            },
+            name: "databaseset",
+            id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          },
+          // {
+          //   redirect: null,
+          //   path: "/labelprint",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/labelprint/voucherlabel/23",
+          //       component: "labelprint/VoucherLabel",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "采购标签"
+          //       },
+          //       name: "labelprint-voucherlabel",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/labelprint/voucherlabel",
+          //       component: "labelprint/VoucherLabel",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "杂入标签"
+          //       },
+          //       name: "labelprint-voucherlabel",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/labelprint/voucherlabel",
+          //       component: "labelprint/VoucherLabel",
+          //       route: "3",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "销退标签"
+          //       },
+          //       name: "labelprint-voucherlabel",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/labelprint/voucherlabel",
+          //       component: "labelprint/VoucherLabel",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "物料标签"
+          //       },
+          //       name: "labelprint-voucherlabel",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/labelprint/voucherlabel",
+          //       component: "labelprint/VoucherLabel",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "工单标签"
+          //       },
+          //       name: "labelprint-voucherlabel",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "print",
+          //     title: "标签打印"
+          //   },
+          //   name: "labelprint",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/labelprint",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/instock/purchase",
+          //       component: "instock/VoucherPurchase",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "采购订单"
+          //       },
+          //       name: "instock-voucherpurchase",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instock/produce",
+          //       component: "instock/VoucherProduce",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "生产订单"
+          //       },
+          //       name: "instock-voucherproduce",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instock/uppershelf",
+          //       component: "instock/VoucherUpperShelf",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "上架任务"
+          //       },
+          //       name: "instock-voucheruppershelf",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instock/pallet",
+          //       component: "instock/Pallet",
+          //       route: "3",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "托盘管理"
+          //       },
+          //       name: "instock-pallet",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "instock",
+          //     title: "入库管理"
+          //   },
+          //   name: "instock",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/quality",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/quality/voucherquality",
+          //       component: "quality/VoucherQuality",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "检验单"
+          //       },
+          //       name: "quality-voucherquality",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "quality",
+          //     title: "检验管理"
+          //   },
+          //   name: "quality",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/outstock",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/outstock/delivery",
+          //       component: "outstock/VoucherDelivery",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "发货通知单"
+          //       },
+          //       name: "outstock-voucherdelivery",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/outstock/dispatchcar",
+          //       component: "outstock/VoucherDispatchCar",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "派车单管理"
+          //       },
+          //       name: "outstock-voucherdispatchcar",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     // {
+          //     //   path: "/outstock/railway",
+          //     //   component: "outstock/railway",
+          //     //   route: "3",
+          //     //   hidden: false,
+          //     //   meta: {
+          //     //     keepAlive: false,
+          //     //     internalOrExternal: false,
+          //     //     title: "月台管理"
+          //     //   },
+          //     //   name: "outstock-railway",
+          //     //   id: "3f915b2769fc80648e92d04e84ca059d"
+          //     // },
+          //     {
+          //       path: "/outstock/lcl",
+          //       component: "outstock/Voucherlcl",
+          //       route: "3",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "拼箱管理"
+          //       },
+          //       name: "outstock-lcl",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     // {
+          //     //   path: "/outstock/entruck",
+          //     //   component: "outstock/entruck",
+          //     //   route: "4",
+          //     //   hidden: false,
+          //     //   meta: {
+          //     //     keepAlive: false,
+          //     //     internalOrExternal: false,
+          //     //     title: "装车管理"
+          //     //   },
+          //     //   name: "outstock-entruck",
+          //     //   id: "3f915b2769fc80648e92d04e84ca059d"
+          //     // },
+          //     {
+          //       path: "/outstock/entruck",
+          //       component: "outstock/VoucherEntruck",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "托运单管理"
+          //       },
+          //       name: "outstock-voucherentruck",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/outstock/materialreq",
+          //       component: "outstock/VoucherMaterialReq",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "领料单管理"
+          //       },
+          //       name: "outstock-vouchermaterialreq",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "outstock",
+          //     title: "出库管理"
+          //   },
+          //   name: "outstock",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/transfer",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/transfer/transferin",
+          //       component: "transfer/VoucherTransferIn",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "调拨入库单"
+          //       },
+          //       name: "transfer-vouchertransferin",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/transfer/transferout",
+          //       component: "transfer/VoucherTransfeOut",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "调拨出库单"
+          //       },
+          //       name: "transfer-vouchertransfeout",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "transfer",
+          //     title: "调拨管理"
+          //   },
+          //   name: "transfer",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/returnstock",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/returnstock/salereturn",
+          //       component: "returnstock/VoucherSaleReturn",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "销售退货单"
+          //       },
+          //       name: "returnstock-vouchersalereturn",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/returnstock/purchasereturn/23",
+          //       component: "returnstock/VoucherPurchaseReturn",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "仓退单"
+          //       },
+          //       name: "returnstock-voucherpurchasereturn",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/returnstock/purchasereturn",
+          //       component: "returnstock/VoucherPurchaseReturn",
+          //       route: "3",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "验退单"
+          //       },
+          //       name: "returnstock-voucherpurchasereturn",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/returnstock/proreturn",
+          //       component: "returnstock/VoucherProReturn",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "生产退料单"
+          //       },
+          //       name: "returnstock-voucherproreturn",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "returnstock",
+          //     title: "退货管理"
+          //   },
+          //   name: "returnstock",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          // {
+          //   redirect: null,
+          //   path: "/instore",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/instore/inventory",
+          //       component: "instore/Inventory",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "盘点管理"
+          //       },
+          //       name: "instore-inventory",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instore/inventoryfile",
+          //       component: "instore/InventoryFile",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "新增盘点"
+          //       },
+          //       name: "instore-inventoryfile",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instore/inventoryproloss",
+          //       component: "instore/InventoryProloss",
+          //       route: "2",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "盈亏分析"
+          //       },
+          //       name: "instore-inventoryproloss",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instore/otherin",
+          //       component: "instore/VoucherOtherIn",
+          //       route: "3",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "杂入管理"
+          //       },
+          //       name: "instore-voucherotherin",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/instore/otherout",
+          //       component: "instore/VoucherOtherOut",
+          //       route: "4",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "杂出管理"
+          //       },
+          //       name: "instore-voucherotherout",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //     // {
+          //     //   path: "/instore/stockearly",
+          //     //   component: "instore/StockEarly",
+          //     //   route: "5",
+          //     //   hidden: false,
+          //     //   meta: {
+          //     //     keepAlive: false,
+          //     //     internalOrExternal: false,
+          //     //     title: "库存预警"
+          //     //   },
+          //     //   name: "instore-stockearly",
+          //     //   id: "3f915b2769fc80648e92d04e84ca059d"
+          //     // }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "instore",
+          //     title: "库内管理"
+          //   },
+          //   name: "instore",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // },
+          {
+            redirect: null,
+            path: "/stockreport",
+            component: "layouts/RouteView",
+            route: "1",
+            hidden: false,
+            children: [
+              {
+                path: "/stockreport/stockdetail",
+                component: "stockreport/StockDetail",
+                route: "1",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "库存明细"
+                },
+                name: "stockreport-stockdetail",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              },
+              // {
+              //   path: "/stockreport/receivedetail",
+              //   component: "stockreport/ReceiveDetail",
+              //   route: "2",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "收货明细"
+              //   },
+              //   name: "instore-receivedetail",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/otherout",
+              //   component: "instore/VoucherOtherOut",
+              //   route: "3",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "上架明细"
+              //   },
+              //   name: "instore-voucherotherout",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockearly",
+              //   component: "instore/StockEarly",
+              //   route: "4",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "拣货明细"
+              //   },
+              //   name: "instore-stockearly",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockage",
+              //   component: "instore/StockAge",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "复核明细"
+              //   },
+              //   name: "instore-stockage",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockage",
+              //   component: "instore/StockAge",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "移库明细"
+              //   },
+              //   name: "instore-stockage",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockage",
+              //   component: "instore/StockAge",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "库存调整"
+              //   },
+              //   name: "instore-stockage",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockage",
+              //   component: "instore/StockAge",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "库龄报表"
+              //   },
+              //   name: "instore-stockage",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stockage",
+              //   component: "instore/StockAge",
+              //   route: "5",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "在途库存"
+              //   },
+              //   name: "instore-stockage",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // },
+              // {
+              //   path: "/instore/stocktran",
+              //   component: "stockreport/StockTran",
+              //   route: "6",
+              //   hidden: false,
+              //   meta: {
+              //     keepAlive: false,
+              //     internalOrExternal: false,
+              //     title: "库存台账"
+              //   },
+              //   name: "instore-stocktran",
+              //   id: "3f915b2769fc80648e92d04e84ca059d"
+              // }
+            ],
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              icon: "stockreport",
+              title: "库内报表"
+            },
+            name: "stockreport",
+            id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          },
+          {
+            redirect: null,
+            path: "/materialdoc",
+            component: "layouts/RouteView",
+            route: "1",
+            hidden: false,
+            children: [
+              {
+                path: "/materialdoc/sapdoc",
+                component: "materialdoc/MaterialdocList",
+                route: "1",
+                hidden: false,
+                meta: {
+                  keepAlive: false,
+                  internalOrExternal: false,
+                  title: "凭证管理"
+                },
+                name: "materialdoc-sap",
+                id: "3f915b2769fc80648e92d04e84ca059d"
+              }                           
+            ],
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              icon: "set",
+              title: "凭证管理"
+            },
+            name: "materialdoc",
+            id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          },
+          // {
+          //   redirect: null,
+          //   path: "/systemrule",
+          //   component: "layouts/RouteView",
+          //   route: "1",
+          //   hidden: false,
+          //   children: [
+          //     {
+          //       path: "/stockreport/inventory",
+          //       component: "instore/Inventory",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "全局规则"
+          //       },
+          //       name: "instore-inventory",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     },
+          //     {
+          //       path: "/stockreport/inventory",
+          //       component: "instore/Inventory",
+          //       route: "1",
+          //       hidden: false,
+          //       meta: {
+          //         keepAlive: false,
+          //         internalOrExternal: false,
+          //         title: "业务规则"
+          //       },
+          //       name: "instore-inventory",
+          //       id: "3f915b2769fc80648e92d04e84ca059d"
+          //     }
+          //   ],
+          //   meta: {
+          //     keepAlive: false,
+          //     internalOrExternal: false,
+          //     icon: "systemrule",
+          //     title: "系统规则"
+          //   },
+          //   name: "systemrule",
+          //   id: "d7d6e2e4e2934f2c9385a623fd98c6f3"
+          // }
+        ];
