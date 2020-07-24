@@ -3,15 +3,15 @@
     <el-card>
       <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
-          <!-- <el-col :span="4">
+          <el-col :span="3">
             <el-form-item>
-              <el-select style="width:100%" v-model="voucherTyleListSelect" multiple placeholder="单据名称">
+              <el-select style="width:100%" v-model ="queryParam.Vouchertype" clearable placeholder="单据名称">
                 <el-option v-for="item in voucherTyleListAll" :key="item.Parameterid" :label="item.Parametername"
                   :value="item.Parameterid">
                 </el-option>
               </el-select>
             </el-form-item>
-          </el-col> -->
+          </el-col>
           <el-col :span="4">
             <el-form-item label="">
               <el-input v-model="queryParam.Strongholdcode" placeholder="工厂" clearable></el-input>
@@ -115,7 +115,8 @@
           Materialno: '',
           Batchno: '',
           Barcode: '',
-          Createtime: ''          
+          Createtime: '',
+          Vouchertype:''
         },
         voucherTyleListAll: [],
         voucherTyleListSelect: [],
@@ -127,36 +128,44 @@
         columns: [{
             label: "工厂",
             prop: "Strongholdcode",
-            colvisible: true
+            colvisible: true,
+            width: 60
           },
           {
-            label: "仓库编码",
+            label: "仓库",
             prop: "Towarehouseno",
             colvisible: true,
-            width: 90
+            width: 60
           },
           {
             label: "库位",
             prop: "Toareano",
-            colvisible: true
+            colvisible: true,
+            width: 60
+          },
+          {
+            label: "单据名称",
+            prop: "StrVoucherType",
+            colvisible: true,
+            width:120
           },
           {
             label: "ERP单号",
             prop: "Erpvoucherno",
             colvisible: true,
-            widkth: 120
+            width: 145
           },
           {
             label: "供应商编码",
             prop: "Supplierno",
             colvisible: true,
-            width: 120
+            width: 100
           },
           {
             label: "供应商名称",
             prop: "Suppliername",
             colvisible: true,
-            width: 120
+            width: 270
           },
           {
             label: "物料编码",
@@ -174,38 +183,37 @@
             label: "物料描述",
             prop: "Materialdesc",
             colvisible: true,
-            width: 120
+            width: 200
           },
           {
             label: "条码",
             prop: "Barcode",
-            colvisible: true
+            colvisible: true,
+            width: 450
           },
           {
             label: "批次",
             prop: "Batchno",
-            colvisible: true
+            colvisible: true,
+            width: 100
           },
           {
             label: "数量",
             prop: "Qty",
-            colvisible: true
+            colvisible: true,
+            width: 60
           },
           {
             label: "寄售",
             prop: "Specialstock",
-            colvisible: true
-          },
-          {
-            label: "单据名称",
-            prop: "Strvouchertype",
             colvisible: true,
-            width: 120
-          },
+            width: 60
+          },         
           {
             label: "收货人",
             prop: "Struserno",
-            colvisible: true
+            colvisible: true,
+            width: 90
           },
           {
             label: "收货时间",
@@ -229,7 +237,7 @@
       }
     },
     created() {
-      getParameterList()
+      this.getParameterList()
     },
   }
 

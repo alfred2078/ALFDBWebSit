@@ -3,24 +3,35 @@
     <el-card>
       <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
-          <el-col :span="5">
+          <el-col :span="3">
+            <el-form-item  label="">
+              <el-input v-model="queryParam.Strongholdcode" placeholder="工厂" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="3">
             <el-form-item  label="">
               <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="3">
             <el-form-item  label="">
               <el-input v-model="queryParam.Areano" placeholder="库位" clearable></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="4">
             <el-form-item  label="">
               <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="4">
+            <el-form-item  label="">
+              <el-input v-model="queryParam.Cusmaterialno" placeholder="客户件号" clearable></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="4">
             <el-form-item  label="">
               <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
             </el-form-item>
@@ -70,7 +81,9 @@
           Areano: '',
           Materialno: '',
           Batchno: '',
-          Createtime: ''
+          Createtime: '',
+          Cusmaterialno:'',
+          Strongholdcode:''
         },
         outerVisible: false,
         idshow: false,

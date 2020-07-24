@@ -2,26 +2,44 @@
   <div>
     <el-card>
       <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
-        <el-row>
-          <el-col :span="5">
+        <el-row>          
+          <el-col :span="4">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="4">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.Materialdoc" placeholder="凭证号" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
+          <el-col :span="3">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="4">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.GUID" placeholder="GUID" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="3">
+            <el-form-item>
+              <el-select style="width:100%" v-model ="queryParam.Vouchertype" clearable placeholder="单据名称">
+                <el-option v-for="item in voucherTyleListAll" :key="item.Parameterid" :label="item.Parametername"
+                  :value="item.Parameterid">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="3">
+            <el-form-item>
+              <el-select style="width:100%" v-model="queryParam.Poststatus" clearable placeholder="过账状态">
+                <el-option v-for="item in postStatusListAll" :key="item.Parameterid" :label="item.Parametername"
+                  :value="item.Parameterid">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="3">
@@ -47,27 +65,6 @@
     <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
 
-    <!-- <el-card body-style="padding:2px;">
-      <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
-        :header-row-style="{ height: '30', font: 'normal' }"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" :data="Data" style="width: 100%" row-key="id"
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Erpvoucherno" label="ERP单号"> </el-table-column>
-        <el-table-column prop="Rowno" label="行号"> </el-table-column>        
-        <el-table-column prop="Materialno" label="物料号"> </el-table-column>
-        <el-table-column prop="Materialdesc" label="物料描述"> </el-table-column>        
-        <el-table-column prop="Cusmaterialno" label="客户料件"> </el-table-column>
-        <el-table-column prop="Materialdoc" label="凭证"> </el-table-column>        
-        <el-table-column prop="Qty" label="数量"> </el-table-column>
-        <el-table-column prop="Poststatus" label="状态"> </el-table-column>
-        <el-table-column prop="Guid" label="GUID"> </el-table-column>
-        <el-table-column prop="Errormsg" label="错误信息"> </el-table-column>
-        <el-table-column prop="note" label="69码"> </el-table-column>
-        <el-table-column prop="note" label="效期"> </el-table-column>
-        <el-table-column prop="note" label="临近期"> </el-table-column>       
-
-      </el-table>
-    </el-card> -->
 
   </div>
 </template>
@@ -77,6 +74,10 @@
     ALFModelListMixins
   } from '@/mixins/ALFModelListMixins'
   import Pagination from "@/components/Pagination";
+  import {
+    getParameterList
+  } from "@/api/api";
+
   export default {
     mixins: [ALFModelListMixins],
     components: {
@@ -88,12 +89,17 @@
           Erpvoucherno: '',
           Materialdoc: '',
           GUID: '',
-          Towarehouseno: ''
+          Towarehouseno: '',
+          Vouchertype:''  ,
+          Poststatus:''   
         },
+        splace:'',
+        voucherTyleListAll:[],
+        postStatusListAll:[],
         outerVisible: false,
         idshow: false,
         apiUrl: {
-          query: "/MaterialDoc/GetT_MaterialDocListByPage",
+          query: "/MaterialDoc/GetV_MaterialDocListByPage",
           save: "",
           update: ""
         },
@@ -101,32 +107,44 @@
           {
             label: "工厂",
             prop: "Strongholdcode",
-            colvisible: true
+            colvisible: true,
+            width:60
           },
           {
             label: "仓库",
             prop: "Towarehouseno",
-            colvisible: true
+            colvisible: true,
+            width:60
+          },
+          {
+            label: "单据名称",
+            prop: "StrVoucherType",
+            colvisible: true,
+            width:120
           },
           {
             label: "ERP单号",
             prop: "Erpvoucherno",
-            colvisible: true
+            colvisible: true,
+            width:145
           },
           {
             label: "行号",
             prop: "Rowno",
-            colvisible: true
+            colvisible: true,
+            width:80
           },
           {
             label: "物料号",
             prop: "Materialno",
-            colvisible: true
+            colvisible: true,
+            width:120
           },
           {
             label: "物料描述",
             prop: "Materialdesc",
-            colvisible: true
+            colvisible: true,
+            width:200
           },
           // {
           //   label: "客户料号",
@@ -134,33 +152,67 @@
           //   colvisible: true
           // },
           {
+            label: "批号",
+            prop: "Batchno",
+            colvisible: true,
+            width:100
+          },
+          {
             label: "凭证号",
             prop: "Materialdoc",
-            colvisible: true
+            colvisible: true,
+            width:100
           },
           {
             label: "数量",
             prop: "Qty",
-            colvisible: true
+            colvisible: true,
+            width:60
           },
           {
             label: "状态",
-            prop: "Poststatus",
-            colvisible: true
+            prop: "StrPostStatus",
+            colvisible: true,
+            width:60
           },
           {
             label: "GUID",
             prop: "Guid",
-            colvisible: true
+            colvisible: true,
+            width:140
           },
           {
             label: "错误信息",
             prop: "Errormsg",
-            colvisible: true
+            colvisible: true,
+            width:300
           }
         ]
       }
-    }
+    },
+    methods: {
+      getParameterList() {
+        // queryParam.Groupname = "VoucherRec_Type"
+        let type = "VoucherAll_Type"
+        getParameterList({Groupname:type}).then(res => {
+          if (res.Result === 1) {
+            // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
+            this.voucherTyleListAll = res.Data            
+          }
+        });
+
+        getParameterList({Groupname:"PostStatus_Type"}).then(res => {
+          if (res.Result === 1) {
+            // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
+            this.postStatusListAll = res.Data            
+          }
+        });
+
+      }
+    },
+    created() {
+      this.getParameterList()
+    },
   }
 
 </script>

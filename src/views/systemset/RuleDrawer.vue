@@ -85,7 +85,7 @@
         getMenuList().then(res => {
           if (res.Result === 1) {
             this.treeMenu = res.Data
-            this.defaultExpanded = this.treeMenu.map(item => item.Id)
+            this.defaultExpanded = this.treeMenu.map(item => item.Id)            
           }
           // else {
           //   this.$message.error(res.ResultValue);
@@ -98,6 +98,7 @@
         }).then(res => {
           if (res.Result === 1) {
             this.defaultChecked = res.Data.map(item => item.Menuid)
+            // console.log(this.defaultChecked)
           }
           // else {
           //   this.$message.error(res.ResultValue);

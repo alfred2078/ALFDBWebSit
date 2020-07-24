@@ -69,8 +69,7 @@ export const ALFModelListMixins = {
     },
     getQueryParams() {
       let pageReuquest = {};
-      let FilterGroup = {};
-      debugger;
+      let FilterGroup = {};      
       let arrRoles = this.getQueryField(this.queryParam);
       if (arrRoles.length > 0) {
         FilterGroup.Rules = arrRoles;
@@ -80,8 +79,7 @@ export const ALFModelListMixins = {
       pageReuquest.PageSize = this.PageData.pageSize;
       return pageReuquest;
     },
-    getQueryField(queryParam) {
-      console.log(queryParam);
+    getQueryField(queryParam) {      
       let Rules = [];
       let objKeys = Object.keys(queryParam);
       for (let key of objKeys) {
@@ -93,7 +91,7 @@ export const ALFModelListMixins = {
           if (key !== "Createtime") {
             Rules.push({
               Field: key,
-              Value: queryParam[key],
+              Value: queryParam[key]+'',
               Operate: 3
             });
           } else {
@@ -116,6 +114,7 @@ export const ALFModelListMixins = {
           }
         }
       }
+      console.log(Rules)
       return Rules;
     },
     /**按钮区域新增,初始化dialog */

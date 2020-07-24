@@ -49,7 +49,7 @@
     <!-- table区域 -->
     <el-card body-style="padding:2px;">
       <el-table border :data="Data" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
-        :cell-style="{ padding: '2px' }" style="width: 100%;" show-summary>
+        :cell-style="{ padding: '2px' }" style="width: 100%;" show-summary :summary-method="getSummaries">
         <template v-for="item in columns">
           <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
             v-if="item.colvisible" show-overflow-tooltip>
