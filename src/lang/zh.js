@@ -1,6 +1,6 @@
 export default {
     login: {
-        title0: '浙江银轮集团WMS系统管理平台',
+        title0: '浙江博多集团WMS系统管理平台',
         title1: '成品仓库',
         login: '登录',
         loginmsg: '欢迎访问WMS系统',
@@ -12,6 +12,6 @@ export default {
         titleMessage:'WMS企业管理'        
     },
     header:{
-        iconMessage:'欢迎进入银轮集团WMS系统管理平台'
+        iconMessage:'欢迎进入博多集团WMS系统管理平台'
     }
 }
