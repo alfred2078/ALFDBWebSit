@@ -359,6 +359,7 @@ import Pagination from "@/components/Pagination";
          min.model.Groupname="Check_Isdel";
          getTParameterList(min.model).then(sres=>{             
             if(sres.Result == 1){
+              debugger;
                  min.isdellist = sres.Data;
                   min.isdellist.forEach(t=>{
                    t.Parameterid= t.Parameterid+'';
@@ -402,7 +403,7 @@ import Pagination from "@/components/Pagination";
         var min = this;
          min.model={};
          min.model.Erpvoucherno = val.Erpvoucherno;
-         min.model.Checkstatus =val.checkstatus;
+         min.model.Checkstatus =val.Checkstatus;
          min.model.Isdel = 2;
          min.updateTCheckAsync(min.model);
           min.getModelList();
@@ -456,7 +457,7 @@ import Pagination from "@/components/Pagination";
                 type: 'warning'
               });
           return;
-        }else if(min.CheckChangeData[0].checkstatus!=4&&min.CheckChangeData[0].checkstatus!=3)
+        }else if(min.CheckChangeData[0].Checkstatus!=4&&min.CheckChangeData[0].Checkstatus!=3)
         {
           min.$message({
                 message: '只有完成或终止单据才能复盘',
