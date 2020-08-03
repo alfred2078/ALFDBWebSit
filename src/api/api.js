@@ -29,6 +29,21 @@ const updateUser = (params)=>postAction("User/UpdateT_UserAsync",params);
 //参数获取
 const getParameterList = (params)=>postAction("Parameter/GetT_ParameterList",params);
 
+//标签打印
+
+const getPurchasList= (params)=>postAction("Purchase/GetT_PurchaseOrderListADFAsync",params); //采购入库单
+const getMaterilOrderList= (params)=>postAction("Material/GetT_MaterialDetailList",params); //物料单
+const getSaleReturnOrderList= (params)=>postAction("SaleReturn/GetT_SaleReturnDetailListADFAsync",params); //销退单
+const getOtherOrderList= (params)=>postAction("Other/GetT_OtherHeadListADFAsync",params); //杂入单
+const getWorkOrderList= (params)=>postAction("WorkOrder/GetT_WorkOrderHeadListADFAsync",params); //杂入单
+
+
+const  UploadFile= (params)=>postAction("Print/InitialPrint",params); //期初打印
+//const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8011/Main.aspx",params,name);//正式预览打印地址
+const windowpost=(params,name)=>openPostWindow("http://localhost:34590/Main.aspx",params,name);// 本地预览打印地址
+//const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8055/Main.aspx",params,name);// 用户测试预览打印地址
+
+
 export{
     saveWarehouse,
     updateWarehouse,
@@ -47,6 +62,23 @@ export{
     getRuleListByUserID,
     saveUser,
     updateUser,
-    getParameterList
+    getParameterList,
+  	 getPurchasList,
+    getMaterilOrderList,
+    getSaleReturnOrderList,
+    getOtherOrderList,
+    getWorkOrderList,
+    windowpost,
+    UploadFile
 }
+//post 表单提交
+function openPostWindow(url, data,name) { 
+    //var winHeight = window.document.documentElement.clientHeight;
+    var formStr = '<form style="visibility:hidden;" method="POST" action="' + url + '">' +
+                            '<input type="hidden" name="'+name+'" value="' + encodeURI(data) + '" />' +
+                            '</form>';
+    var win = window.open("");
+    win.document.body.innerHTML = formStr;
+    win.document.forms[0].submit();
+};
 
