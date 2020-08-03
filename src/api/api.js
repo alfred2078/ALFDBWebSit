@@ -25,7 +25,7 @@ const getRuleListByUserID = (params)=>postAction("Rule/GetT_RuleListByUserIDAsyn
 //用户管理
 const saveUser = (params)=>postAction("User/SaveT_UserAsync",params);
 const updateUser = (params)=>postAction("User/UpdateT_UserAsync",params);
-
+const updateUserPwd = (params)=>postAction("User/UpdateT_UserPwd",params);
 //参数获取
 const getParameterList = (params)=>postAction("Parameter/GetT_ParameterList",params);
 
