@@ -142,7 +142,7 @@
         sizeForm: {
           name: ""
         },
-        outerVisible: true,
+        outerVisible: false,
         tableData: [{
           code: "PO01",
           name: "采购订单",
