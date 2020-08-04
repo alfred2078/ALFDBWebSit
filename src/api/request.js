@@ -5,7 +5,7 @@ const service = new axios.create({
   baseURL: "https://localhost:44394/api",
   // baseURL: "http://wms.yinlun.cn:7002/api",
   // baseURL: "http://192.168.88.27:5001/api",
-  timeout: 5000,
+  timeout: 50000,
   withCredentials: false,
   headers: {
     "Content-Type": "application/json"

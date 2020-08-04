@@ -1,13 +1,13 @@
 <template>
   <div class="dash-main">
     <div class="dash-header">
-      <chart-card class="dash-header-item" :total="expCount" title="异常未处理">
+      <chart-card class="dash-header-item" :total="expCount" title="异常未处理"  >
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="异常说明" placement="right-start">
           <i class="el-icon-chat-dot-round"></i>
         </el-tooltip>        
         <span slot="footerSlot">{{ `当日异常总数：${expOrderQty}` }}</span>
       </chart-card>
-      <chart-card class="dash-header-item" :total="`${recPercentage}`" title="当日收货总数">
+      <chart-card class="dash-header-item-receivetran" :total="`${recPercentage}`" title="当日收货总数">
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="指标说明" placement="right-start">
           <i class="el-icon-chat-dot-round"></i>
         </el-tooltip>        
@@ -19,45 +19,70 @@
         </el-tooltip>       
         <span slot="footerSlot">{{ `当日上架任务：${shefOrderQty}` }}</span>
       </chart-card> -->
-      <chart-card class="dash-header-item" :total="`${pickPercentage}`" title="当日发货总数">
+      <chart-card class="dash-header-item-receivetran" :total="`${pickPercentage}`" title="当日发货总数">
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="指标说明" placement="right-start">
           <i class="el-icon-chat-dot-round"></i>
         </el-tooltip>
         
         <span slot="footerSlot">{{ `当日发货单：${pickOrderQty}` }}</span>
       </chart-card>
-      <!-- <chart-card class="dash-header-item" :total="`${reviPercentage}`" title="未完成质检单">
+      <chart-card class="dash-header-item" :total="`${reviPercentage}`" title="未完成质检单">
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="指标说明" placement="right-start">
           <i class="el-icon-chat-dot-round"></i>
         </el-tooltip>
         
         <span slot="footerSlot">{{ `当日质检单：${reviOrderQty}` }}</span>
-      </chart-card> -->
+      </chart-card>
     </div>
 
-    <!-- <div class="dash-body">
+    <div class="dash-body">
       <el-tabs v-model="recmonth">
+      
         <el-tab-pane class="dash-body-tab-pane" label="月入库情况分析" name="recmonth">
-          <el-card body-style="padding:0;" class="dash-header-item">
-            <ve-histogram colors="#60ACFC" height="330px" :data="chartData" :settings="chartSettings"></ve-histogram>
+          <el-card body-style="padding:0;" class="dash-header-item" v-if="recmonth=='recmonth'">
+            <ve-histogram colors="#60ACFC"  :data="chartData" :grid="grid" :settings="chartSettings"></ve-histogram>
           </el-card>
-          <el-card class="dash-header-item">
-            <ve-histogram colors="#e6a23c" height="330px" :data="chartData1" :settings="chartSettings1"></ve-histogram>
+          <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
+            <ve-histogram colors="#e6a23c"  :data="chartData1" :grid="grid" :settings="chartSettings1"></ve-histogram>
           </el-card>
-          <el-card class="dash-header-item">
-            <ve-pie :data="chartData3"></ve-pie>
+          <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
+            <ve-pie :data="chartData3" :settings="piechartSettings"></ve-pie>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="月出库情况分析" name="outmobth"> </el-tab-pane>
+        <el-tab-pane label="月出库情况分析" name="outmobth" class="dash-body-tab-pane" @click="outmobthClick">
+            <el-card body-style="padding:0;" class="dash-header-item" v-if="recmonth=='outmobth'">
+              <ve-histogram colors="#60ACFC"  :data="outchartData" :grid="grid" :settings="outchartSettings"></ve-histogram>
+            </el-card>
+            <el-card class="dash-header-item" v-if="recmonth=='outmobth'">
+              <ve-histogram colors="#e6a23c"  :data="outchartData1" :grid="grid" :settings="outchartSettings1"></ve-histogram>
+            </el-card>
+            <el-card class="dash-header-item" v-if="recmonth=='outmobth'">
+              <ve-pie :data="outchartData3" :settings="outpiechartSettings"></ve-pie>
+            </el-card>
+    
+        </el-tab-pane>
       </el-tabs>      
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
+ import {
+    getMaterialDocPoststatuse,
+    getReceiveSumQty,
+    getOutStockTranSumQty,
+    getQualityDetailLinestatus,
+    getReceiveTranGroupByMonth,
+    getReceiveTranGroupByWarehou,
+    getReceiveTranGroupByMaterialno,
+    getOutStockGroupByMonth,
+    getOutStockGroupByWarehou,
+    GetOutStockGroupByMaterialno
+  } from "@/api/api";
+import {  USER_INFO } from "@/store/mutation-types";
+ import Vue from 'vue'
   import chartCard from "@/components/card";
   import OutstockChart from "@/components/chart/OutstockChart.vue";
-
   const outStockData = [];
   for (let i = 0; i < 12; i += 1) {
     outStockData.push({
@@ -70,129 +95,263 @@
     components: {
       chartCard,
       OutstockChart
+      
     },
     data() {
       this.chartSettings = {
-        yAxisName: ["总数量"]
+        yAxisName: "总数量",
+        labelMap: {
+          'month': '日期',
+          'sum': '入库数量'
+        },
       };
       this.chartSettings1 = {
-        yAxisName: ["总数量"]
+        yAxisName: "总数量",
+        labelMap: {
+          'warehousename': '仓库',
+          'sum': '入库数量'
+        },
+      };
+      this.piechartSettings = {
+          radius: 120,
+          offsetY: 230,
+          labelMap: {
+          'materialdesc': '物料名称',
+          'sum': '入库数量'
+          },
+      };
+      this.outchartSettings = {
+        yAxisName: "总数量",
+        labelMap: {
+          'month': '日期',
+          'sum': '出库数量'
+        },
+      };
+      this.outchartSettings1 = {
+        yAxisName: "总数量",
+        labelMap: {
+          'warehousename': '仓库',
+          'sum': '出库数量'
+        },
+      };
+      this.outpiechartSettings = {
+          radius: 120,
+          offsetY: 230,
+          labelMap: {
+          'materialdesc': '物料名称',
+          'sum': '出库数量'
+          },
       };
       return {
+        grid:{
+          top:80,
+          bottom:50
+        },
         recmonth: "recmonth",
         outStockData,
         chartData: {
-          columns: ["日期", "总入库数量"],
+          columns: ["month", "sum"],
+       
           rows: [{
-              日期: "1",
-              总入库数量: 10,
-              同期入库数量: 66
+              month: 1,
+              sum: 0
             },
             {
-              日期: "2",
-              总入库数量: 20,
-              同期入库数量: 55
+              month: 2,
+              sum: 0
             },
             {
-              日期: "3",
-              总入库数量: 30,
-              同期入库数量: 44
+              month: 3,
+              sum: 0
             },
             {
-              日期: "4",
-              总入库数量: 40,
-              同期入库数量: 55
+              month: 4,
+              sum: 0
             },
             {
-              日期: "5",
-              总入库数量: 50,
-              同期入库数量: 22
+              month: 5,
+              sum: 0
             },
             {
-              日期: "6",
-              总入库数量: 60,
-              同期入库数量: 66
+              month: 6,
+              sum: 0
             },
             {
-              日期: "7",
-              总入库数量: 55,
-              同期入库数量: 66
+              month: 7,
+              sum: 0
             },
             {
-              日期: "8",
-              总入库数量: 77,
-              同期入库数量: 66
+              month: 8,
+              sum: 0
             },
             {
-              日期: "9",
-              总入库数量: 34,
-              同期入库数量: 66
+              month: 9,
+              sum: 0
             },
             {
-              日期: "10",
-              总入库数量: 67,
-              同期入库数量: 66
+              month: 10,
+              sum: 0
             },
             {
-              日期: "11",
-              总入库数量: 34,
-              同期入库数量: 66
+              month: 11,
+              sum: 0
             },
             {
-              日期: "12",
-              总入库数量: 87,
-              同期入库数量: 0
+              month: 12,
+              sum: 0
             }
           ]
         },
         chartData1: {
-          columns: ["仓库", "入库数量"],
+          columns: ["warehousename", "sum"],
           rows: [{
-              仓库: "成品仓库1",
-              入库数量: 55
+              warehousename: "成品仓库1",
+              sum: 55
             },
             {
-              仓库: "成品仓库2",
-              入库数量: 77
+              warehousename: "成品仓库2",
+              sum: 77
             },
             {
-              仓库: "成品仓库3",
-              入库数量: 88
+              warehousename: "成品仓库3",
+              sum: 88
             },
             {
-              仓库: "成品仓库4",
-              入库数量: 22
+              warehousename: "成品仓库4",
+              sum: 22
             }
           ]
         },
         chartData3: {
-          columns: ['SKU', '总数量'],
+          columns: ['materialdesc', 'sum'],
           rows: [{
-              'SKU': '酸梅膏',
-              '总数量': 1393
+              'materialdesc': '酸梅膏',
+              'sum': 0
             },
             {
-              'SKU': '酸多多糖浆',
-              '总数量': 3530
+              'materialdesc': '酸多多糖浆',
+              'sum': 0
             },
             {
-              'SKU': '牛奶',
-              '总数量': 2923
+              'materialdesc': '牛奶',
+              'sum': 0
             },
             {
-              'SKU': '纸杯',
-              '总数量': 1723
+              'materialdesc': '纸杯',
+              'sum': 0
             },
             {
-              'SKU': '冰淇淋专用植脂末',
-              '总数量': 3792
+              'materialdesc': '冰淇淋专用植脂末',
+              'sum': 0
             },
             {
-              'SKU': '核桃豆味粉',
-              '总数量': 4593
+              'materialdesc': '核桃豆味粉',
+              'sum': 0
             }
           ]
-        }
+        },
+        outchartData: {
+          columns: ["month", "sum"],
+       
+          rows: [{
+              month: 1,
+              sum: 0
+            },
+            {
+              month: 2,
+              sum: 0
+            },
+            {
+              month: 3,
+              sum: 0
+            },
+            {
+              month: 4,
+              sum: 0
+            },
+            {
+              month: 5,
+              sum: 0
+            },
+            {
+              month: 6,
+              sum: 0
+            },
+            {
+              month: 7,
+              sum: 500
+            },
+            {
+              month: 8,
+              sum: 0
+            },
+            {
+              month: 9,
+              sum: 0
+            },
+            {
+              month: 10,
+              sum: 0
+            },
+            {
+              month: 11,
+              sum: 0
+            },
+            {
+              month: 12,
+              sum: 0
+            }
+          ]
+        },
+        outchartData1: {
+          columns: ["warehousename", "sum"],
+          rows: [{
+              warehousename: "成品仓库1",
+              sum: 55
+            },
+            {
+              warehousename: "成品仓库2",
+              sum: 77
+            },
+            {
+              warehousename: "成品仓库3",
+              sum: 88
+            },
+            {
+              warehousename: "成品仓库4",
+              sum: 22
+            }
+          ]
+        },
+        outchartData3: {
+          columns: ['materialdesc', 'sum'],
+          rows: [{
+              'materialdesc': '酸梅膏',
+              'sum': 0
+            },
+            {
+              'materialdesc': '酸多多糖浆',
+              'sum': 0
+            },
+            {
+              'materialdesc': '牛奶',
+              'sum': 0
+            },
+            {
+              'materialdesc': '纸杯',
+              'sum': 0
+            },
+            {
+              'materialdesc': '冰淇淋专用植脂末',
+              'sum': 0
+            },
+            {
+              'materialdesc': '核桃豆味粉',
+              'sum': 0
+            }
+          ]
+        },
+        modelListWarehouse:{}
       };
     },
     props: {
@@ -236,7 +395,180 @@
         type: String,
         default: "10"
       }
+    },
+    created(){
+      this.exp();
+      this.outmobthClick()
+    },
+    methods:{
+      exp(){
+        debugger;
+        var min = this;
+     
+
+        var user = Vue.ls.get(USER_INFO);
+        min.modelListWarehouse =user.modelListWarehouse;
+        console.log(1+'--begin---'+new Date());
+        getMaterialDocPoststatuse(min.modelListWarehouse).then(res=>{
+          console.log(1+'--end---'+new Date());
+          if (res.Result === 1) {
+            debugger;
+          
+                  min.expCount=res.Data.Poststatus;
+                  min.expOrderQty = res.Data.newPoststatus;
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        })
+       /*  getReceiveSumQty(min.modelListWarehouse).then(res=>{
+          if (res.Result === 1) {
+              debugger;
+              console.log(2);
+                  min.recPercentage=res.Data.Qty;
+                  min.recOrderQty = res.Data.Count;
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        }) */
+     console.log(3+'--begin---'+new Date());
+     getOutStockTranSumQty(min.modelListWarehouse).then(res=>{
+       
+          if (res.Result === 1) {
+              debugger;
+              console.log(3+'--end---'+new Date());
+                  min.pickPercentage=res.Data.Qty;
+                  min.pickOrderQty = res.Data.Count;
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        })
+        console.log(4+'--begin---'+new Date());
+       getQualityDetailLinestatus(min.modelListWarehouse).then(res=>{
+          
+          if (res.Result === 1) {
+              debugger;
+               console.log(4+'--end---'+new Date());
+                  min.reviPercentage=res.Data.Linestatus;
+                  min.reviOrderQty = res.Data.newLinestatus;
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        })
+        console.log(5+'--begin---'+new Date());
+        getReceiveTranGroupByMonth(min.modelListWarehouse).then(res=>{
+      
+            if (res.Result === 1) {
+              debugger;
+              console.log(5+'--end---'+new Date());
+                  min.chartData.rows.forEach(t=>{
+                    res.Data.forEach(d=>{
+                      if(t.month==d.month)
+                      {
+                        t.sum=d.sum;
+                      }
+                    })
+                  })       
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        })
+        console.log(6+'--begin---'+new Date());
+        getReceiveTranGroupByWarehou(min.modelListWarehouse).then(res=>{
+        
+            if (res.Result === 1) {
+              debugger;
+              console.log(6+'--end---'+new Date());
+                  min.chartData1.rows=res.Data;
+            }
+            else {
+                min.$message.error(res.ResultValue);
+            }
+
+        })  
+      console.log(7+'--begin---'+new Date());
+        getReceiveTranGroupByMaterialno(min.modelListWarehouse).then(res=>{
+           
+            if (res.Result === 1) {
+              debugger;
+              console.log(7+'--end---'+new Date());
+                  min.chartData3.rows=res.Data;
+            }
+            else {
+                min.$message.error(res.ResultValue);
+            }
+
+        })
+      
+      },
+      outmobthClick()
+      {
+        var min = this;
+     debugger;
+
+        var user = Vue.ls.get(USER_INFO);
+        min.modelListWarehouse =user.modelListWarehouse;
+        console.log(5+'--begin---'+new Date());
+        getOutStockGroupByMonth(min.modelListWarehouse).then(res=>{
+      
+            if (res.Result === 1) {
+              debugger;
+              console.log(5+'--end---'+new Date());
+                  min.outchartData.rows.forEach(t=>{
+                    res.Data.forEach(d=>{
+                      if(t.month==d.month)
+                      {
+                        t.sum=d.sum;
+                      }
+                    })
+                  })       
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+
+        })
+        console.log(6+'--begin---'+new Date());
+        getOutStockGroupByWarehou(min.modelListWarehouse).then(res=>{
+        
+            if (res.Result === 1) {
+              debugger;
+              console.log(6+'--end---'+new Date());
+                  min.outchartData1.rows=res.Data;
+            }
+            else {
+                min.$message.error(res.ResultValue);
+            }
+
+        })  
+      console.log(7+'--begin---'+new Date());
+        GetOutStockGroupByMaterialno(min.modelListWarehouse).then(res=>{
+           
+            if (res.Result === 1) {
+              debugger;
+              console.log(7+'--end---'+new Date());
+                  min.outchartData3.rows=res.Data;
+            }
+            else {
+                min.$message.error(res.ResultValue);
+            }
+
+        })
+
+      }
+      
     }
+  
+    
   };
 
 </script>
@@ -251,6 +583,13 @@
         flex-grow: 1;
         width: 0;
         margin: 5px 5px;
+        background-color: #f3ee40f2;
+      };
+      .dash-header-item-receivetran{
+        flex-grow: 1;
+        width: 0;
+        margin: 5px 5px;
+        background-color: #66b1ff;
       }
     }
 
@@ -261,7 +600,7 @@
       .dash-header-item {
         flex-grow: 1;
         width: 0;
-
+ 
         // margin: 5px 5px;      
       }
     }
