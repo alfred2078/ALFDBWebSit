@@ -1,7 +1,7 @@
 
 
 import { postAction } from '@/api/manage'
-
+//20200804wu
 //基础数据模块
 //仓库模块
 const saveWarehouse = (params)=>postAction("Warehouse/SaveT_WarehouseAsync",params);
