@@ -23,7 +23,7 @@ import {
 Vue.config.devtools = true
 Vue.config.productionTip = false
 
-// Vue.use(Viser)
+// Vue.use(Viser) 
  Vue.use(VCharts)
 Vue.use(VueLs, SystemConfig.storageOptions)
 

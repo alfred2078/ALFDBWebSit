@@ -23,7 +23,7 @@
           <el-form-item label="密码确认"  prop="RePassword">
             <el-input type="password" v-model="tempForm.RePassword" clearable placeholder="密码确认"></el-input>
           </el-form-item>
-          
+           
       </el-form>
     
        <div slot="footer" class="dialog-footer">

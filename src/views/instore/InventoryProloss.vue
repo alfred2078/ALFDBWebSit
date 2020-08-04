@@ -8,7 +8,7 @@
               <el-input v-model="Checkrefserial.Erpvoucherno" placeholder="盘点单号" clearable></el-input>
             </el-form-item>
           </el-col>
-
+ 
           <el-col :span="5">
             <el-form-item label-width="" label="">
               <el-input v-model="Checkrefserial.Materialno" placeholder="物料编码" clearable></el-input>

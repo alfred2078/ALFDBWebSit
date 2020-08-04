@@ -8,4 +8,4 @@ const getters = {
     language:(state)=>state.systemset.language
 }
 
-export default getters
+export default getters 

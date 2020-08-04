@@ -493,7 +493,7 @@ import {  USER_INFO } from "@/store/mutation-types";
             else {
                 min.$message.error(res.ResultValue);
             }
-
+ 
         })  
       console.log(7+'--begin---'+new Date());
         getReceiveTranGroupByMaterialno(min.modelListWarehouse).then(res=>{
