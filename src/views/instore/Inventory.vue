@@ -8,7 +8,7 @@
               <el-input v-model="queryParam.Erpvoucherno" placeholder="盘点单号"></el-input>
             </el-form-item>
           </el-col>
-
+  
           <el-col :span="3" >
             <el-form-item >
               <el-select v-model="queryParam.Checkstatus" placeholder="请选择盘点状态" clearable>
