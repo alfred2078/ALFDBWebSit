@@ -1,7 +1,7 @@
 
 
 import { postAction } from '@/api/manage'
-//20200804wu01666
+//20200804wu01
 //20200802testsadsads
 //基础数据模块
 //仓库模块
