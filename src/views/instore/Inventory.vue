@@ -16,7 +16,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-          </el-col>
+          </el-col> 
 
           <el-col :span="3" >
             <el-form-item   >
