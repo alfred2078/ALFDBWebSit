@@ -105,7 +105,7 @@
         },
         columns: [
           {
-            label: "工厂",
+            label: "据点",
             prop: "Strongholdcode",
             colvisible: true,
             width:60

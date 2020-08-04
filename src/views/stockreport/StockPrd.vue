@@ -14,7 +14,7 @@
           </el-col> -->
           <el-col :span="4">
             <el-form-item label="">
-              <el-input v-model="queryParam.Strongholdcode" placeholder="工厂" clearable></el-input>
+              <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
@@ -123,7 +123,7 @@
           update: ""
         },
         columns: [{
-            label: "工厂",
+            label: "据点",
             prop: "Strongholdcode",
             colvisible: true
           },

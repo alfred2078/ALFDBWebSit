@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="4">
             <el-form-item label="">
-              <el-input v-model="queryParam.Strongholdcode" placeholder="工厂" clearable></el-input>
+              <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
             </el-form-item>
           </el-col>
 
@@ -89,7 +89,7 @@
           exportXls: "/Stock/GetT_StockListByExp"
         },
         columns: [{
-            label: "工厂",
+            label: "据点",
             prop: "Strongholdcode",
             colvisible: true
           },
@@ -108,11 +108,11 @@
             prop: "Materialno",
             colvisible: true
           },
-          {
-            label: "客户件号",
-            prop: "Cusmaterialno",
-            colvisible: true
-          },          
+          // {
+          //   label: "客户件号",
+          //   prop: "Cusmaterialno",
+          //   colvisible: true
+          // },          
           {
             label: "物料描述",
             prop: "Materialdesc",
@@ -128,13 +128,13 @@
             prop: "Qty",
             colvisible: true
           },
-          {
-            label: "寄售",
-            prop: "Specialstock",
-            colvisible: true
-          }
+          // {
+          //   label: "寄售",
+          //   prop: "Specialstock",
+          //   colvisible: true
+          // }
         ],
-        tHeader: ['工厂', '仓库编码', '仓库名称', '物料编码','客户件号',
+        tHeader: ['据点', '仓库编码', '仓库名称', '物料编码','客户件号',
           '物料描述', '批次', '数量', '寄售'
         ],
         filterVal: ['Strongholdcode', 'Towarehouseno', 'Warehousename', 'Materialno',
