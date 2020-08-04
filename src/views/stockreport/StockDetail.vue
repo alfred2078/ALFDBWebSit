@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="3">
             <el-form-item  label="">
-              <el-input v-model="queryParam.Strongholdcode" placeholder="工厂" clearable></el-input>
+              <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="3">
@@ -25,11 +25,11 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="4">
+          <!-- <el-col :span="4">
             <el-form-item  label="">
               <el-input v-model="queryParam.Cusmaterialno" placeholder="客户件号" clearable></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
 
           <el-col :span="4">
             <el-form-item  label="">
@@ -93,7 +93,7 @@
           update: ""
         },
         columns: [{
-            label: "工厂",
+            label: "据点",
             prop: "Strongholdcode",
             colvisible: true
           },
@@ -112,11 +112,11 @@
             prop: "Materialno",
             colvisible: true
           },
-          {
-            label: "客户件号",
-            prop: "Cusmaterialno",
-            colvisible: true
-          },
+          // {
+          //   label: "客户件号",
+          //   prop: "Cusmaterialno",
+          //   colvisible: true
+          // },
           {
             label: "物料描述",
             prop: "Materialdesc",
@@ -137,11 +137,11 @@
             prop: "Qty",
             colvisible: true
           },
-          {
-            label: "寄售",
-            prop: "Specialstock",
-            colvisible: true
-          }
+          // {
+          //   label: "寄售",
+          //   prop: "Specialstock",
+          //   colvisible: true
+          // }
         ],
       }
     }
