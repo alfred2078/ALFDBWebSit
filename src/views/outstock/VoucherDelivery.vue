@@ -1,23 +1,23 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="sizeForm"  size="small ">
+      <el-form :model="queryParam"  size="small ">
         <el-row>
           <el-col :span="5">
             <el-form-item  label="">
-              <el-input v-model="sizeForm.name" placeholder="发货通知单号" clearable></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="发货通知单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
             <el-form-item label-width="" label="">
-              <el-input v-model="sizeForm.name" placeholder="客户编码或名称" clearable></el-input>
+              <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="9">
             <el-form-item label-width="" label="">
-              <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="创建开始日期"
+              <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至" start-placeholder="创建开始日期"
                 end-placeholder="创建结束日期">
               </el-date-picker>
             </el-form-item>
@@ -25,7 +25,7 @@
 
           <el-col :span="5">
             <el-form-item label-width="0">
-              <el-button icon="el-icon-search" type="primary">查询</el-button>
+              <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
               <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
@@ -49,15 +49,9 @@
         </el-col>
         <el-col :span="2">
           <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
-          <el-dropdown>
-            <el-button size="small" type="primary">
+          <el-button size="small" type="primary" @click="handleExportXls">
               导出<i class="el-icon-download"></i>
             </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>导出当前页</el-dropdown-item>
-              <el-dropdown-item>导出查询结果</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
         </el-col>
       </el-row>
     </el-card>
@@ -65,22 +59,22 @@
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="350" 
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="350"  :data="Data"
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="code" label="发货通知单号"> </el-table-column>
-        <el-table-column prop="name" label="单据名称"> </el-table-column>
-        <el-table-column prop="depcode" label="客户编码"> </el-table-column>
-        <el-table-column prop="depname" label="客户名称"> </el-table-column> 
-        <el-table-column prop="depname" label="通知日期"> </el-table-column>
-        <el-table-column prop="note" label="备注"> </el-table-column>
-        <el-table-column prop="note" label="送货地址"> </el-table-column>
-        <el-table-column prop="note" label="客户联络人姓名"> </el-table-column>
-        <el-table-column prop="note" label="联络人电话"> </el-table-column>
-        <el-table-column prop="note" label="总重量"> </el-table-column>
-        <el-table-column prop="note" label="总费用"> </el-table-column>
-        <el-table-column prop="note" label="送货上门费"> </el-table-column>
-        <el-table-column prop="creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="createtime" label="创建时间"></el-table-column>
+        <el-table-column prop="Erpvoucherno" label="发货通知单号"> </el-table-column>
+        <el-table-column prop="Parametername" label="单据名称"> </el-table-column>
+        <el-table-column prop="Customerno" label="客户编码"> </el-table-column>
+        <el-table-column prop="Customername" label="客户名称"> </el-table-column> 
+        <el-table-column prop="Voudate" label="通知日期"> </el-table-column>
+        <el-table-column prop="Erpnote" label="备注"> </el-table-column>
+        <el-table-column prop="Address" label="送货地址"> </el-table-column>
+        <el-table-column prop="Contacts" label="客户联络人姓名"> </el-table-column>
+        <el-table-column prop="Tel" label="联络人电话"> </el-table-column>
+        <el-table-column prop="Weighttotal" label="总重量"> </el-table-column>
+        <el-table-column prop="Costtotal" label="总费用"> </el-table-column>
+        <el-table-column prop="Outcosttotal" label="送货上门费"> </el-table-column>
+        <el-table-column prop="Creater" label="创建人"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
 
         <el-table-column fixed="right" label="操作" :render-header="renderHeader">
           <template slot-scope="scope">
@@ -100,11 +94,10 @@
       </el-table>
     </el-card>
 
-    <el-card body-style="padding:0">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
-        :page-sizes="[10, 20, 30, 40]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="1">
-      </el-pagination>
-    </el-card>
+      <!-- 分页区域 -->
+    <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
+      :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
+
     <el-dialog title="发货通知单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
           border: '1px solid #e9e9e9',
@@ -113,23 +106,23 @@
         }">
         <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  :data="OutStockDetailList"
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="code" label="仓库"> </el-table-column>
-        <el-table-column prop="code" label="项次"> </el-table-column>
-        <el-table-column prop="name" label="项序"> </el-table-column>
-        <el-table-column prop="depcode" label="物料编码"> </el-table-column>
-        <el-table-column prop="depname" label="物料名称"> </el-table-column>
-        <el-table-column prop="status" label="批次"> </el-table-column>
-        <el-table-column prop="role" label="订单数量"> </el-table-column>
-        <el-table-column prop="people" label="未发货数量"> </el-table-column>
-        <el-table-column prop="note" label="已发货数量"> </el-table-column>
-        <el-table-column prop="note" label="已拣货数量"> </el-table-column>
-        <el-table-column prop="note" label="已过账数量"> </el-table-column>
-        <el-table-column prop="status" label="单位"> </el-table-column>
-        <el-table-column prop="status" label="规格型号"> </el-table-column>
-        <el-table-column prop="creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="createtime" label="创建时间"></el-table-column>
+        <el-table-column prop="Towarehouseno" label="仓库"> </el-table-column>
+        <el-table-column prop="Rowno" label="项次"> </el-table-column>
+        <el-table-column prop="Rownodel" label="项序"> </el-table-column>
+        <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
+        <el-table-column prop="Batchno" label="批次"> </el-table-column>
+        <el-table-column prop="Voucherqty" label="订单数量"> </el-table-column>
+        <el-table-column prop="Remainqty" label="未发货数量"> </el-table-column>
+        <el-table-column prop="Postqty" label="已发货数量"> </el-table-column>
+        <el-table-column prop="Outstockqty" label="已拣货数量"> </el-table-column>
+      
+        <el-table-column prop="Unit" label="单位"> </el-table-column>
+        <el-table-column prop="Spec" label="规格型号"> </el-table-column>
+        <el-table-column prop="Creater" label="创建人"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
         
       </el-table>
       </div>
@@ -142,25 +135,69 @@
 </template>
 
 <script>
+import {
+    ALFModelListMixins
+  } from '@/mixins/ALFModelListMixins';
+import Pagination from "@/components/Pagination";
+import {
+        getOutStockDetail,     
+        } from "@/api/api";
+import Vue from "vue";
+import store from "@/store";
   export default {
+    mixins: [ALFModelListMixins],
+   
+    components: {
+      Pagination
+    },
     data() {
       return {
-        sizeForm: {
-          name: ""
+        xlsname:"发货通知单",
+        queryParam: {        
+          Erpstatuscode:"",
+          customerno:"",
+          Createtime:""
         },
-        outerVisible: true,
-        tableData: [{
-          code: "PO01",
-          name: "采购订单",
-          depcode: "01",
-          depname: "采购部",
-          status: "10001",
-          role: "测试供应商",
-          people: "测试账户",
-          warehouse: "成品仓",
-          creater: "admin",
-          createtime: "2020-01-02"
-        }]
+        apiUrl: {
+          query: "/OutStock/GetV_OutStockListByPage",
+          exportXls: "/OutStock/GetV_OutStockDetailListExp"
+        },
+        OutStockDetailList:[],
+        outerVisible: false,
+    
+        tHeader: ['发货通知单号', '单据名称', '客户编码', '客户名称','通知日期', '备注', '送货地址',
+                  '客户联络人姓名', '联络人电话', '总重量', '总费用', '送货上门费'
+                  , '仓库', '项次', '项序', '物料编码', '物料名称', '批次', '订单数量', '未发货数量', '已发货数量'
+                  , '已拣货数量', '单位', '规格型号', '创建人', '创建时间'
+        ],
+        filterVal: ['Erpvoucherno', 'Parametername', 'Customerno', 'Customername','Voudate', 'Erpnote', 'Address',
+                    'Contacts', 'Tel', 'Weighttotal', 'Costtotal', 'Outcosttotal'
+                    , 'Towarehouseno', 'Rowno', 'Rownodel','Materialno', 'Materialdesc', 'Batchno',
+                    'Voucherqty', 'Remainqty', 'Postqty', 'Outstockqty', 'Unit', 'Spec', 'Creater', 'Createtime'
+                   ]
+      }
+    },
+    methods:{
+
+      handleClick(val)
+      {
+        var min = this;
+        min.outerVisible=true;
+        
+        var model ={};
+        model.Erpvoucherno = val.Erpvoucherno;
+       
+        getOutStockDetail(val).then(res=>{
+          debugger;
+          if (res.Result == 1) {
+   
+             min.OutStockDetailList=res.Data;
+
+            }
+            else {
+              min.$message.error(res.ResultValue);
+            }
+        })
       }
     }
   }
