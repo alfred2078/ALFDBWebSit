@@ -1,21 +1,21 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="sizeForm" size="small"  @keyup.enter.native="getModelList">
+      <el-form :model="queryParam" size="small"  @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item >
-              <el-input v-model="sizeForm.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item  label="">
-              <el-input v-model="sizeForm.SupplierName" placeholder="供应商名称" clearable></el-input>
+              <el-input v-model="queryParam.Suppliername" placeholder="供应商名称" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item  label="">
-              <el-input v-model="sizeForm.Supplierno" placeholder="供应商编号" clearable></el-input>
+              <el-input v-model="queryParam.Supplierno" placeholder="供应商编号" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
@@ -119,7 +119,7 @@ mixins: [ALFModelListMixins],
     },
     data() {
       return {
-        sizeForm: {
+        queryParam: {
           Erpvoucherno: "",
           Supplierno:"",
           Suppliername:""
@@ -179,10 +179,9 @@ mixins: [ALFModelListMixins],
               }  
           },
          handleClick(val){
-           debugger;
             this.outerVisible=true;
-         this.sizeForm.Erpvoucherno=val.Erpvoucherno;
-           var json= JSON.stringify(this.sizeForm);
+         this.queryParam.Erpvoucherno=val.Erpvoucherno;
+           var json= JSON.stringify(this.queryParam);
           getInspecReturndetail(json).then(res=>{
                   if (res.Result == 1) {
                     this.detailsData=res.Data;
