@@ -1,30 +1,30 @@
 <template>
   <div>
     <el-card>
-      <el-form :model="sizeForm"  size="small ">
+      <el-form :model="queryParam"  size="small ">
         <el-row>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="sizeForm.name" placeholder="检验单号" clearable></el-input>
+              <el-input v-model="queryParam.Qualityno" placeholder="检验单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="sizeForm.name" placeholder="到货单号" clearable></el-input>
+              <el-input v-model="queryParam.Arrvoucherno" placeholder="到货单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="sizeForm.name" placeholder="物料编码" clearable></el-input>
+              <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
-            <el-form-item label="单据状态">
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-form-item label="">
+              <el-select v-model="queryParam.Erpstatuscode" placeholder="单据状态">
+                 <el-option v-for="item in options" :key="item.Parameterid" :label="item.Parametername" :value="item.Parameterid">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -34,7 +34,7 @@
         <el-row>
           <el-col :span="9">
             <el-form-item label="">
-              <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="创建开始日期"
+              <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至" start-placeholder="创建开始日期"
                 end-placeholder="创建结束日期">
               </el-date-picker>
             </el-form-item>
@@ -42,7 +42,7 @@
 
           <el-col :span="5">
             <el-form-item label-width="0">
-              <el-button icon="el-icon-search" type="primary">查询</el-button>
+              <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
               <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
@@ -67,62 +67,76 @@
         </el-col>
         <el-col :span="2">
           <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
-          <el-dropdown>
-            <el-button size="small" type="primary">
+          <el-button size="small" type="primary" @click="handleExportXls">
               导出<i class="el-icon-download"></i>
             </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>导出当前页</el-dropdown-item>
-              <el-dropdown-item>导出查询结果</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
         </el-col>
       </el-row>
     </el-card>
 
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
-        :header-row-style="{ height: '30', font: 'normal' }"
+        :header-row-style="{ height: '30', font: 'normal' }" :data="Data"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="code" label="检验单号"> </el-table-column>
-        <el-table-column prop="code" label="到货单号"> </el-table-column>
-        <el-table-column prop="code" label="采购订单号"> </el-table-column>
-        <el-table-column prop="code" label="单据名称"> </el-table-column>
-        <el-table-column prop="name" label="到货日期"> </el-table-column>
-        <el-table-column prop="name" label="检验日期"> </el-table-column>
-        <el-table-column prop="depcode" label="检验人"> </el-table-column>
-        <el-table-column prop="depname" label="物料编码"> </el-table-column>
-        <el-table-column prop="depname" label="物料名称"> </el-table-column>
-        <el-table-column prop="depname" label="合格数量"> </el-table-column>
-        <el-table-column prop="depname" label="不合格数量"> </el-table-column>
-        <el-table-column prop="depname" label="批次"> </el-table-column>
-        <el-table-column prop="depname" label="判断结果"> </el-table-column>
-        <el-table-column prop="status" label="状态"> </el-table-column>
-        <el-table-column prop="creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="createtime" label="创建时间"></el-table-column>
+        <el-table-column prop="Qualityno" label="检验单号"  width= '150'> </el-table-column>
+        <el-table-column prop="Arrvoucherno" label="到货单号"  width= '150'> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="采购订单号" width= '120'> </el-table-column>
+        <el-table-column prop="Parametername" label="单据名称" width= '120'> </el-table-column>
+        <el-table-column prop="Createtime" label="到货日期" width= '150'> </el-table-column>
+        <el-table-column prop="Materialno" label="物料编码" width= '120'> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width= '150'> </el-table-column>
+        <el-table-column prop="Qualityqty" label="合格数量" width= '120'> </el-table-column>
+        <el-table-column prop="Unqualityqty" label="不合格数量" width= '120'> </el-table-column>
+        <el-table-column prop="Batchno" label="批次" width= '150'> </el-table-column>
+        <el-table-column prop="Erpstatuscodedesc" label="判断结果"> </el-table-column>
+      
+        <el-table-column prop="Creater" label="创建人"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width= '150'></el-table-column>
         
       </el-table>
     </el-card>
 
-    <el-card body-style="padding:0">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
-        :page-sizes="[10, 20, 30, 40]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="1">
-      </el-pagination>
-    </el-card>
+    <!-- 分页区域 -->
+    <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
+      :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
 
 
   </div>
 </template>
 
 <script>
+import {
+    ALFModelListMixins
+  } from '@/mixins/ALFModelListMixins';
+import Pagination from "@/components/Pagination";
+import {
+        getTParameterList,
+        
+        } from "@/api/api";
+import Vue from "vue";
+import store from "@/store";
   export default {
+    mixins: [ALFModelListMixins],
+   
+    components: {
+      Pagination
+    },
     data() {
       return {
-        sizeForm: {
-          name: ""
+         xlsname:"质检单",
+        queryParam: {
+          Qualityno: "",
+          Arrvoucherno:"",
+          Materialno:"",
+          Erpstatuscode:"",
+          Createtime:""
         },
-        outerVisible: true,
+        apiUrl: {
+          query: "/Quality/GetT_QualityDetailListByPage",
+          exportXls: "/Quality/GetT_QualityDetailExp"
+        },
+        outerVisible: false,
         tableData: [{
           code: "PO01",
           name: "采购订单",
@@ -134,8 +148,38 @@
           warehouse: "成品仓",
           creater: "admin",
           createtime: "2020-01-02"
-        }]
+        }],
+        options:[],
+        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','到货日期', '物料编码', '物料名称',
+                  '合格数量', '不合格数量', '批次', '判断结果', '创建人', '创建时间'
+        ],
+        filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Createtime', 'Materialno', 'Materialdesc',
+                    'Qualityqty', 'Unqualityqty', 'Batchno', 'Erpstatuscodedesc', 'Creater', 'Createtime'
+        ]
       }
+    },
+     created(){
+      this.getTParameter();
+
+    },
+    methods:{
+       //状态下拉框
+      getTParameter()
+      {
+        debugger;
+        var min = this;
+         min.model={};
+         min.model.Groupname="Linestatus";
+         getTParameterList(min.model).then(sres=>{             
+            if(sres.Result == 1){
+                 min.options = sres.Data;
+                 min.options.forEach(t=>{
+                   t.Parameterid= t.Parameterid+'';
+                 });
+            }            
+          })
+      },
+
     }
   }
 
