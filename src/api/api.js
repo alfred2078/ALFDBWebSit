@@ -73,7 +73,10 @@ const saveTCheck =(params)=>postAction("Check/SaveT_Check",params);//保存盘�
 //盈亏管理
 const getTCheckAnalyze =(params)=>postAction("Check/GetT_CheckAnalyze",params);//查询盈亏
 const delCloTCheck =(params)=>postAction("Check/DelCloT_Check",params);//盈亏处理
-
+//入库管理
+const getPurchaseOrderListByPage =(params)=>postAction("Purchase/GetV_PurchaseOrderListByPage",params);//查询采购订单表头
+const getPurchaseOrderDateil =(params)=>postAction("Purchase/GetT_PurchaseOrderDateil",params);//查询采购订单表体
+const getWorkOrderDetailList =(params)=>postAction("WorkOrder/GetV_WorkOrderDetailList",params);//查询生产订单表体
 
 export{
     saveWarehouse,
@@ -125,7 +128,10 @@ export{
     getReceiveTranGroupByMaterialno,
     getOutStockGroupByMonth,
     getOutStockGroupByWarehou,
-    GetOutStockGroupByMaterialno
+    GetOutStockGroupByMaterialno,
+    getPurchaseOrderListByPage,
+    getPurchaseOrderDateil,
+    getWorkOrderDetailList
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
