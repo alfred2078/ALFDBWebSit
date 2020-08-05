@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const service = new axios.create({
-  // baseURL: "http://192.168.88.108:8080/api",
-  baseURL: "https://localhost:44394/api",
-  // baseURL: "http://wms.yinlun.cn:7002/api",
-  // baseURL: "http://192.168.88.27:5001/api",
+const service = new axios.create({  
+  baseURL: "https://localhost:44394/api",  
+  // baseURL: "http://172.19.106.230:5001/api",
   timeout: 50000,
   withCredentials: false, 
   headers: {
