@@ -79,7 +79,8 @@ const getPurchaseOrderDateil =(params)=>postAction("Purchase/GetT_PurchaseOrderD
 const getWorkOrderDetailList =(params)=>postAction("WorkOrder/GetV_WorkOrderDetailList",params);//查询生产订单表体
 //验退
 const getInspecReturndetail =(params)=>postAction("InspecReturn/GetT_InspecReturnDetail",params);//盈亏处理
-
+//发货通知单
+const getOutStockDetail =(params)=>postAction("OutStock/GetT_OutStockDetail",params);//查询出货表体
 
 
 export{
@@ -136,7 +137,8 @@ export{
     getPurchaseOrderListByPage,
     getPurchaseOrderDateil,
     getWorkOrderDetailList,
-    getInspecReturndetail
+    getInspecReturndetail,
+    getOutStockDetail
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
