@@ -25,17 +25,17 @@
             </el-form-item>
           </el-col>
 
-          <!-- <el-col :span="4">
-            <el-form-item  label="">
-              <el-input v-model="queryParam.Cusmaterialno" placeholder="客户件号" clearable></el-input>
-            </el-form-item>
-          </el-col> -->
-
           <el-col :span="4">
             <el-form-item  label="">
               <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
             </el-form-item>
           </el-col>
+           <el-col :span="4">
+            <el-form-item  label="">
+              <el-input v-model="queryParam.Qualityno" placeholder="检验单号" clearable></el-input>
+            </el-form-item>
+          </el-col>
+
           <el-col :span="3">
           <el-form-item >
               <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
@@ -88,19 +88,27 @@
         outerVisible: false,
         idshow: false,
         apiUrl: {
-          query: "/Stock/GetT_StockListByPage",
+          query: "/Stock/GetV_StockListByPage",
           save: "",
           update: ""
         },
         columns: [{
             label: "据点",
             prop: "Strongholdcode",
-            colvisible: true
+            colvisible: true,
+            width:80
           },
           {
-            label: "仓库编码",
+            label: "仓库",
             prop: "Towarehouseno",
-            colvisible: true
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "库位",
+            prop: "Areano",
+            colvisible: true,
+            width:120
           },
           // {
           //   label: "仓库名称",
@@ -110,7 +118,8 @@
           {
             label: "物料编码",
             prop: "Materialno",
-            colvisible: true
+            colvisible: true,
+            width:150
           },
           // {
           //   label: "客户件号",
@@ -120,28 +129,87 @@
           {
             label: "物料描述",
             prop: "Materialdesc",
-            colvisible: true
+            colvisible: true,
+            width:150
           },
           {
             label: "条码",
             prop: "Barcode",
-            colvisible: true
+            colvisible: true,
+            width:330
           },
           {
             label: "批次",
             prop: "Batchno",
-            colvisible: true
+            colvisible: true,
+            width:120
           },
           {
             label: "数量",
             prop: "Qty",
-            colvisible: true
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "效期",
+            prop: "Edate",
+            colvisible: true,
+            width:110
+          },
+          {
+            label: "69码",
+            prop: "watercode",
+            colvisible: true,
+            width:140
+          },
+          {
+            label: "质检状态",
+            prop: "Strstatus",
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "限制性",
+            prop: "StrIslimitstock",
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "供应商",
+            prop: "Supplierno",
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "供应商名称",
+            prop: "Suppliername",
+            colvisible: true,
+            width:150
+          },
+          {
+            label: "拣货数量",
+            prop: "TaskQty",
+            colvisible: true,
+            width:100
+          },
+          {
+            label: "质检单号",
+            prop: "Qualityno",
+            colvisible: true,
+            width:180
+          },
+          {
+            label: "到货单号",
+            prop: "Arrvoucherno",
+            colvisible: true,
+            width:180
           },
           // {
-          //   label: "寄售",
-          //   prop: "Specialstock",
-          //   colvisible: true
-          // }
+          //   label: "锁定",
+          //   prop: "StrIsretention",
+          //   colvisible: true,
+          //   width:100
+          // },
         ],
       }
     }
