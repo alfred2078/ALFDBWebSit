@@ -27,30 +27,29 @@
               <el-input v-model="queryParam.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
             </el-form-item>
           </el-col>
+
           <el-col :span="4">
             <el-form-item label="">
-              <el-input v-model="queryParam.CusMaterialno" placeholder="客户件号" clearable></el-input>
+              <el-input v-model="queryParam.Barcode" placeholder="条码" clearable></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> 
 
-        </el-row>
-
-        <el-row>
           <el-col :span="4">
             <el-form-item label="">
               <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
             </el-form-item>
           </el-col>
+
+        </el-row>
+
+        
+
+        <el-row>          
           <el-col :span="4">
             <el-form-item label="">
               <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
             </el-form-item>
-          </el-col>
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input v-model="queryParam.Barcode" placeholder="条码" clearable></el-input>
-            </el-form-item>
-          </el-col>
+          </el-col>          
 
           <el-col :span="9">
             <el-form-item label="">
@@ -68,6 +67,14 @@
         </el-row>
 
       </el-form>
+    </el-card>
+
+    <el-card body-style="padding:5px;">
+      <el-row>      
+        <el-col :span="2">
+          <el-button @click="handleExportXls" size="small " icon="el-icon-download" type="primary">导出</el-button>
+        </el-col>
+      </el-row>
     </el-card>
 
     <el-card body-style="padding:2px;">
@@ -107,11 +114,11 @@
     },
     data() {
       return {
+        xlsname:"收货记录",
         queryParam: {
           Strongholdcode: '',
           Towarehouseno: '',
-          Erpvoucherno: '',
-          CusMaterialno: '',
+          Erpvoucherno: '',          
           Materialno: '',
           Batchno: '',
           Barcode: '',
@@ -123,7 +130,8 @@
         apiUrl: {
           query: "/ReceiveTran/GetT_ReceiveTranListByPage",
           save: "",
-          update: ""
+          update: "",
+          exportXls: "/ReceiveTran/GetT_ReceiveTranListByExp"
         },
         columns: [{
             label: "据点",
@@ -174,8 +182,8 @@
             width: 120
           },
           {
-            label: "客户件号",
-            prop: "CusMaterialno",
+            label: "效期",
+            prop: "Edate",
             colvisible: true,
             width: 120
           },
@@ -202,13 +210,7 @@
             prop: "Qty",
             colvisible: true,
             width: 60
-          },
-          {
-            label: "寄售",
-            prop: "Specialstock",
-            colvisible: true,
-            width: 60
-          },         
+          },                
           {
             label: "收货人",
             prop: "Struserno",
@@ -222,6 +224,14 @@
             width: 200
           },
         ],
+        tHeader: ['工厂', '仓库', '库位', '单据名称','ERP单号',
+          '供应商编码', '供应商名称', '物料编码', '客户件号','物料描述',
+          '条码','批次','数量','寄售','收货人','收货时间'
+        ],
+        filterVal: ['Strongholdcode', 'Towarehouseno', 'Toareano', 'StrVoucherType',
+          'Erpvoucherno','Supplierno', 'Suppliername', 'Materialno', 'CusMaterialno',
+          'Materialdesc','Barcode','Batchno','Qty','Specialstock','Struserno','Createtime'
+        ]
       }
     },
     methods: {
