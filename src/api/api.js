@@ -40,8 +40,8 @@ const getWorkOrderList= (params)=>postAction("WorkOrder/GetT_WorkOrderHeadListAD
 
 
 const  UploadFile= (params)=>postAction("Print/InitialPrint",params); //期初打印
-//const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8011/Main.aspx",params,name);//正式预览打印地址
-const windowpost=(params,name)=>openPostWindow("http://localhost:34590/Main.aspx",params,name);// 本地预览打印地址
+const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8011/Main.aspx",params,name);//正式预览打印地址
+// const windowpost=(params,name)=>openPostWindow("http://localhost:34590/Main.aspx",params,name);// 本地预览打印地址
 //const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8055/Main.aspx",params,name);// 用户测试预览打印地址
 
 //物料管理
