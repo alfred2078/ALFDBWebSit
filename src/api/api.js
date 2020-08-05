@@ -77,6 +77,10 @@ const delCloTCheck =(params)=>postAction("Check/DelCloT_Check",params);//盈亏�
 const getPurchaseOrderListByPage =(params)=>postAction("Purchase/GetV_PurchaseOrderListByPage",params);//查询采购订单表头
 const getPurchaseOrderDateil =(params)=>postAction("Purchase/GetT_PurchaseOrderDateil",params);//查询采购订单表体
 const getWorkOrderDetailList =(params)=>postAction("WorkOrder/GetV_WorkOrderDetailList",params);//查询生产订单表体
+//验退
+const getInspecReturndetail =(params)=>postAction("InspecReturn/GetT_InspecReturnDetail",params);//盈亏处理
+
+
 
 export{
     saveWarehouse,
@@ -131,7 +135,8 @@ export{
     GetOutStockGroupByMaterialno,
     getPurchaseOrderListByPage,
     getPurchaseOrderDateil,
-    getWorkOrderDetailList
+    getWorkOrderDetailList,
+    getInspecReturndetail
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
