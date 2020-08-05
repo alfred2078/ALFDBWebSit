@@ -1,17 +1,17 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="queryParam" label-width="90px" size="small " @keyup.enter.native="getModelList">
+      <el-form :model="queryParam"  size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="queryParam.Erpvoucherno" placeholder="采购订单号"></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" clearable placeholder="采购订单号"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="queryParam.Suppliername" placeholder="供应商名称"></el-input>
+              <el-input v-model="queryParam.Suppliername" clearable placeholder="供应商名称"></el-input>
             </el-form-item>
           </el-col>
 
