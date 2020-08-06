@@ -9,6 +9,12 @@
             </el-form-item>
           </el-col>
 
+          <el-col :span="4">
+            <el-form-item label="">
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="采购订单号" clearable></el-input>
+            </el-form-item>
+          </el-col>
+
           <el-col :span="5">
             <el-form-item label="">
               <el-input v-model="queryParam.Arrvoucherno" placeholder="到货单号" clearable></el-input>
@@ -23,7 +29,7 @@
 
           <el-col :span="5">
             <el-form-item label="">
-              <el-select v-model="queryParam.Erpstatuscode" placeholder="单据状态">
+              <el-select v-model="queryParam.Erpstatuscode" placeholder="单据状态" clearable>
                  <el-option v-for="item in options" :key="item.Parameterid" :label="item.Parametername" :value="item.Parameterid">
                 </el-option>
               </el-select>
@@ -43,7 +49,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+             <!--  <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
             </el-form-item>
           </el-col>
 
@@ -83,6 +89,7 @@
         <el-table-column prop="Arrvoucherno" label="到货单号"  width= '150'> </el-table-column>
         <el-table-column prop="Erpvoucherno" label="采购订单号" width= '120'> </el-table-column>
         <el-table-column prop="Parametername" label="单据名称" width= '120'> </el-table-column>
+        <el-table-column prop="Voucherqty" label="送验量" width= '120'> </el-table-column>
         <el-table-column prop="Createtime" label="到货日期" width= '150'> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码" width= '120'> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width= '150'> </el-table-column>
@@ -126,6 +133,7 @@ import store from "@/store";
       return {
          xlsname:"质检单",
         queryParam: {
+          Erpvoucherno:"",
           Qualityno: "",
           Arrvoucherno:"",
           Materialno:"",
@@ -150,10 +158,10 @@ import store from "@/store";
           createtime: "2020-01-02"
         }],
         options:[],
-        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','到货日期', '物料编码', '物料名称',
+        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','送验量','到货日期', '物料编码', '物料名称',
                   '合格数量', '不合格数量', '批次', '判断结果', '创建人', '创建时间'
         ],
-        filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Createtime', 'Materialno', 'Materialdesc',
+        filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Voucherqty','Createtime', 'Materialno', 'Materialdesc',
                     'Qualityqty', 'Unqualityqty', 'Batchno', 'Erpstatuscodedesc', 'Creater', 'Createtime'
         ]
       }
