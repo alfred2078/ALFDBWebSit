@@ -88,6 +88,11 @@ const getPurchasereturndateil =(params)=>postAction("PurchaseReturn/Get_Purchase
 //杂入
 const getVOtherinorderDetail =(params)=>postAction("OtherIn/Get_VOtherinorderDetail",params);//查询杂入表体
 
+//调拨出库
+const getVTransferoutDetail =(params)=>postAction("TransferOut/Get_VTransferoutDetail",params);//查询调拨出表体
+//调拨入库
+const getVTransferinDetail =(params)=>postAction("Transferin/Get_VTransferinDetail",params);//查询调拨入表体
+
 export{
     saveWarehouse,
     updateWarehouse,
@@ -146,7 +151,9 @@ export{
     getOutStockDetail,
     getRawmaterialOutDetail,
     getPurchasereturndateil,
-    getVOtherinorderDetail
+    getVOtherinorderDetail,
+    getVTransferoutDetail,
+    getVTransferinDetail
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 

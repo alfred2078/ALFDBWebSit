@@ -89,7 +89,7 @@
           background: '#fff'
         }">
         <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
-          :header-row-style="{ height: '30', font: 'normal' }" :data="TransferinDetail"
+          :header-row-style="{ height: '30', font: 'normal' }" :data="TransferoutDetail"
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" style="width: 100%" row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
           <el-table-column prop="Fromwarehouseno" label="拨出仓库"> </el-table-column>
@@ -100,7 +100,7 @@
           <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
           <el-table-column prop="Unitname" label="单位名称"> </el-table-column>
           <el-table-column prop="Voucherqty" label="调拨数量"> </el-table-column>
-          <el-table-column prop="Receiveqty" label="实际调拨数量"> </el-table-column>
+          <el-table-column prop="Outstockqty" label="实际调拨数量"> </el-table-column>
           <el-table-column prop="Postqty" label="过账数量"> </el-table-column>
           <el-table-column prop="Batchno" label="拨入批次"> </el-table-column>
           <el-table-column prop="Batchno" label="拨出批次"> </el-table-column>
@@ -121,7 +121,7 @@
   } from '@/mixins/ALFModelListMixins';
 import Pagination from "@/components/Pagination";
  import {
-        getVTransferinDetail
+        getVTransferoutDetail
       
         } from "@/api/api";
  import Vue from "vue";
@@ -135,22 +135,22 @@ import Pagination from "@/components/Pagination";
     },
     data() {
       return {
-         xlsname:"调拨入单",
+         xlsname:"调拨出单",
         queryParam:{
           Erpvoucherno:"",
           Createtime:""
         },
         apiUrl: {
-          query: "/Transferin/Get_VTransferinListByPage",
-          exportXls: "/Transferin/Get_TransferindetailListByExp"
+          query: "/TransferOut/Get_VTransferoutListByPage",
+          exportXls: "/TransferOut/Get_TransferoutdetailListByExp"
         },
         outerVisible: false,
-        TransferinDetail:[],
+        TransferoutDetail:[],
          tHeader: ['调拨单号', '单据名称', '部门编码', '部门名称','备注',
                   '拨出仓库','拨入仓库', '项次', '项序', '物料编码','物料名称', '单位名称', '调拨数量', '实际调拨数量','过账数量','拨入批次','拨出批次', '创建人', '创建时间'
         ],
         filterVal: ['Erpvoucherno', 'Parametername', 'Departmentcode', 'Departmentname','Erpnote',
-                    'Fromwarehouseno', 'Towarehouseno', 'Rowno', 'Rownodel','Materialno','Materialdesc', 'Unitname', 'Voucherqty','Receiveqty', 'Postqty','Batchno', 'Batchno', 'Creater', 'Createtime'
+                    'Fromwarehouseno', 'Towarehouseno', 'Rowno', 'Rownodel','Materialno','Materialdesc', 'Unitname', 'Voucherqty','Outstockqty', 'Postqty','Batchno', 'Batchno', 'Creater', 'Createtime'
         ]
          
       }
@@ -164,11 +164,11 @@ import Pagination from "@/components/Pagination";
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
        
-        getVTransferinDetail(val).then(res=>{
+        getVTransferoutDetail(val).then(res=>{
           debugger;
           if (res.Result == 1) {
    
-             min.TransferinDetail=res.Data;
+             min.TransferoutDetail=res.Data;
 
             }
             else {
