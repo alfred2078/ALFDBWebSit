@@ -81,7 +81,12 @@ const getWorkOrderDetailList =(params)=>postAction("WorkOrder/GetV_WorkOrderDeta
 const getInspecReturndetail =(params)=>postAction("InspecReturn/GetT_InspecReturnDetail",params);//盈亏处理
 //发货通知单
 const getOutStockDetail =(params)=>postAction("OutStock/GetT_OutStockDetail",params);//查询出货表体
-
+//领料单
+const getRawmaterialOutDetail =(params)=>postAction("RawMaterialOut/Get_TRawmaterialOutDetail",params);//查询领料表体
+//仓退
+const getPurchasereturndateil =(params)=>postAction("PurchaseReturn/Get_Purchasereturndateil",params);//查询仓退表体
+//杂入
+const getVOtherinorderDetail =(params)=>postAction("OtherIn/Get_VOtherinorderDetail",params);//查询杂入表体
 
 export{
     saveWarehouse,
@@ -138,7 +143,10 @@ export{
     getPurchaseOrderDateil,
     getWorkOrderDetailList,
     getInspecReturndetail,
-    getOutStockDetail
+    getOutStockDetail,
+    getRawmaterialOutDetail,
+    getPurchasereturndateil,
+    getVOtherinorderDetail
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
