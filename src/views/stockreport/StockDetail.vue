@@ -193,7 +193,7 @@
             width:100
           },
           {
-            label: "质检单号",
+            label: "检验单号",
             prop: "Qualityno",
             colvisible: true,
             width:180
