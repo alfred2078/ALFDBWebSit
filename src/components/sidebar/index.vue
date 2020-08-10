@@ -1,15 +1,16 @@
 <template>
   <el-scrollbar wrapClass="scrollbar-wrapper">
-    <el-aside width="200px">
+    <el-aside :width="this.isCollap?'67px':'220px'">
       <!-- <logo></logo> -->
       <el-menu
+   
         background-color="#001529"
         text-color="#ffffffe6"
         active-text-color="#fff"
         mode="vertical"
         :default-active="$route.path"
-        :collapse="isCollapse"
-        :show-timeout="200"
+        :collapse="this.isCollap"
+        :show-timeout="200"    
         router
       >
         <sidebar-item
@@ -17,6 +18,7 @@
           :key="route.name"
           :item="route"
           :base-path="route.path"
+  
         ></sidebar-item>
       </el-menu>
     </el-aside>
@@ -25,7 +27,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import Logo from "@/components/logo";
+ import Logo from "@/components/logo";
 import SidebarItem from "./SidebarItem";
 
 export default {
@@ -37,7 +39,7 @@ export default {
     };
   },
   computed: {    
-    ...mapGetters(["addRouters"])
+    ...mapGetters(["addRouters","isCollap"])
   }
 };
 </script>
@@ -46,7 +48,7 @@ export default {
 .scrollbar-wrapper {
   overflow-x: hidden !important;
   .el-scrollbar__view {
-    height: 100%;
+ 
     
   }
 }

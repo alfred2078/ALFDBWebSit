@@ -14,9 +14,9 @@
       <main-header class="topLayout">
       </main-header>
       <!-- 左边 -->
-      <side-bar class="leftLayout"></side-bar>
+      <side-bar class="leftLayout" ></side-bar>
       <!-- 右边 -->
-      <el-container class="rigthLayout">
+      <el-container  v-bind:class="[this.isCollap?'rigthLayoutTrue':'rigthLayoutFalse']">
         <el-main>
           <main-tab></main-tab>
         </el-main>
@@ -30,13 +30,22 @@
   import MainHeader from "./MainHeader";
   import MainTab from "@/components/maintab";
   import Logo from "@/components/logo";
-
+  import { mapGetters } from "vuex";
   export default {
     name: "MainLayout",
     components: {
       SideBar,
       MainHeader,
       MainTab,     
+    },
+    data(){
+      return {
+        
+      };
+     
+    },
+    computed: {    
+      ...mapGetters(["isCollap"])
     }
   };
 
@@ -52,6 +61,7 @@
 
 
   .leftLayout {
+  
     float: left;
     display: block;
     position: absolute;
@@ -62,10 +72,25 @@
     //  overflow-y: scroll;
   }
 
-  .rigthLayout {
+  .rigthLayoutFalse {
+
     float: left;
     position: absolute;
-    left: 200px;
+    left: 210px;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    padding-bottom: 30px;
+    -webkit-transition: left .3s ease-in-out;
+    transition: left .3s ease-in-out;
+    background: #f0f0f0;
+  }
+
+  .rigthLayoutTrue {
+
+    float: left;
+    position: absolute;
+    left: 67px;
     right: 0;
     top: 50px;
     bottom: 0;
@@ -95,8 +120,8 @@
     height: 50px;
     font-size: 22px;
     color: #fff;
-    width: 100%;
-    height: 60px;
+ 
+   
   }
 
   .content-collapse {

@@ -15,7 +15,7 @@ import i18n from './lang'
 import Cookies from 'js-cookie'
 // import Viser from 'viser-vue'
 import VCharts from 'v-charts'
-
+import Fragment from 'vue-fragment'
 import {
   SYS_LANGUAGE
 } from "@/store/mutation-types"
@@ -26,7 +26,7 @@ Vue.config.productionTip = false
 // Vue.use(Viser) 
  Vue.use(VCharts)
 Vue.use(VueLs, SystemConfig.storageOptions)
-
+Vue.use(Fragment.Plugin)
 Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)
 })

@@ -20,6 +20,7 @@
     "v-charts": "^1.19.0",
     "viser-vue": "^2.4.8",
     "vue": "^2.5.2",
+    "vue-fragment": "^1.5.1",
     "vue-i18n": "^8.15.3",
     "vue-ls": "^3.2.1",
     "vue-router": "^3.1.6",

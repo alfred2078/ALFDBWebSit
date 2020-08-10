@@ -2,8 +2,8 @@
   <el-header>
     <div class="header">
       <logo style="width:250px"></logo>
-      <div class="headeritem1">
-        <i class="el-icon-s-fold"></i>
+      <div class="headeritem1" @click="toggleCollapse">
+       <i :class="icon"></i>
         <span>{{$t('header.iconMessage')}}</span>
       </div>
       <div class="headeritem2">
@@ -16,6 +16,8 @@
 <script>
   import MainMenu from "@/components/maincontainer/MainMenu";
   import Logo from "@/components/logo";
+  import store from "@/store";
+  import { mapGetters } from "vuex";
   export default {
     name: "MainHeader",
     components: {
@@ -23,8 +25,28 @@
       Logo
     },
     data() {
-      return {};
-    }
+      return {
+        icon:"el-icon-s-fold"
+      };
+    },
+    
+    computed: {    
+      ...mapGetters(["addRouters","isCollap"])
+    },
+    methods: {
+      toggleCollapse () {
+        //debugger;
+        store.dispatch('toggleCollapse');
+        if(this.isCollap)
+        {
+          this.icon="el-icon-s-unfold"
+        } else 
+        {
+          this.icon="el-icon-s-fold"
+        }
+        //this.$store.dispatch('menuToggleSideBar/toggleCollapse')
+      }
+  }
   };
 
 </script>
