@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input v-model="queryParam.Erpvoucherno" placeholder="生产订单号"></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="生产订单号" clearable></el-input>
             </el-form-item>
           </el-col>
 

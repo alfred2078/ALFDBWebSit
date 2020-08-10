@@ -83,7 +83,7 @@
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }" :data="Data"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column prop="Qualityno" label="检验单号"  width= '180'> </el-table-column>
         <el-table-column prop="Arrvoucherno" label="到货单号"  width= '180'> </el-table-column>
