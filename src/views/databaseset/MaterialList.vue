@@ -18,7 +18,7 @@
             <el-input v-model="sizeForm.name" placeholder="规格型号"></el-input>
           </el-form-item>
         </el-col> -->
-          <el-col :span="9"> 
+          <el-col :span="9">
             <el-form-item label="">
               <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至" start-placeholder="开始日期"
                 end-placeholder="结束日期">
@@ -28,7 +28,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary" @click="reset">重置</el-button>
+           
             </el-form-item>
           </el-col>
         </el-row>
@@ -57,7 +57,7 @@
 
     <el-card body-style="padding:2px;">
       <el-table :data="Data" :row-style="{height:'30'}" :cell-style="{padding:'2px'}" :header-row-style="{height:'30'}"
-        :header-cell-style="{padding:'2px',background:'#f6f6f6'}" height="500" border  :fit="true"  style="width: 100%">
+        :header-cell-style="{padding:'2px',background:'#f6f6f6'}"  border  :fit="true"  style="width: 100%">
         <el-table-column prop="Strongholdcode" label="据点编号" width="120" :show-overflow-tooltip="true">
         </el-table-column>
         <el-table-column prop="Strongholdname" label="据点名称" width="120" :show-overflow-tooltip="true">

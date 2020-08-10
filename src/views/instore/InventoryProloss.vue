@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="Checkrefserial" size="small ">
+      <el-form :model="Checkrefserial" size="small " @keyup.enter.native="getInfo">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
               <el-input v-model="Checkrefserial.Erpvoucherno" placeholder="盘点单号" clearable></el-input>
             </el-form-item>
           </el-col>
- 
+
           <el-col :span="5">
             <el-form-item label-width="" label="">
               <el-input v-model="Checkrefserial.Materialno" placeholder="物料编码" clearable></el-input>
@@ -24,7 +24,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" @click="getInfo" type="primary">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+           
               
             </el-form-item>
           </el-col>

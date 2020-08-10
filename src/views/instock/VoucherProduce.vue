@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="queryParam" label-width="90px" size="small ">
+      <el-form :model="queryParam"  size="small "  @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item label="">
@@ -20,7 +20,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+           
             </el-form-item>
           </el-col>
         </el-row>
@@ -101,7 +101,7 @@
         <el-table-column prop="Receiveqty" label="已入库数量"> </el-table-column>
         <el-table-column prop="Remainqty" label="未入库数量"> </el-table-column>
         <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
 
         
       </el-table>

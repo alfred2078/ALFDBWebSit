@@ -8,7 +8,7 @@
               <el-input v-model="queryParam.Erpvoucherno" placeholder="盘点单号"></el-input>
             </el-form-item>
           </el-col>
-  
+
           <el-col :span="3" >
             <el-form-item >
               <el-select v-model="queryParam.Checkstatus" placeholder="请选择盘点状态" clearable>
@@ -16,8 +16,8 @@
                 </el-option>
               </el-select>
             </el-form-item>
-          </el-col> 
- 
+          </el-col>
+
           <el-col :span="3" >
             <el-form-item   >
               <el-select v-model="queryParam.Isdel" placeholder="是否删除" clearable >
@@ -37,7 +37,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary" @click="reset">重置</el-button>
+             
             </el-form-item>
           </el-col>
 
@@ -91,7 +91,7 @@
     <el-card body-style="padding:2px;">
       <el-table :data="Data"  @selection-change="GetCheckChange" ref="Table" @current-change="chooseMcaterialChange" border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column type="selection"  width="55"  > </el-table-column>
          <template v-for="item in columns">
@@ -359,7 +359,6 @@ import Pagination from "@/components/Pagination";
          min.model.Groupname="Check_Isdel";
          getTParameterList(min.model).then(sres=>{             
             if(sres.Result == 1){
-              debugger;
                  min.isdellist = sres.Data;
                   min.isdellist.forEach(t=>{
                    t.Parameterid= t.Parameterid+'';
@@ -403,7 +402,7 @@ import Pagination from "@/components/Pagination";
         var min = this;
          min.model={};
          min.model.Erpvoucherno = val.Erpvoucherno;
-         min.model.Checkstatus =val.Checkstatus;
+         min.model.Checkstatus =val.checkstatus;
          min.model.Isdel = 2;
          min.updateTCheckAsync(min.model);
           min.getModelList();

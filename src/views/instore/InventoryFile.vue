@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="checkFrom" size="small" >
+      <el-form :model="checkFrom" size="small" @keyup.enter.native="getInfo">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
@@ -70,13 +70,13 @@
                 </el-date-picker>
               </el-form-item> -->
             </el-col>
- 
+
             
 
             <el-col :span="5">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" @click="getInfo" type="primary">查询</el-button>
-                <el-button icon="el-icon-refresh-right" type="primary" @click="reset">重置</el-button>
+                
               </el-form-item>
             </el-col>
           </el-row>

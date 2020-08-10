@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="queryParam"  size="small ">
+      <el-form :model="queryParam"  size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item  label="">
@@ -26,7 +26,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+       
             </el-form-item>
           </el-col>
         </el-row>
@@ -59,36 +59,27 @@
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="350"  :data="Data"
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"   :data="Data"
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Erpvoucherno" label="发货通知单号"> </el-table-column>
-        <el-table-column prop="Parametername" label="单据名称"> </el-table-column>
-        <el-table-column prop="Customerno" label="客户编码"> </el-table-column>
-        <el-table-column prop="Customername" label="客户名称"> </el-table-column> 
-        <el-table-column prop="Voudate" label="通知日期"> </el-table-column>
-        <el-table-column prop="Erpnote" label="备注"> </el-table-column>
-        <el-table-column prop="Address" label="送货地址"> </el-table-column>
-        <el-table-column prop="Contacts" label="客户联络人姓名"> </el-table-column>
-        <el-table-column prop="Tel" label="联络人电话"> </el-table-column>
-        <el-table-column prop="Weighttotal" label="总重量"> </el-table-column>
-        <el-table-column prop="Costtotal" label="总费用"> </el-table-column>
-        <el-table-column prop="Outcosttotal" label="送货上门费"> </el-table-column>
-        <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
+        <el-table-column prop="Erpvoucherno" label="发货通知单号" width='180'> </el-table-column>
+        <el-table-column prop="Parametername" label="单据名称"  width='120'> </el-table-column>
+        <el-table-column prop="Customerno" label="客户编码"  width='120'> </el-table-column>
+        <el-table-column prop="Customername" label="客户名称" width='180'> </el-table-column> 
+        <el-table-column prop="Voudate" label="通知日期" width='180'> </el-table-column>
+        <el-table-column prop="Erpnote" label="备注" width='180'> </el-table-column>
+        <el-table-column prop="Address" label="送货地址" width='250'> </el-table-column>
+        <el-table-column prop="Contacts" label="客户联络人姓名" width='150'> </el-table-column>
+        <el-table-column prop="Tel" label="联络人电话" width='150'> </el-table-column>
+        <el-table-column prop="Weighttotal" label="总重量" width='100'> </el-table-column>
+        <el-table-column prop="Costtotal" label="总费用" width='100'> </el-table-column>
+        <el-table-column prop="Outcosttotal" label="送货上门费" width='100'> </el-table-column>
+        <el-table-column prop="Creater" label="创建人" width='100'></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width='180'></el-table-column>
 
         <el-table-column fixed="right" label="操作" :render-header="renderHeader">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
-            <!-- <el-dropdown>
-              <span class="el-dropdown-link">
-                更多<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>密码</el-dropdown-item>
-                <el-dropdown-item>停用</el-dropdown-item>
-                <el-dropdown-item>删除</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown> -->
+    
           </template>
         </el-table-column>
       </el-table>
@@ -108,21 +99,21 @@
         :header-row-style="{ height: '30', font: 'normal' }"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  :data="OutStockDetailList"
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Towarehouseno" label="仓库"> </el-table-column>
-        <el-table-column prop="Rowno" label="项次"> </el-table-column>
-        <el-table-column prop="Rownodel" label="项序"> </el-table-column>
-        <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
-        <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
-        <el-table-column prop="Batchno" label="批次"> </el-table-column>
-        <el-table-column prop="Voucherqty" label="订单数量"> </el-table-column>
-        <el-table-column prop="Remainqty" label="未发货数量"> </el-table-column>
-        <el-table-column prop="Postqty" label="已发货数量"> </el-table-column>
-        <el-table-column prop="Outstockqty" label="已拣货数量"> </el-table-column>
+        <el-table-column prop="Towarehouseno" label="仓库" width='80'> </el-table-column>
+        <el-table-column prop="Rowno" label="项次" width='80'> </el-table-column>
+        <el-table-column prop="Rownodel" label="项序" width='80'> </el-table-column>
+        <el-table-column prop="Materialno" label="物料编码" width='100'> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width='250'> </el-table-column>
+        <el-table-column prop="Batchno" label="批次" width='120'> </el-table-column>
+        <el-table-column prop="Voucherqty" label="订单数量" width='100'> </el-table-column>
+        <el-table-column prop="Remainqty" label="未发货数量" width='100'> </el-table-column>
+        <el-table-column prop="Postqty" label="已发货数量" width='100'> </el-table-column>
+        <el-table-column prop="Outstockqty" label="已拣货数量" width='100'> </el-table-column>
       
         <el-table-column prop="Unit" label="单位"> </el-table-column>
-        <el-table-column prop="Spec" label="规格型号"> </el-table-column>
-        <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
+        <el-table-column prop="Spec" label="规格型号" width='100'> </el-table-column>
+        <el-table-column prop="Creater" label="创建人" width='120'></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width='180'></el-table-column>
         
       </el-table>
       </div>

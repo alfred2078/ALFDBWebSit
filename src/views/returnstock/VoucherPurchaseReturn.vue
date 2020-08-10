@@ -25,7 +25,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+           
             </el-form-item>
           </el-col>
 
@@ -67,17 +67,17 @@
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column prop="Erpvoucherno" label="仓退单号"> </el-table-column>
-        <el-table-column prop="Parametername" label="单据名称"> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="仓退单号" width="180"> </el-table-column>
+        <el-table-column prop="Parametername" label="单据名称" width="100"> </el-table-column>
         <!-- <el-table-column prop="depcode" label="单据日期"> </el-table-column> -->
-        <el-table-column prop="Departmentcode" label="部门编码"> </el-table-column>
-        <el-table-column prop="Departmentname" label="部门名称"> </el-table-column>
+        <el-table-column prop="Departmentcode" label="部门编码" width="100"> </el-table-column>
+        <el-table-column prop="Departmentname" label="部门名称" width="150"> </el-table-column>
         <el-table-column prop="Supplierno" label="供应商编码"> </el-table-column>
         <el-table-column prop="Suppliername" label="供应商名称"> </el-table-column>
         <el-table-column prop="Creater" label="创建人"></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
 
-        <el-table-column fixed="right" label="操作" :render-header="renderHeader">
+        <el-table-column fixed="right" label="操作" width="80" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
             <!-- <el-dropdown>

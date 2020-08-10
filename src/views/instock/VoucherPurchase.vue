@@ -26,7 +26,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+        
             </el-form-item>
           </el-col>
         </el-row>
@@ -63,17 +63,17 @@
         :header-row-style="{ height: '30', font: 'normal' }"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  :data="Data"
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Erpvoucherno" label="采购订单号" :show-overflow-tooltip="true" width= '120'> </el-table-column>
-        <el-table-column prop="Parametername" label="单据名称" width= '120'> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="采购订单号" :show-overflow-tooltip="true" width= '180'> </el-table-column>
+        <el-table-column prop="Parametername" label="单据名称" width= '100'> </el-table-column>
         <el-table-column prop="Departmentcode" label="部门编码" width= '120'> </el-table-column>
         <el-table-column prop="Departmentname" label="部门名称" width= '120'> </el-table-column>
         <el-table-column prop="Supplierno" label="供应商编码" width= '120' :show-overflow-tooltip="true"> </el-table-column>
-        <el-table-column prop="Suppliername" label="供应商名称" width= '120' :show-overflow-tooltip="true"> </el-table-column>
+        <el-table-column prop="Suppliername" label="供应商名称" width= '180' :show-overflow-tooltip="true"> </el-table-column>
         <el-table-column prop="Vouuser" label="ERP制单人" width= '120'> </el-table-column>
-        <el-table-column prop="Creater" label="创建人" width= '120'></el-table-column>
+        <el-table-column prop="Creater" label="创建人" width= '100'></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间" width= '150' :show-overflow-tooltip="true"></el-table-column>
 
-        <el-table-column fixed="right" label="操作" :render-header="renderHeader">
+        <el-table-column fixed="right" label="操作" :render-header="renderHeader" width= '80'>
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
             <!-- <el-dropdown>
@@ -109,13 +109,13 @@
         <el-table-column prop="Rowno" label="项次"> </el-table-column>
         <el-table-column prop="Rownodel" label="项序"> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
-        <el-table-column prop="Materialdesc" label="物料名称" :show-overflow-tooltip="true"> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width= '180' > </el-table-column>
         
         <el-table-column prop="Voucherqty" label="订单数量"> </el-table-column>
         <el-table-column prop="Receiveqty" label="已收数量"> </el-table-column>
         <el-table-column prop="Remainqty" label="未收数量"> </el-table-column>
         <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间"  width= '190' ></el-table-column>
 
         
       </el-table>

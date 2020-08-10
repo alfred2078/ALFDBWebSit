@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-form :model="queryParam" size="small ">
+      <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item  label="">
@@ -57,17 +57,17 @@
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }" :data="Data"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Erpvoucherno" label="调拨单号"> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="调拨单号" width= '180'> </el-table-column>
         <el-table-column prop="Parametername" label="单据名称"> </el-table-column>
        <!--  <el-table-column prop="code" label="单据日期"> </el-table-column> -->
         <el-table-column prop="Departmentcode" label="部门编码"> </el-table-column>
-        <el-table-column prop="Departmentname" label="部门名称"> </el-table-column>
+        <el-table-column prop="Departmentname" label="部门名称" :show-overflow-tooltip="true" > </el-table-column>
         <el-table-column prop="Erpnote" label="备注"> </el-table-column>
         <el-table-column prop="Creater" label="创建人"></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
-        <el-table-column fixed="right" label="操作" :render-header="renderHeader">
+        <el-table-column fixed="right" label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
    
@@ -82,7 +82,7 @@
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
     
 
-    <el-dialog title="调拨单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
+    <el-dialog title="调拨单---详情" width="80%" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
           border: '1px solid #e9e9e9',
           padding: '5px 10px',
@@ -96,11 +96,11 @@
           <el-table-column prop="Towarehouseno" label="拨入仓库"> </el-table-column>
           <el-table-column prop="Rowno" label="项次"> </el-table-column>
           <el-table-column prop="Rownodel" label="项序"> </el-table-column>
-          <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
-          <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
-          <el-table-column prop="Unitname" label="单位名称"> </el-table-column>
+          <el-table-column prop="Materialno" label="物料编码" width= '100'> </el-table-column>
+          <el-table-column prop="Materialdesc" label="物料名称" width= '180'> </el-table-column>
+          <el-table-column prop="Unitname" label="单位名称" > </el-table-column>
           <el-table-column prop="Voucherqty" label="调拨数量"> </el-table-column>
-          <el-table-column prop="Outstockqty" label="实际调拨数量"> </el-table-column>
+          <el-table-column prop="Outstockqty" label="实际调拨数量" width= '100'> </el-table-column>
           <el-table-column prop="Postqty" label="过账数量"> </el-table-column>
           <el-table-column prop="Batchno" label="拨入批次"> </el-table-column>
           <el-table-column prop="Batchno" label="拨出批次"> </el-table-column>

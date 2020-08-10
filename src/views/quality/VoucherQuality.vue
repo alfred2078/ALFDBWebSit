@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-form :model="queryParam"  size="small ">
+      <el-form :model="queryParam"  size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item label="">
@@ -85,12 +85,12 @@
         :header-row-style="{ height: '30', font: 'normal' }" :data="Data"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Qualityno" label="检验单号"  width= '150'> </el-table-column>
-        <el-table-column prop="Arrvoucherno" label="到货单号"  width= '150'> </el-table-column>
-        <el-table-column prop="Erpvoucherno" label="采购订单号" width= '120'> </el-table-column>
+        <el-table-column prop="Qualityno" label="检验单号"  width= '180'> </el-table-column>
+        <el-table-column prop="Arrvoucherno" label="到货单号"  width= '180'> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="采购订单号" width= '180'> </el-table-column>
         <el-table-column prop="Parametername" label="单据名称" width= '120'> </el-table-column>
         <el-table-column prop="Voucherqty" label="送验量" width= '120'> </el-table-column>
-        <el-table-column prop="Createtime" label="到货日期" width= '150'> </el-table-column>
+        <el-table-column prop="Createtime" label="到货日期" width= '190'> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码" width= '120'> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width= '150'> </el-table-column>
         <el-table-column prop="Qualityqty" label="合格数量" width= '120'> </el-table-column>
@@ -99,7 +99,7 @@
         <el-table-column prop="Erpstatuscodedesc" label="判断结果"> </el-table-column>
       
         <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间" width= '150'></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width= '190'></el-table-column>
         
       </el-table>
     </el-card>

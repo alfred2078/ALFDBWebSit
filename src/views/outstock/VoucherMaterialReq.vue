@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-form :model="queryParam" size="small ">
+      <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
@@ -58,17 +58,17 @@
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }" :data="Data"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
+        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column prop="Erpvoucherno" label="领料单号"> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="领料单号" width='180'> </el-table-column>
         <el-table-column prop="Parametername" label="单据名称" width= '120'> </el-table-column>
-        <el-table-column prop="Createtime" label="单据日期"> </el-table-column>
-        <el-table-column prop="Departmentcode" label="部门编码"> </el-table-column>
-        <el-table-column prop="Departmentname" label="部门名称"> </el-table-column>
-        <el-table-column prop="Erpnote" label="备注"> </el-table-column>
-        <el-table-column prop="Creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
-        <el-table-column fixed="right" label="操作" :render-header="renderHeader">
+        <el-table-column prop="Createtime" label="单据日期" width='180'> </el-table-column>
+        <el-table-column prop="Departmentcode" label="部门编码" width='100'> </el-table-column>
+        <el-table-column prop="Departmentname" label="部门名称" width='120'> </el-table-column>
+        <el-table-column prop="Erpnote" label="备注" width='180'> </el-table-column>
+        <el-table-column prop="Creater" label="创建人" width='120'></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width='180'></el-table-column>
+        <el-table-column fixed="right" label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
             <!-- <el-dropdown>
@@ -103,7 +103,7 @@
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" style="width: 100%" row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
           <el-table-column prop="Towarehouseno" label="仓库编码"> </el-table-column>
-          <el-table-column prop="Arrvoucherno" label="生产订单号"> </el-table-column>
+          <el-table-column prop="Arrvoucherno" label="生产订单号" width='200'> </el-table-column>
           <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
           <el-table-column prop="Unitname" label="单位名称"> </el-table-column>

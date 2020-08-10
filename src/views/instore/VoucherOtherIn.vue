@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="queryParam" size="small ">
+      <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
@@ -20,7 +20,7 @@
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+             
             </el-form-item>
           </el-col>
 
@@ -82,7 +82,7 @@
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column prop="Towarehouseno" label="仓库"> </el-table-column>        
         <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
-        <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width="180"> </el-table-column>
         <el-table-column prop="Batchno" label="批次"> </el-table-column>
         <el-table-column prop="Voucherqty" label="杂入数量"> </el-table-column>
         <el-table-column prop="Unitname" label="单位"> </el-table-column>
