@@ -130,6 +130,7 @@ export default {
         Materialno: "",
         Batchno: ""
       },
+      Operate:{Materialno:11,Batchno:11},
       apiUrl: {
         query: "/Stock/GetT_StockListGroup",
         exportXls: "/Stock/GetT_StockListByExp"

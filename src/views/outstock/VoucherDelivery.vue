@@ -149,6 +149,7 @@ import store from "@/store";
           customerno:"",
           Createtime:""
         },
+        Operate:{Erpstatuscode:11,customerno:11},
         apiUrl: {
           query: "/OutStock/GetV_OutStockListByPage",
           exportXls: "/OutStock/GetV_OutStockDetailListExp"

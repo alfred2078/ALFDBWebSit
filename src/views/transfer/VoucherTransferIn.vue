@@ -140,10 +140,12 @@ import Pagination from "@/components/Pagination";
           Erpvoucherno:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/Transferin/Get_VTransferinListByPage",
           exportXls: "/Transferin/Get_TransferindetailListByExp"
         },
+
         outerVisible: false,
         TransferinDetail:[],
          tHeader: ['调拨单号', '单据名称', '部门编码', '部门名称','备注',

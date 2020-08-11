@@ -140,6 +140,7 @@ import store from "@/store";
           Erpstatuscode:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11,Qualityno:11,Arrvoucherno:11,Materialno:11},
         apiUrl: {
           query: "/Quality/GetT_QualityDetailListByPage",
           exportXls: "/Quality/GetT_QualityDetailExp"

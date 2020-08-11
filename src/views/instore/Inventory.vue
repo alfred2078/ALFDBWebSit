@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="4">
             <el-form-item label-width="" label="">
-              <el-input v-model="queryParam.Erpvoucherno" placeholder="盘点单号"></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="盘点单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
@@ -203,6 +203,7 @@ import Pagination from "@/components/Pagination";
           Isdel:"1",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/Check/GetT_CheckListByPage"
         },

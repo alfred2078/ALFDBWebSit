@@ -153,6 +153,7 @@ import Pagination from "@/components/Pagination";
           Suppliername:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11,Suppliername:""},
         apiUrl: {
           query: "/Purchase/GetV_PurchaseOrderListByPage",
           exportXls: "/Purchase/GetV_PurchaseorderdetailListByExp"

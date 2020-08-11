@@ -6,11 +6,11 @@
         欢迎您,{{username}}
         <i class="el-icon-arrow-down el-icon--right "></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
+      <el-dropdown-menu slot="dropdown" >
         <!-- <el-dropdown-item><i class="el-icon-user"></i>个人中心</el-dropdown-item>
         <el-dropdown-item><i class="el-icon-setting"></i>账户设置</el-dropdown-item>
         <el-dropdown-item><i class="el-icon-monitor"></i>系统设置</el-dropdown-item> -->
-        <el-dropdown-item><span  @click="outerVisible=true" class="el-icon-lollipop">密码修改</span></el-dropdown-item>
+        <el-dropdown-item><span  @click="outerVisible=true"   class="el-icon-lollipop">密码修改</span></el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
     <el-link class="linkHelp mainMenu" icon="el-icon-right" href="/">退出登录</el-link>

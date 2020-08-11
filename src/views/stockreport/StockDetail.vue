@@ -85,6 +85,7 @@
           Cusmaterialno:'',
           Strongholdcode:''
         },
+        Operate:{Areano:11,Materialno:11,Batchno:11,Cusmaterialno:11},
         outerVisible: false,
         idshow: false,
         apiUrl: {
@@ -92,6 +93,7 @@
           save: "",
           update: ""
         },
+        
         columns: [{
             label: "据点",
             prop: "Strongholdcode",

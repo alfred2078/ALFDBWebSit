@@ -125,6 +125,7 @@
           Createtime: '',
           Vouchertype:''
         },
+         Operate:{Erpvoucherno:11,Materialno:11,Batchno:11,Barcode:11},
         voucherTyleListAll: [],
         voucherTyleListSelect: [],
         apiUrl: {

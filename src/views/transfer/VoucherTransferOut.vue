@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="5">
             <el-form-item  label="">
-              <el-input v-model="queryParam.Erpvoucherno" placeholder="调拨单号"></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="调拨单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
@@ -140,6 +140,7 @@ import Pagination from "@/components/Pagination";
           Erpvoucherno:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/TransferOut/Get_VTransferoutListByPage",
           exportXls: "/TransferOut/Get_TransferoutdetailListByExp"

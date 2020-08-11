@@ -138,6 +138,7 @@ import Pagination from "@/components/Pagination";
           Erpvoucherno:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/WorkOrder/GetV_WorkOrderListByPage",
           exportXls: "/WorkOrder/GetV_WorkOrderDetailListExp"

@@ -122,6 +122,7 @@ import Pagination from "@/components/Pagination";
           Erpvoucherno:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/OtherIn/Get_VOtherinorderListByPage",
           exportXls: "/OtherIn/Get_VOtherinorderDetailListByExp"

@@ -145,6 +145,7 @@ import store from "@/store";
           Erpvoucherno:"",
           Createtime:""
         },
+        Operate:{Erpvoucherno:11},
         apiUrl: {
           query: "/RawMaterialOut/Get_RawMaterialOutListByPage",
           exportXls: "/RawMaterialOut/Get_VRawMaterialOutDetailListExp"

@@ -24,6 +24,7 @@ export const ALFModelListMixins = {
       },
       /*查询条件*/
       queryParam: {},
+      Operate:{},
       /*后台返回数据 */
       Data: [],
       /**table查询加载 */
@@ -46,6 +47,7 @@ export const ALFModelListMixins = {
         });
         return;
       }
+     
       var params = this.getQueryParams();
       this.loading = true;
       postAction(this.apiUrl.query, params)
@@ -81,18 +83,32 @@ export const ALFModelListMixins = {
     },
     getQueryField(queryParam) {      
       let Rules = [];
+      
       let objKeys = Object.keys(queryParam);
-      for (let key of objKeys) {
+      let OperateLike =  Object.keys(this.Operate);
+      for (let [index,key] of objKeys.entries()) {
         if (
           queryParam[key] !== null &&
           queryParam[key] !== undefined &&
           queryParam[key] !== ""
         ) {
+          var Operates =3;
+          for(let [LikeIndex,LikeKey] of OperateLike.entries())
+          {
+            debugger;
+            if(LikeKey==key)
+            {
+              Operates=this.Operate[LikeKey]
+              break;
+            }
+          }
+         
           if (key !== "Createtime") {
             Rules.push({
               Field: key,
               Value: queryParam[key]+'',
-              Operate: 3
+              Operate: Operates
+
             });
           } else {
             let disArr = Array.from(new Set(queryParam[key]));
