@@ -141,7 +141,7 @@ mixins: [ALFModelListMixins],
             prop: "Arrvoucherno",
             colvisible: true
           },{
-            label: "质检单号",
+            label: "检验单号",
             prop: "Qualityno",
             colvisible: true
           },
