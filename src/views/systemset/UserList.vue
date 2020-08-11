@@ -40,22 +40,11 @@
     </el-card>
     <!-- 按钮区域 -->
     <el-card body-style="padding:5px;">
-      <el-row>
+      <!-- <el-row>
         <el-col :span="2">
           <el-button @click="handleAdd" size="small" icon="el-icon-plus" type="primary">新增</el-button>
         </el-col>
-        <!-- <el-col :span="2">
-          <el-dropdown>
-            <el-button size="small" type="primary">
-              导出<i class="el-icon-download"></i>
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>导出当前页</el-dropdown-item>
-              <el-dropdown-item>导出查询结果</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-col> -->
-      </el-row>
+      </el-row> -->
     </el-card>
     <!-- Table区域 -->
     <el-card body-style="padding:2px;">
@@ -69,9 +58,9 @@
         <el-table-column width="100" fixed="right" label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
-            <el-popconfirm title="确定删除吗？"  @onConfirm="handleDelete(scope.row)">
+            <!-- <el-popconfirm title="确定删除吗？"  @onConfirm="handleDelete(scope.row)">
               <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>              
-            </el-popconfirm>
+            </el-popconfirm> -->
           </template>
         </el-table-column>
       </el-table>
