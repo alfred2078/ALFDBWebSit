@@ -186,11 +186,12 @@ export const ALFModelListMixins = {
               type: "warning"
             });
           }
+          this.exportToExcel();
         })
         .catch(error => {
           this.$message.error("查询失败：" + error.ResultValue);
         });
-      this.exportToExcel();
+       
     },
     exportToExcel() {
       require.ensure([], () => {

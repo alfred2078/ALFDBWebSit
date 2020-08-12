@@ -150,6 +150,7 @@
           Erpvoucherno: "",
           Remarks:""
         },
+        
         TStock:{
           Materialno:"",
           Towarehouseno:"",
@@ -158,18 +159,6 @@
 
         },
         outerVisible: false,
-        tableData: [{
-          code: "PO01",
-          name: "采购订单",
-          depcode: "01",
-          depname: "采购部",
-          status: "10001",
-          role: "测试供应商",
-          people: "测试账户",
-          warehouse: "成品仓",
-          creater: "admin",
-          createtime: "2020-01-02"
-        }],
         Materialmodel:{checktypename:""},
         GroupTMaterial:[],
         GetCheckArea:[],
