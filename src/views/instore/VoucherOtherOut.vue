@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
-              <el-input v-model="queryParam.Erpvoucherno" placeholder="杂入单号" clearable></el-input>
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="杂出单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
@@ -49,7 +49,7 @@
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
        <!--  <el-table-column type="selection" width="55"> </el-table-column> -->
-        <el-table-column prop="Erpvoucherno" label="杂入单号"> </el-table-column>
+        <el-table-column prop="Erpvoucherno" label="杂出单号"> </el-table-column>
         <el-table-column prop="Parametername" label="单据名称"> </el-table-column>
        <!--  <el-table-column prop="depname" label="单据日期"> </el-table-column> -->
         <el-table-column prop="Departmentcode" label="部门编码"> </el-table-column>
@@ -70,7 +70,7 @@
     <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
 
-    <el-dialog title="杂入单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
+    <el-dialog title="杂出单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
           border: '1px solid #e9e9e9',
           padding: '5px 10px',
@@ -84,7 +84,7 @@
         <el-table-column prop="Materialno" label="物料编码"> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width="180"> </el-table-column>
         <el-table-column prop="Batchno" label="批次"> </el-table-column>
-        <el-table-column prop="Voucherqty" label="杂入数量"> </el-table-column>
+        <el-table-column prop="Voucherqty" label="杂出数量"> </el-table-column>
         <el-table-column prop="Unitname" label="单位"> </el-table-column>
         
       </el-table>
@@ -103,7 +103,7 @@
   } from '@/mixins/ALFModelListMixins';
 import Pagination from "@/components/Pagination";
  import {
-        getVOtherinorderDetail
+        getVOtherOutDetail
       
         } from "@/api/api";
  import Vue from "vue";
@@ -117,21 +117,21 @@ import Pagination from "@/components/Pagination";
     },
     data() {
       return {
-         xlsname:"杂入单",
+         xlsname:"杂出单",
         queryParam:{
           Erpvoucherno:"",
           Createtime:""
         },
         Operate:{Erpvoucherno:11},
         apiUrl: {
-          query: "/OtherIn/Get_VOtherinorderListByPage",
-          exportXls: "/OtherIn/Get_VOtherinorderDetailListByExp"
+          query: "/OtherOut/Get_VOtherOutListByPage",
+          exportXls: "/OtherOut/Get_VOtherOutDetailListByExp"
         },
         outerVisible: false,
         OtherinorderList:[],
         WorkOrderdateilDateilList:[],
-         tHeader: ['杂入单号', '单据名称',   '部门编码',  '部门名称',
-                  '仓库', '物料编码','物料名称', '批次', '杂入数量','单位', '创建人', '创建时间'
+         tHeader: ['杂出单号', '单据名称',   '部门编码',  '部门名称',
+                  '仓库', '物料编码','物料名称', '批次', '杂出数量','单位', '创建人', '创建时间'
         ],
         filterVal: ['Erpvoucherno', 'Parametername', 'Departmentcode','Departmentname',
                     'Towarehouseno',  'Materialno','Materialdesc',  'Batchno','Voucherqty', 'Unitname', 'creater', 'createtime'
@@ -146,8 +146,8 @@ import Pagination from "@/components/Pagination";
         
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
-       
-        getVOtherinorderDetail(model).then(res=>{
+       debugger;
+        getVOtherOutDetail(model).then(res=>{
           debugger;
           if (res.Result == 1) {
    

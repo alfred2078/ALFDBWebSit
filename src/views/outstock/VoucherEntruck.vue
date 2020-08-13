@@ -1,29 +1,29 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="sizeForm" size="small ">
+      <el-form :model="queryParam" size="small ">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
-              <el-input v-model="sizeForm.name" placeholder="发货通知单号" clearable></el-input>
+              <el-input v-model="Erpvouchernos" placeholder="发货通知单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
-            <el-form-item label-width="70px" label="托运单号">
-              <el-input v-model="sizeForm.name" placeholder="托运单号" clearable></el-input>
+            <el-form-item label-width="" label="">
+              <el-input v-model="queryParam.Erpvoucherno" placeholder="托运单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="5">
-            <el-form-item label-width="50px" label="客户">
-              <el-input v-model="sizeForm.name" placeholder="客户" clearable></el-input>
+            <el-form-item label-width="" label="">
+              <el-input v-model="queryParam.Customerno" placeholder="客户" clearable></el-input>
             </el-form-item>
           </el-col>
 
 
           <el-col :span="8">
-            <el-form-item label-width="80px" label="创建日期">
+            <el-form-item label-width="" label="">
               <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期"
                 end-placeholder="结束日期">
               </el-date-picker>
@@ -35,8 +35,8 @@
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="0">
-              <el-button icon="el-icon-search" type="primary">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+              <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
+          
             </el-form-item>
           </el-col>
         </el-row>
@@ -58,48 +58,47 @@
           <!-- <el-button size="small" icon="el-icon-upload2" type="primary">导入</el-button> -->
         </el-col>
         <el-col :span="2">
-          <el-button size="small" icon="" type="primary">单据打印</el-button>
+          <el-button size="small" icon="" type="primary"  @click="PrintClick">单据打印</el-button>
         </el-col>
         <el-col :span="2">
           <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
-          <el-dropdown>
-            <el-button size="small" type="primary">
+      
+            <!-- <el-button size="small" type="primary">
               导出<i class="el-icon-download"></i>
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>导出当前页</el-dropdown-item>
-              <el-dropdown-item>导出查询结果</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+            </el-button> -->
+          
         </el-col>
       </el-row>
     </el-card>
 
     <el-card body-style="padding:2px;">
       <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
-        :header-row-style="{ height: '30', font: 'normal' }"
+        :header-row-style="{ height: '30', font: 'normal' }" :data="Data" @selection-change="GetCheckChange" ref="Table" @current-change="chooseMcaterialChange"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" height="330" style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column prop="code" label="发货通知单号"> </el-table-column>
-        <el-table-column prop="name" label="物流单号"> </el-table-column>
-        <el-table-column prop="depcode" label="物流公司"> </el-table-column>
-        <el-table-column prop="depname" label="地址"> </el-table-column>
-        <el-table-column prop="status" label="发站"> </el-table-column>
-        <el-table-column prop="role" label="发货人"> </el-table-column>
-        <el-table-column prop="people" label="发货电话"> </el-table-column>
-        <el-table-column prop="note" label="到站"> </el-table-column>
-        <el-table-column prop="note" label="收货人"> </el-table-column>
-        <el-table-column prop="note" label="收货电话"> </el-table-column>
-        <el-table-column prop="note" label="备注"> </el-table-column>
-        <el-table-column prop="note" label="装车发货人"> </el-table-column>
-        <el-table-column prop="creater" label="创建人"></el-table-column>
-        <el-table-column sortable prop="createtime" label="创建时间"></el-table-column>
+       
+        <el-table-column prop="Trackingnumber" label="物流单号" width="120"> </el-table-column>
+        <el-table-column prop="LogisticsCompany" label="物流公司" width="120"> </el-table-column>
+        <el-table-column prop="Address" label="到站" width="120"> </el-table-column>
+        <el-table-column prop="Contacts" label="收货人" width="100"> </el-table-column>
+        <el-table-column prop="Tel" label="收货电话" width="120"> </el-table-column>
+        <el-table-column prop="Note" label="备注" width="120"> </el-table-column>
+        <el-table-column prop="Creater" label="装车发货人" width="100"> </el-table-column>
+        <el-table-column prop="PrePrice" label="单价" width="80"> </el-table-column>
+          <el-table-column prop="WeightTotal" label="重量" width="80"> </el-table-column>
+          <el-table-column prop="InsuranceCost" label="保费" width="80"> </el-table-column>
+          <el-table-column prop="OutCostTotal" label="送货费" width="80"> </el-table-column>
+          <el-table-column prop="CostTotal" label="运费" width="80"> </el-table-column>
+          <el-table-column prop="SettlementMethod" label="结算方式" width="100"> </el-table-column>
+          <el-table-column prop="SendMethod" label="提货方式" width="100"> </el-table-column>
+        <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
+        <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
 
         <el-table-column fixed="right" label="操作" :render-header="renderHeader">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
+            <el-button @click="handleClick(scope.row)" type="text" size="small" idth="80">详情</el-button>
             <!-- <el-dropdown>
               <span class="el-dropdown-link">
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
@@ -115,11 +114,10 @@
       </el-table>
     </el-card>
 
-    <el-card body-style="padding:0">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
-        :page-sizes="[10, 20, 30, 40]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="1">
-      </el-pagination>
-    </el-card>
+        <!-- 分页区域 -->
+    <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
+      :fcurrent-page.sync="PageData.currentPage" @pagination="search" />
+
     <el-dialog title="托运单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
           border: '1px solid #e9e9e9',
@@ -127,19 +125,14 @@
           background: '#fff'
         }">
         <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
-          :header-row-style="{ height: '30', font: 'normal' }"
+          :header-row-style="{ height: '30', font: 'normal' }" :data="WayBillDetaillList"
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" style="width: 100%" row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-          <el-table-column prop="code" label="商品名称"> </el-table-column>
-          <el-table-column prop="code" label="业务类型"> </el-table-column>
-          <el-table-column prop="name" label="数量"> </el-table-column>
-          <el-table-column prop="depcode" label="单价"> </el-table-column>
-          <el-table-column prop="depname" label="重量/体积"> </el-table-column>
-          <el-table-column prop="status" label="保费"> </el-table-column>
-          <el-table-column prop="role" label="送货费"> </el-table-column>
-          <el-table-column prop="people" label="运费"> </el-table-column>
-          <el-table-column prop="note" label="结算方式"> </el-table-column>
-          <el-table-column prop="note" label="提货方式"> </el-table-column>
+          <el-table-column prop="Materialdesc" label="商品名称"> </el-table-column>
+          <el-table-column prop="Parametername" label="业务类型"> </el-table-column>
+          <el-table-column prop="Qty" label="数量"> </el-table-column>
+          <el-table-column prop="Rowno" label="项次" width='80'> </el-table-column>
+          <el-table-column prop="Rownodel" label="项序" width='80'> </el-table-column>
           
         </el-table>
       </div>
@@ -152,26 +145,122 @@
 </template>
 
 <script>
+import {
+    ALFModelListMixins
+  } from '@/mixins/ALFModelListMixins';
+import Pagination from "@/components/Pagination";
+import {
+        getWayBillDetailHeaderidsub,   
+        getWayBillDetail  
+        } from "@/api/api";
+import Vue from "vue";
+import store from "@/store";
   export default {
+    mixins: [ALFModelListMixins],
+   
+    components: {
+      Pagination
+    },
     data() {
       return {
-        sizeForm: {
-          name: ""
+        xlsname:"托运单",
+        queryParam: {        
+          Erpvoucherno:"",
+          Customerno:"",
+          Createtime:""
         },
-        outerVisible: true,
-        tableData: [{
-          code: "PO01",
-          name: "采购订单",
-          depcode: "01",
-          depname: "采购部",
-          status: "10001",
-          role: "测试供应商",
-          people: "测试账户",
-          warehouse: "成品仓",
-          creater: "admin",
-          createtime: "2020-01-02"
-        }]
+        Erpvouchernos:"",
+        Operate:{Erpstatuscode:11,customerno:11},
+        apiUrl: {
+          query: "/WayBill/Get_WayBillListByPage",
+          exportXls: "/OutStock/GetV_OutStockDetailListExp"
+        },
+        outerVisible: false,
+        WayBillDetaillList:[],
+        CheckChangeData: {}, // 当前选中的值  
+       
       }
+    },
+    methods:{
+        search()
+        {
+          var min = this;
+          if(min.Erpvouchernos!=""&&min.Erpvouchernos!=null&&min.Erpvouchernos!=undefined)
+          {
+            var model ={};
+            model.Erpvoucherno = min.Erpvouchernos;
+            getWayBillDetailHeaderidsub(model).then(res=>{
+            debugger;
+              if (res.Result == 1) {
+                if(res.Data!=undefined)
+                {
+                  min.queryParam.Id=res.Data.Headeridsub;
+                  min.getModelList();
+                  delete min.queryParam.Id;
+                }else
+                {
+                  min.Data=[];
+                }
+              }
+              else {
+                  min.$message.error(res.ResultValue);
+                }
+            })
+          }else{
+          min.getModelList();
+          }
+        },
+         handleClick(val)
+        {
+          var min = this;
+          min.outerVisible=true;
+          
+          var model ={};
+          model.Erpvoucherno = val.Erpvoucherno;
+        
+          getWayBillDetail(model).then(res=>{
+            debugger;
+            if (res.Result == 1) {
+    
+              min.WayBillDetaillList=res.Data;
+
+              }
+              else {
+                min.$message.error(res.ResultValue);
+              }
+          })
+        },
+          //table选中，只能选中一行 不能多选
+      GetCheckChange(val)
+      {
+        debugger;
+        if(val.length>1)
+        {
+    
+          this.$refs.Table.clearSelection();
+          this.$refs.Table.toggleRowSelection(val.pop());
+              //return;
+        }else
+        {
+          this.CheckChangeData={};
+        this.CheckChangeData = val;
+        console.log(this.CheckChangeData);
+        }
+        
+      },
+      chooseMcaterialChange(val){
+         this.$refs.Table.toggleRowSelection(val)
+       },
+       PrintClick(){
+  
+              if(this.CheckChangeData.length==1){
+                var Erpvoucherno=this.CheckChangeData[0].Erpvoucherno
+                 windowpost(Erpvoucherno,"inspecReturn");
+              }  
+        },
+
+    
+
     }
   }
 

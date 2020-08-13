@@ -92,7 +92,12 @@ const getVOtherinorderDetail =(params)=>postAction("OtherIn/Get_VOtherinorderDet
 const getVTransferoutDetail =(params)=>postAction("TransferOut/Get_VTransferoutDetail",params);//查询调拨出表体
 //调拨入库
 const getVTransferinDetail =(params)=>postAction("Transferin/Get_VTransferinDetail",params);//查询调拨入表体
+//杂出
+const getVOtherOutDetail =(params)=>postAction("OtherOut/Get_VOtherOutDetail",params);//查询杂出表体
 
+//托运单
+const getWayBillDetailHeaderidsub =(params)=>postAction("WayBill/Get_WayBillDetailHeaderidsub",params);//查询托运单id
+const getWayBillDetail =(params)=>postAction("WayBill/Get_WayBillDetail",params);//查询托运单表体
 export{
     saveWarehouse,
     updateWarehouse,
@@ -153,7 +158,10 @@ export{
     getPurchasereturndateil,
     getVOtherinorderDetail,
     getVTransferoutDetail,
-    getVTransferinDetail
+    getVTransferinDetail,
+    getVOtherOutDetail,
+    getWayBillDetailHeaderidsub,
+    getWayBillDetail
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 

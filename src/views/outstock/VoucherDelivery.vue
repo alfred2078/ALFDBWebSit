@@ -146,7 +146,7 @@ import store from "@/store";
         xlsname:"发货通知单",
         queryParam: {        
           Erpstatuscode:"",
-          customerno:"",
+          Customerno:"",
           Createtime:""
         },
         Operate:{Erpstatuscode:11,customerno:11},
@@ -179,7 +179,7 @@ import store from "@/store";
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
        
-        getOutStockDetail(val).then(res=>{
+        getOutStockDetail(model).then(res=>{
           debugger;
           if (res.Result == 1) {
    

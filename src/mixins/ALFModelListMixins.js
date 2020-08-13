@@ -54,6 +54,7 @@ export const ALFModelListMixins = {
         .then(res => {
           if (res.Result === 1) {
         
+            
             res.Data.forEach(t => {
               t.Createtime =new Date(t.Createtime).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
             });

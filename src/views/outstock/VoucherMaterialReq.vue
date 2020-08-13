@@ -169,7 +169,7 @@ import store from "@/store";
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
       
-        getRawmaterialOutDetail(val).then(res=>{
+        getRawmaterialOutDetail(model).then(res=>{
         
           if (res.Result == 1) {
    
