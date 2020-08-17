@@ -53,15 +53,17 @@ export const ALFModelListMixins = {
       postAction(this.apiUrl.query, params)
         .then(res => {
           if (res.Result === 1) {
-        
+        debugger;
             
             res.Data.forEach(t => {
+              if(t.hasOwnProperty('Createtime'))
               t.Createtime =t.Createtime.replace("T", " "); 
             });
             this.Data = res.Data;
             
             this.PageData = res.PageData;
             this.loading = false;
+            
           } else {
             this.loading = false;
             this.$message({
