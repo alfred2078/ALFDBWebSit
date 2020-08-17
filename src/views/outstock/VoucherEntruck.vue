@@ -5,7 +5,7 @@
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
-              <el-input v-model="Erpvouchernos" placeholder="发货通知单号" clearable></el-input>
+              <el-input v-model="Arrvoucherno" placeholder="发货通知单号" clearable></el-input>
             </el-form-item>
           </el-col>
 
@@ -63,9 +63,9 @@
         <el-col :span="2">
           <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
       
-            <!-- <el-button size="small" type="primary">
+            <el-button size="small" type="primary"  @click="handleExportXls">
               导出<i class="el-icon-download"></i>
-            </el-button> -->
+            </el-button>
           
         </el-col>
       </el-row>
@@ -91,8 +91,8 @@
           <el-table-column prop="InsuranceCost" label="保费" width="80"> </el-table-column>
           <el-table-column prop="OutCostTotal" label="送货费" width="80"> </el-table-column>
           <el-table-column prop="CostTotal" label="运费" width="80"> </el-table-column>
-          <el-table-column prop="SettlementMethod" label="结算方式" width="100"> </el-table-column>
-          <el-table-column prop="SendMethod" label="提货方式" width="100"> </el-table-column>
+          <el-table-column prop="SettlementMethodName" label="结算方式" width="100"> </el-table-column>
+          <el-table-column prop="SendMethodName" label="提货方式" width="100"> </el-table-column>
         <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
 
@@ -169,15 +169,24 @@ import store from "@/store";
           Customerno:"",
           Createtime:""
         },
-        Erpvouchernos:"",
+        Arrvoucherno:"",
         Operate:{Erpstatuscode:11,customerno:11},
         apiUrl: {
           query: "/WayBill/Get_WayBillListByPage",
-          exportXls: "/OutStock/GetV_OutStockDetailListExp"
+          exportXls: "/WayBill/GetWayBillDetailExp"
         },
         outerVisible: false,
         WayBillDetaillList:[],
         CheckChangeData: {}, // 当前选中的值  
+        tHeader: ['物流单号', '物流公司',   '到站',  '收货人',
+                  '收货电话', '备注','装车发货人', '单价', '重量','保费', '送货费', '运费', '结算方式', '提货方式'
+                  , '商品名称', '业务类型','数量', '项次', '项序','创建人', '创建时间'
+        ],
+        filterVal: ['Trackingnumber', 'LogisticsCompany', 'Address','Contacts',
+                    'Tel',  'Note','Creater',  'PrePrice','WeightTotal', 'InsuranceCost', 'OutCostTotal', 'CostTotal','SettlementMethodNames', 'SendMethodNames'
+                    , 'Materialdesc','Parametername', 'Qty', 'Rowno', 'Rownodel', 'Creater', 'Createtime'
+        ]
+
        
       }
     },
@@ -185,10 +194,10 @@ import store from "@/store";
         search()
         {
           var min = this;
-          if(min.Erpvouchernos!=""&&min.Erpvouchernos!=null&&min.Erpvouchernos!=undefined)
+          if(min.Arrvoucherno!=""&&min.Arrvoucherno!=null&&min.Arrvoucherno!=undefined)
           {
             var model ={};
-            model.Erpvoucherno = min.Erpvouchernos;
+            model.Arrvoucherno = min.Arrvoucherno;
             getWayBillDetailHeaderidsub(model).then(res=>{
             debugger;
               if (res.Result == 1) {

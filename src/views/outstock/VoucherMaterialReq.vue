@@ -68,7 +68,7 @@
         <el-table-column prop="Erpnote" label="备注" width='180'> </el-table-column>
         <el-table-column prop="Creater" label="创建人" width='120'></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间" width='180'></el-table-column>
-        <el-table-column fixed="right" label="操作" >
+        <el-table-column  label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
             <!-- <el-dropdown>

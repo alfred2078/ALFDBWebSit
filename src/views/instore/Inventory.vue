@@ -100,7 +100,7 @@
           </el-table-column>
         </template>
 
-        <el-table-column fixed="right" label="操作" >
+        <el-table-column  label="操作" >
           <template slot-scope="scope">
               <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
             <el-popconfirm
