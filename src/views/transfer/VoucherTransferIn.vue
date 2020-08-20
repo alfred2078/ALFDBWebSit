@@ -166,7 +166,7 @@ import Pagination from "@/components/Pagination";
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
        
-        getVTransferinDetail(val).then(res=>{
+        getVTransferinDetail(model).then(res=>{
           debugger;
           if (res.Result == 1) {
    

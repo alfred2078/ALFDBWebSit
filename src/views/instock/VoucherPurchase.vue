@@ -189,12 +189,12 @@ import Pagination from "@/components/Pagination";
         var model ={};
         model.Erpvoucherno = val.Erpvoucherno;
        
-        getPurchaseOrderDateil(val).then(res=>{
+        getPurchaseOrderDateil(model).then(res=>{
           debugger;
           if (res.Result == 1) {
    
              min.PurchaseOrderDateilList=res.Data;
-
+              
             }
             else {
               min.$message.error(res.ResultValue);

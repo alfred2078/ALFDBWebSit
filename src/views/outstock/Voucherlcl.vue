@@ -9,13 +9,13 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="4">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="3">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.PackageSeq" placeholder="箱号" clearable></el-input>
             </el-form-item>
@@ -29,10 +29,9 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="1">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary"  @click="getModelList">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -71,8 +70,8 @@
         style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column prop="Erpvoucherno" label="发货通知单号" width='180'> </el-table-column>
         <el-table-column prop="PackageSeq" label="箱号" width='80'> </el-table-column>
-        <el-table-column prop="Customerno" label="客户编码"> </el-table-column>
-        <el-table-column prop="Customername" label="客户名称"> </el-table-column>
+        <el-table-column prop="Customerno" label="客户编码" width='120'> </el-table-column>
+        <el-table-column prop="Customername" label="客户名称" width='120'> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码"> </el-table-column> 
         <el-table-column prop="Materialdesc" label="物料名称" width='200'> </el-table-column>
         <el-table-column prop="Batchno" label="批次"> </el-table-column>

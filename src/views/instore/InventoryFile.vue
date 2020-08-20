@@ -252,6 +252,20 @@
       save(){
         var min = this;
         debugger;
+        if(min.areaList.length==0){
+            min.$message({
+                message: '请勾选数据',
+                type: 'warning'
+              });
+              return;
+        }
+        if(min.checkFrom.Erpvoucherno==""||min.checkFrom.Erpvoucherno==null){
+            min.$message({
+                message: '盘点单号获取有误，请尝试刷新页面',
+                type: 'warning'
+              });
+              return;
+        }
         min.pageCheckModel.T_Check=min.checkFrom;
         min.pageCheckModel.T_Check.Creater=Vue.ls.get(USER_NAME);
         min.pageCheckModel.V_Area=min.areaList;
@@ -262,6 +276,7 @@
                 type: 'success'
               });
               min.getTCHECKERPVOUCHERNO();
+              min.getInfo();
             }
             else {
               min.$message.error(res.ResultValue);

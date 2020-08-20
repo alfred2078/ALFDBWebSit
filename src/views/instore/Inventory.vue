@@ -171,6 +171,7 @@ import Pagination from "@/components/Pagination";
   } from "@/store/mutation-types";
   import Vue from "vue";
  import store from "@/store";
+
   export default {
     mixins: [ALFModelListMixins],
     name:"instore-inventory",
@@ -465,7 +466,9 @@ import Pagination from "@/components/Pagination";
               });
           return;
         }
+        debugger;
          min.CheckChangeData[0].Creater=Vue.ls.get(USER_NAME);
+       delete min.CheckChangeData[0].Createtime;
         reSaveTCheck(min.CheckChangeData[0]).then(res=>{
            if (res.Result === 1) {
              min.$message({

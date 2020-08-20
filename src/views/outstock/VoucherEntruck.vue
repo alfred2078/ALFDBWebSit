@@ -15,7 +15,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="5">
+          <el-col :span="4">
             <el-form-item label-width="" label="">
               <el-input v-model="queryParam.Customerno" placeholder="客户" clearable></el-input>
             </el-form-item>
@@ -29,17 +29,17 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-
-          
-        </el-row>
-        <el-row>
-          <el-col :span="5">
+          <el-col :span="1">
             <el-form-item label-width="0">
               <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
           
             </el-form-item>
           </el-col>
+          
         </el-row>
+      
+        
+        
       </el-form>
     </el-card>
 

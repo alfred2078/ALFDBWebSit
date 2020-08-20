@@ -98,7 +98,7 @@
         <el-table border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"  :data="OutStockDetailList"
-        style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+        style="width: 100%" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" height="500">
         <el-table-column prop="Towarehouseno" label="仓库" width='80'> </el-table-column>
         <el-table-column prop="Rowno" label="项次" width='80'> </el-table-column>
         <el-table-column prop="Rownodel" label="项序" width='80'> </el-table-column>
