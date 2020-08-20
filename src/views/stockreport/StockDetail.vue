@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card>
+    <el-card  ref="refForm">
       <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="3">
@@ -44,10 +44,18 @@
         </el-row>
       </el-form>
     </el-card>
-    
+
+    <el-card ref="refButton">
+      <el-row>
+        <el-col :span="2">
+         <!--  <el-button @click="newAdd" size="small " icon="el-icon-download" type="primary">导出</el-button> -->
+        </el-col>
+      </el-row>
+    </el-card>
+
     <el-card body-style="padding:2px;">
       <el-table border :data="Data" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
-        :cell-style="{ padding: '2px' }" style="width: 100%;">
+        :cell-style="{ padding: '2px' }" style="width: 100%;" :height="screenHeight">
         <template v-for="item in columns">
           <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
             v-if="item.colvisible" show-overflow-tooltip>
@@ -56,10 +64,11 @@
       </el-table>
     </el-card>
 
-    <!-- 分页区域 -->
+    <el-card body-style="padding:0;" ref="refPage">
+      <!-- 分页区域 -->
     <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
-
+    </el-card>
 
   </div>
 </template>
@@ -87,6 +96,7 @@
         },
         Operate:{Areano:11,Materialno:11,Batchno:11,Cusmaterialno:11},
         outerVisible: false,
+        screenHeight:null,
         idshow: false,
         apiUrl: {
           query: "/Stock/GetV_StockListByPage",
@@ -214,6 +224,14 @@
           // },
         ],
       }
+    },
+    mounted(){
+      debugger;
+      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //浏览器高度
+      let refForm = this.$refs.refForm.$el.offsetHeight;
+      let refButton = this.$refs.refButton.$el.offsetHeight;
+      let refPage = this.$refs.refPage.$el.offsetHeight;
+      this.screenHeight = (h-refForm-refButton-refPage)-115;
     }
   }
 

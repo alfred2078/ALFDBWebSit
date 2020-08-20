@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-card >
+  <div style="height:100% ;" >
+    <el-card ref="refForm">
       <el-form  :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="5">
@@ -47,7 +47,7 @@
       </el-form>
     </el-card>
 
-    <el-card >
+    <el-card ref="refButton">
       <el-row>
         <el-col :span="2">
          <!--  <el-button @click="newAdd" size="small " icon="el-icon-download" type="primary">导出</el-button> -->
@@ -55,9 +55,9 @@
       </el-row>
     </el-card>
 
-    <el-card body-style="padding:2px;">
+    <el-card body-style="padding:2px">
       <el-table :data="Data" :row-style="{height:'30'}" :cell-style="{padding:'2px'}" :header-row-style="{height:'30'}"
-        :header-cell-style="{padding:'2px',background:'#f6f6f6'}"  border  :fit="true"  style="width: 100%">
+        :header-cell-style="{padding:'2px',background:'#f6f6f6'}"  border   :fit="true"  style="width: 100%;" :height="screenHeight" ref="table">
         <el-table-column prop="Strongholdcode" label="据点编号" width="120" :show-overflow-tooltip="true">
         </el-table-column>
         <el-table-column prop="Strongholdname" label="据点名称" width="120" :show-overflow-tooltip="true">
@@ -95,7 +95,7 @@
       </el-table>
     </el-card>
 
-    <el-card body-style="padding:0">
+    <el-card body-style="padding:0;" ref="refPage">
       <!-- 分页区域 -->
     <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
@@ -113,7 +113,7 @@
         <el-table :data="materialPackData" border :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
           :header-row-style="{ height: '30', font: 'normal' }"
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" style="width: 100%" row-key="id"
-          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" >
           <el-table-column prop="Strongholdcode" label="据点编号" width="120" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column prop="Strongholdname" label="据点名称" width="120" :show-overflow-tooltip="true"> </el-table-column>          
           <el-table-column prop="Materialno" label="物料编码" width="120" :show-overflow-tooltip="true"> </el-table-column>          
@@ -178,6 +178,7 @@
         sizeForm: {
           name: ""
         },
+        screenHeight:null,
         queryParam:{
           Materialno:"",
           Materialdescen:"",
@@ -186,12 +187,31 @@
         apiUrl:{
           query: "/Material/GetT_MaterialListByPage"
         },     
+       
         outerVisible: false,
         materialPackData:[],
         materialModel:{},
         doubleclick: null,// 记录当前编辑行序号
         addList:[]
       };
+    },
+    mounted(){
+      debugger;
+      const that = this;
+      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //浏览器高度
+        let refForm = that.$refs.refForm.$el.offsetHeight;
+        let refButton = that.$refs.refButton.$el.offsetHeight;
+        let refPage = that.$refs.refPage.$el.offsetHeight;
+        that.screenHeight = (h-refForm-refButton-refPage)-125;//tabs和头部宽度
+      window.onresize = function temp() {       //监听游览器高度变化
+        debugger;
+        let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //浏览器高度
+        let refForm = that.$refs.refForm.$el.offsetHeight;
+        let refButton = that.$refs.refButton.$el.offsetHeight;
+        let refPage = that.$refs.refPage.$el.offsetHeight;
+        that.screenHeight = (h-refForm-refButton-refPage)-125;
+      };
+      
     },
     methods:{
       handleClick(val)
