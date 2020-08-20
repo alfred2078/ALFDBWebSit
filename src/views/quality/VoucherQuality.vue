@@ -94,7 +94,7 @@
         <el-table-column prop="Materialno" label="物料编码" width= '120'> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width= '150'> </el-table-column>
 
-        <el-table-column prop="Sampuserno" label="抽检账人" width= '120'> </el-table-column>
+        <el-table-column prop="Sampuserno" label="抽检人" width= '120'> </el-table-column>
         <el-table-column prop="Sampqty" label="抽检数量" width= '120'> </el-table-column>
         <el-table-column prop="Sampdate" label="抽检时间" width= '190'> </el-table-column>
 
