@@ -93,10 +93,15 @@
         <el-table-column prop="Createtime" label="到货日期" width= '190'> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码" width= '120'> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width= '150'> </el-table-column>
+
+        <el-table-column prop="Sampuserno" label="抽检账人" width= '120'> </el-table-column>
+        <el-table-column prop="Sampqty" label="抽检数量" width= '120'> </el-table-column>
+        <el-table-column prop="Sampdate" label="抽检时间" width= '190'> </el-table-column>
+
         <el-table-column prop="Qualityqty" label="合格数量" width= '120'> </el-table-column>
         <el-table-column prop="Unqualityqty" label="不合格数量" width= '120'> </el-table-column>
         <el-table-column prop="Batchno" label="批次" width= '150'> </el-table-column>
-        <el-table-column prop="Erpstatuscodedesc" label="判断结果"> </el-table-column>
+        <el-table-column prop="Erpstatuscodedesc" label="判断结果"  width= '120'> </el-table-column>
       
         <el-table-column prop="Creater" label="创建人"></el-table-column>
         <el-table-column sortable prop="Createtime" label="创建时间" width= '190'></el-table-column>
@@ -159,10 +164,10 @@ import store from "@/store";
           createtime: "2020-01-02"
         }],
         options:[],
-        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','送验量','到货日期', '物料编码', '物料名称',
+        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','送验量','到货日期', '物料编码', '物料名称','抽检账人', '抽检数量', '抽检时间',
                   '合格数量', '不合格数量', '批次', '判断结果', '创建人', '创建时间'
         ],
-        filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Voucherqty','Createtime', 'Materialno', 'Materialdesc',
+        filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Voucherqty','Createtime', 'Materialno', 'Materialdesc','Sampuserno', 'Sampqty', 'Sampdate',
                     'Qualityqty', 'Unqualityqty', 'Batchno', 'Erpstatuscodedesc', 'Creater', 'Createtime'
         ]
       }
