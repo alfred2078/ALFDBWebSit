@@ -164,7 +164,7 @@ import store from "@/store";
           createtime: "2020-01-02"
         }],
         options:[],
-        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','送验量','到货日期', '物料编码', '物料名称','抽检账人', '抽检数量', '抽检时间',
+        tHeader: ['检验单号', '到货单号', '采购订单号', '单据名称','送验量','到货日期', '物料编码', '物料名称','抽检人', '抽检数量', '抽检时间',
                   '合格数量', '不合格数量', '批次', '判断结果', '创建人', '创建时间'
         ],
         filterVal: ['Qualityno', 'Arrvoucherno', 'Erpvoucherno', 'Parametername','Voucherqty','Createtime', 'Materialno', 'Materialdesc','Sampuserno', 'Sampqty', 'Sampdate',
