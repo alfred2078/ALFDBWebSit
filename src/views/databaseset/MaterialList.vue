@@ -57,7 +57,7 @@
 
     <el-card body-style="padding:2px">
       <el-table :data="Data" :row-style="{height:'30'}" :cell-style="{padding:'2px'}" :header-row-style="{height:'30'}"
-        :header-cell-style="{padding:'2px',background:'#f6f6f6'}"  border   :fit="true"  style="width: 100%;" :height="screenHeight" ref="table">
+        :header-cell-style="{padding:'2px',background:'#f6f6f6'}"  border   :fit="true"  style="width: 100%;"  :max-height="screenHeight" ref="table">
         <el-table-column prop="Strongholdcode" label="据点编号" width="120" :show-overflow-tooltip="true">
         </el-table-column>
         <el-table-column prop="Strongholdname" label="据点名称" width="120" :show-overflow-tooltip="true">
