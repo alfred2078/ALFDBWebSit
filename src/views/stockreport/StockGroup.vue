@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <el-card>
+  <div class="layout">
+    <el-row>
+      <el-card ref="refForm" type="flex">
       <el-form
         :model="queryParam"
         label-width="0px"
@@ -61,7 +62,9 @@
       </el-form>
     </el-card>
 
-    <el-card body-style="padding:5px;">
+    </el-row>
+    <el-row>
+      <el-card ref="refButton" body-style="padding:10px;" type="flex">
       <el-row>
         <!-- <el-col :span="2">
           <el-button size="small " icon="el-icon-upload2" type="primary">导入</el-button>
@@ -76,8 +79,11 @@
         </el-col>
       </el-row>
     </el-card>
-    <!-- table区域 -->
-    <el-card body-style="padding:2px;">
+
+    </el-row>
+    <el-row type="flex" class="layout" body-style="padding:2px;">
+      <el-main class="layout-main">
+        <el-container class="layout-main-container">
       <el-table
         border
         :data="Data"
@@ -87,6 +93,8 @@
         style="width: 100%;"
         show-summary
         :summary-method="getSummaries"
+        height="auto"
+            class="layout-table"
       >
         <template v-for="item in columns">
           <el-table-column
@@ -100,7 +108,7 @@
           </el-table-column>
         </template>
       </el-table>
-    </el-card>
+
 
     <!-- 分页区域 -->
     <pagination
@@ -109,9 +117,14 @@
       :fcurrent-page.sync="PageData.currentPage"
       @pagination="getModelList"
     />
-
+   </el-container>
+      </el-main>
+    </el-row>
   </div>
 </template>
+<style lang="scss" scoped>
+@import "@/styles/layout.scss";
+</style>
 
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";

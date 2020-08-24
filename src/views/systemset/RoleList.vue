@@ -1,41 +1,49 @@
 <template>
-  <div>
-    <el-card>
-      <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+  <div class="layout">
+    <!-- 查询区域 -->
+    <el-row>
+      <el-card type="flex">
+        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+          <el-row>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Ruleno" placeholder="角色编码" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Rulename" placeholder="角色名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="9">
+              <el-form-item label>
+                <el-date-picker
+                  v-model="queryParam.Createtime"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="创建开始日期"
+                  end-placeholder="创建结束日期"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="5">
+              <el-form-item label-width="0">
+                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-card>
+    </el-row>
+    <el-row>
+      <!-- 按钮区域 -->
+      <el-card body-style="padding:10px;" type="flex">
         <el-row>
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input v-model="queryParam.Ruleno" placeholder="角色编码" clearable=""></el-input>
-            </el-form-item>
+          <el-col :span="2">
+            <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
           </el-col>
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input v-model="queryParam.Rulename" placeholder="角色名称" clearable></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="9">
-            <el-form-item label="">
-              <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至"
-                start-placeholder="创建开始日期" end-placeholder="创建结束日期">
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label-width="0">
-              <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-    </el-card>
-
-    <el-card body-style="padding:5px;">
-      <el-row>
-        <el-col :span="2">
-          <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
-        </el-col>
-        <!-- <el-col :span="2">
+          <!-- <el-col :span="2">
           <el-button size="small " icon="el-icon-edit" type="primary">编辑</el-button>
         </el-col>
         <el-col :span="2">
@@ -54,29 +62,44 @@
               <el-dropdown-item>导出查询结果</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-        </el-col> -->
-      </el-row>
-    </el-card>
-
-    <el-card body-style="padding:2px;">
-      <el-table border :data="Data" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
-        :cell-style="{ padding: '2px' }" style="width: 100%;">
-        <template v-for="item in columns">
-          <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
-            v-if="item.colvisible" show-overflow-tooltip>
-          </el-table-column>
-        </template>
-        <el-table-column width="130" fixed="right" label="操作">
-          <template slot-scope="scope">
-            <el-button @click="handleGrant(scope.row)" type="text" size="small">授权</el-button>
-            <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
-            <el-popconfirm title="确定删除吗？" @onConfirm="handleDelete(scope.row)">
-              <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>
-            </el-popconfirm>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- <el-table :row-style="{height:'30'}" :cell-style="{padding:'2px'}" :header-row-style="{height:'30'}"
+          </el-col>-->
+        </el-row>
+      </el-card>
+    </el-row>
+    <el-row type="flex" class="layout" body-style="padding:2px;">
+      <el-main class="layout-main">
+        <el-container class="layout-main-container">
+          <el-table
+            border
+            :data="Data"
+            :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
+            v-loading="loading"
+            :cell-style="{ padding: '2px' }"
+            style="width: 100%;"
+            height="auto"
+            class="layout-table"
+          >
+            <template v-for="item in columns">
+              <el-table-column
+                :key="item.prop"
+                :prop="item.prop"
+                :label="item.label"
+                :width="item.width"
+                v-if="item.colvisible"
+                show-overflow-tooltip
+              ></el-table-column>
+            </template>
+            <el-table-column width="130" fixed="right" label="操作">
+              <template slot-scope="scope">
+                <el-button @click="handleGrant(scope.row)" type="text" size="small">授权</el-button>
+                <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
+                <el-popconfirm title="确定删除吗？" @onConfirm="handleDelete(scope.row)">
+                  <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>
+                </el-popconfirm>
+              </template>
+            </el-table-column>
+          </el-table>
+          <!-- <el-table :row-style="{height:'30'}" :cell-style="{padding:'2px'}" :header-row-style="{height:'30'}"
         :header-cell-style="{padding:'2px',background:'#f6f6f6'}" height="350" border :data="tableData"
         style="width: 100%">
         <el-table-column prop="date" label="角色编码">
@@ -103,21 +126,26 @@
         </el-table-column>
 
 
-      </el-table> -->
-    </el-card>
+          </el-table>-->
 
-    <!-- 分页区域 -->
-    <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
-      :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
-
+          <!-- 分页区域 -->
+          <pagination
+            :total="PageData.totalCount"
+            :fpage-size.sync="PageData.pageSize"
+            :fcurrent-page.sync="PageData.currentPage"
+            @pagination="getModelList"
+          />
+        </el-container>
+      </el-main>
+    </el-row>
     <rule-dialog ref="dialogForm" @ok="getModelList"></rule-dialog>
-    <rule-drawer ref="drawerForm" ></rule-drawer>
+    <rule-drawer ref="drawerForm"></rule-drawer>
 
     <!-- <el-card body-style="padding:0">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
         :page-sizes="[10, 20, 30, 40]" layout="total, sizes, prev, pager, next, jumper" :total="4">
       </el-pagination>
-    </el-card> -->
+    </el-card>-->
 
     <!-- <el-dialog title="角色管理---新增" :show-close="true" :visible.sync="outerVisible">
       <div :style="{
@@ -189,130 +217,130 @@
           </el-form-item>
         </el-form>
       </div>
-    </el-drawer> -->
+    </el-drawer>-->
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import "@/styles/layout.scss";
+</style>
+
 <script>
-  import {
-    ALFModelListMixins
-  } from "@/mixins/ALFModelListMixins";
-  import Pagination from "@/components/Pagination";
-  import RuleDialog from "./RuleDialog";
-  import RuleDrawer from './RuleDrawer';
+import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
+import Pagination from "@/components/Pagination";
+import RuleDialog from "./RuleDialog";
+import RuleDrawer from "./RuleDrawer";
 
-  export default {
-    mixins: [ALFModelListMixins],
-    components: {
-      Pagination,
-      RuleDialog,
-      RuleDrawer
-    },
-    data() {
-      return {
-        queryParam: {
-          Ruleno: "",
-          Rulename: "",
-          Createtime: ""
+export default {
+  mixins: [ALFModelListMixins],
+  components: {
+    Pagination,
+    RuleDialog,
+    RuleDrawer
+  },
+  data() {
+    return {
+      queryParam: {
+        Ruleno: "",
+        Rulename: "",
+        Createtime: ""
+      },
+      apiUrl: {
+        query: "/Rule/GetT_RuleListByPage",
+        delete: "/Rule/DeleteT_RuleAsync"
+      },
+      columns: [
+        {
+          label: "Id",
+          prop: "Id",
+          colvisible: false
         },
-        apiUrl: {
-          query: "/Rule/GetT_RuleListByPage",
-          delete: "/Rule/DeleteT_RuleAsync"
+        {
+          label: "角色编码",
+          prop: "Ruleno",
+          colvisible: true
         },
-        columns: [{
-            label: "Id",
-            prop: "Id",
-            colvisible: false
-          },
-          {
-            label: "角色编码",
-            prop: "Ruleno",
-            colvisible: true
-          },
-          {
-            label: "角色名称",
-            prop: "Rulename",
-            colvisible: true
-          },
-          {
-            label: "角色描述",
-            prop: "Description",
-            colvisible: true
-          },
-          {
-            label: "创建人",
-            prop: "Creater",
-            colvisible: true
-          },
-          {
-            label: "创建时间",
-            prop: "Createtime",
-            colvisible: true
-          }
-        ]
-      };
-    }
-  };
-
+        {
+          label: "角色名称",
+          prop: "Rulename",
+          colvisible: true
+        },
+        {
+          label: "角色描述",
+          prop: "Description",
+          colvisible: true
+        },
+        {
+          label: "创建人",
+          prop: "Creater",
+          colvisible: true
+        },
+        {
+          label: "创建时间",
+          prop: "Createtime",
+          colvisible: true
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .page-container {
-
-    // background-color: blue;
-    .el-header,
-    .el-footer {
-      background-color: #b3c0d1;
-      color: #333;
-      text-align: center;
-      line-height: 60px;
-    }
-
-    //   .el-main {
-    //     background-color: #E9EEF3;
-    //     color: #333;
-    //     text-align: center;
-    //     line-height: 160px;
-    //   }
+.page-container {
+  // background-color: blue;
+  .el-header,
+  .el-footer {
+    background-color: #b3c0d1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
   }
 
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409eff;
-  }
+  //   .el-main {
+  //     background-color: #E9EEF3;
+  //     color: #333;
+  //     text-align: center;
+  //     line-height: 160px;
+  //   }
+}
 
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
 
-  .el-form-item {
-    margin: 10px;
-  }
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 
-  >>>.element.style {
-    margin: 0;
-  }
+.el-form-item {
+  margin: 10px;
+}
 
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409eff;
-  }
+>>> .element.style {
+  margin: 0;
+}
 
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
 
-  >>>.el-dialog {
-    margin: 5vh auto 50px !important;
-  }
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 
-  >>>.el-dialog__title {
-    font-size: 14px;
-    color: #fff;
-  }
+>>> .el-dialog {
+  margin: 5vh auto 50px !important;
+}
 
-  >>>.el-dialog__header {
-    background-color: #3b9bf5e6;
-  }
+>>> .el-dialog__title {
+  font-size: 14px;
+  color: #fff;
+}
 
+>>> .el-dialog__header {
+  background-color: #3b9bf5e6;
+}
 </style>

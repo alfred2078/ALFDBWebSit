@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <el-card>
+  <div class="layout">
+    <!-- 查询区域 -->
+    <el-row>
+      <el-card type="flex">
       <el-form label-width="" :model="queryParam" size="small " @keyup.enter.native="getModelList">
         <el-row>
           <el-col :span="4">
@@ -35,8 +37,10 @@
         </el-row>
       </el-form>
     </el-card>
-
-    <el-card body-style="padding:5px;">
+</el-row>
+    <el-row>
+      <!-- 按钮区域 -->
+      <el-card body-style="padding:10px;" type="flex">
       <el-row>
         <el-col :span="2">
           <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
@@ -49,10 +53,13 @@
         </el-col> -->
       </el-row>
     </el-card>
-
-    <el-card body-style="padding:2px;">
+ </el-row>
+    <el-row type="flex" class="layout" body-style="padding:2px;">
+      <el-main class="layout-main">
+        <el-container class="layout-main-container">
       <el-table border :data="Data" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
-        :cell-style="{ padding: '2px' }" style="width: 100%;">
+        :cell-style="{ padding: '2px' }" style="width: 100%;" height="auto"
+            class="layout-table">
         <template v-for="item in columns">
           <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
             v-if="item.colvisible" show-overflow-tooltip>
@@ -91,12 +98,14 @@
           </template>
         </el-table-column>
       </el-table> -->
-    </el-card>
+
 
     <!-- 分页区域 -->
     <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
-
+</el-container>
+      </el-main>
+    </el-row>
       <area-dialog ref="dialogForm" @ok="getModelList"></area-dialog>
     <!-- <el-card body-style="padding:0">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
@@ -166,6 +175,10 @@
     </el-dialog> -->
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "@/styles/layout.scss";
+</style>
 
 <script>
   import {

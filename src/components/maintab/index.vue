@@ -1,6 +1,6 @@
 <template>
   <div >
-    <el-tabs v-model="activePage"  closable @tab-click="clickTab" @tab-remove="removeTab">
+    <el-tabs v-model="activePage"  closable @tab-click="clickTab" @tab-remove="removeTab" >
       <el-tab-pane
         v-for="(item, index) in pageList"
         :key="item.fullPath"
@@ -8,10 +8,10 @@
         :name="item.fullPath"
       ></el-tab-pane>
     </el-tabs>
-    <div style="margin: 0">
-      <el-collapse-transition>
+    <div style="margin: 0;height:100% ;" >
+      <el-collapse-transition style="height:100% ;">
         <keep-alive>
-          <router-view></router-view>
+          <router-view style="height:97% ;"></router-view>
         </keep-alive>
       </el-collapse-transition>      
     </div>

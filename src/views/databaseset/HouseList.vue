@@ -1,131 +1,96 @@
 <template>
-  <div>
-    <el-card>
-      <el-form
-        :model="queryParam"
-        size="small "
-        @keyup.enter.native="getModelList"
-      >
-        <el-row>
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input
-                v-model="queryParam.Warehouseno"
-                placeholder="仓库编码"
-                clearable
-              ></el-input>
-            </el-form-item>
-          </el-col>
+  <div class="layout">
+    <!-- 查询区域 -->
+    <el-row>
+      <el-card type="flex">
+        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+          <el-row>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Warehouseno" placeholder="仓库编码" clearable></el-input>
+              </el-form-item>
+            </el-col>
 
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input
-                v-model="queryParam.Warehousename"
-                placeholder="仓库名称"
-                clearable
-              ></el-input>
-            </el-form-item>
-          </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Warehousename" placeholder="仓库名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
 
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input
-                v-model="queryParam.Houseno"
-                placeholder="库区编码"
-                clearable
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="4">
-            <el-form-item label="">
-              <el-input
-                v-model="queryParam.Housename"
-                placeholder="库区名称"
-                clearable
-              ></el-input>
-            </el-form-item>
-          </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Houseno" placeholder="库区编码" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Housename" placeholder="库区名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
 
-          <el-col :span="8">
-            <el-form-item>
-              <el-button
-                icon="el-icon-search"
-                type="primary"
-                @click="getModelList"
-                >查询</el-button
-              >
-              <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
-            </el-form-item>
-            <!-- <el-form-item>
+            <el-col :span="8">
+              <el-form-item>
+                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
+              </el-form-item>
+              <!-- <el-form-item>
               <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
-            </el-form-item>            -->
+              </el-form-item>-->
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-card>
+    </el-row>
+    <el-row>
+      <!-- 按钮区域 -->
+      <el-card body-style="padding:10px;" type="flex">
+        <el-row>
+          <el-col :span="2">
+            <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
           </el-col>
-        </el-row>
-      </el-form>
-    </el-card>
-
-    <el-card body-style="padding:5px;">
-      <el-row>
-        <el-col :span="2">
-          <el-button
-            @click="handleAdd"
-            size="small "
-            icon="el-icon-plus"
-            type="primary"
-            >新增</el-button
-          >
-        </el-col>
-        <!-- <el-col :span="2">
+          <!-- <el-col :span="2">
           <el-button size="small " icon="el-icon-upload2" type="primary">导入</el-button>
         </el-col>
         <el-col :span="2">
           <el-button size="small " icon="el-icon-download" type="primary">导出</el-button>
-        </el-col> -->
-      </el-row>
-    </el-card>
-
-    <el-card body-style="padding:2px;">
-      <el-table
-        border
-        :data="Data"
-        :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
-        v-loading="loading"
-        :cell-style="{ padding: '2px' }"
-        style="width: 100%;"
-      >
-        <template v-for="item in columns">
-          <el-table-column
-            :key="item.prop"
-            :prop="item.prop"
-            :label="item.label"
-            :width="item.width"
-            v-if="item.colvisible"
-            show-overflow-tooltip
+          </el-col>-->
+        </el-row>
+      </el-card>
+    </el-row>
+    <el-row type="flex" class="layout" body-style="padding:2px;">
+      <el-main class="layout-main">
+        <el-container class="layout-main-container">
+          <el-table
+            border
+            :data="Data"
+            :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
+            v-loading="loading"
+            :cell-style="{ padding: '2px' }"
+            style="width: 100%;"
+            height="auto"
+            class="layout-table"
           >
-          </el-table-column>
-        </template>
-        <el-table-column width="100" fixed="right" label="操作">
-          <template slot-scope="scope">
-            <el-button @click="handleEdit(scope.row)" type="text" size="small"
-              >编辑</el-button
-            >
-            <el-popconfirm
-              title="确定删除吗？"
-              @onConfirm="handleDelete(scope.row)"
-            >
-              <el-button
-                slot="reference"
-                type="text"
-                size="small"
-                class="del-btn"
-                >删除</el-button
-              >
-              <!-- <el-button slot="reference">删除</el-button> -->
-            </el-popconfirm>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- <el-table :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
+            <template v-for="item in columns">
+              <el-table-column
+                :key="item.prop"
+                :prop="item.prop"
+                :label="item.label"
+                :width="item.width"
+                v-if="item.colvisible"
+                show-overflow-tooltip
+              ></el-table-column>
+            </template>
+            <el-table-column width="100" fixed="right" label="操作">
+              <template slot-scope="scope">
+                <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
+                <el-popconfirm title="确定删除吗？" @onConfirm="handleDelete(scope.row)">
+                  <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>
+                  <!-- <el-button slot="reference">删除</el-button> -->
+                </el-popconfirm>
+              </template>
+            </el-table-column>
+          </el-table>
+          <!-- <el-table :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" :data="Data" style="width: 100%"
         row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" :fit="true">
@@ -155,17 +120,18 @@
             </el-dropdown>
           </template>
         </el-table-column>
-      </el-table> -->
-    </el-card>
+          </el-table>-->
 
-    <!-- 分页区域 -->
-    <pagination
-      :total="PageData.totalCount"
-      :fpage-size.sync="PageData.pageSize"
-      :fcurrent-page.sync="PageData.currentPage"
-      @pagination="getModelList"
-    />
-
+          <!-- 分页区域 -->
+          <pagination
+            :total="PageData.totalCount"
+            :fpage-size.sync="PageData.pageSize"
+            :fcurrent-page.sync="PageData.currentPage"
+            @pagination="getModelList"
+          />
+        </el-container>
+      </el-main>
+    </el-row>
     <!-- <el-dialog title="库区管理---新增" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
           border: '1px solid #e9e9e9',
@@ -214,15 +180,19 @@
 
 
 
-    </el-dialog> -->
+    </el-dialog>-->
     <house-dialog ref="dialogForm" @ok="getModelList"></house-dialog>
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import "@/styles/layout.scss";
+</style>
+
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
-import HouseDialog from './HouseDialog'
+import HouseDialog from "./HouseDialog";
 export default {
   mixins: [ALFModelListMixins],
   components: {
@@ -239,7 +209,7 @@ export default {
       },
       apiUrl: {
         query: "/House/GetT_HouseListByPage",
-        delete: "/House/DeleteT_HouseAsync" 
+        delete: "/House/DeleteT_HouseAsync"
       },
       columns: [
         {

@@ -1,77 +1,109 @@
 <template>
-  <div>
-    <el-card>
-      <el-form :model="queryParam" label-width="0px" size="small " @keyup.enter.native="getModelList">
+  <div class="layout">
+    <!-- 查询区域 -->
+    <el-row>
+      <el-card type="flex">
+        <el-form
+          :model="queryParam"
+          label-width="0px"
+          size="small "
+          @keyup.enter.native="getModelList"
+        >
+          <el-row>
+            <el-col :span="5">
+              <el-form-item label>
+                <el-input v-model="queryParam.Warehouseno" placeholder="仓库编码" clearable></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="5">
+              <el-form-item label>
+                <el-input v-model="queryParam.Warehousename" placeholder="仓库名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="9">
+              <el-form-item label>
+                <el-date-picker
+                  v-model="queryParam.Createtime"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="5">
+              <el-form-item label-width="0">
+                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-card>
+    </el-row>
+    <el-row>
+      <!-- 按钮区域 -->
+      <el-card body-style="padding:10px;" type="flex" >
         <el-row>
-          <el-col :span="5">
-            <el-form-item label="">
-              <el-input v-model="queryParam.Warehouseno" placeholder="仓库编码" clearable></el-input>
-            </el-form-item>
+          <el-col :span="2">
+            <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
           </el-col>
-
-          <el-col :span="5">
-            <el-form-item label="">
-              <el-input v-model="queryParam.Warehousename" placeholder="仓库名称" clearable></el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="9">
-            <el-form-item label="">
-              <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至"
-                start-placeholder="开始日期" end-placeholder="结束日期">
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="5">
-            <el-form-item label-width="0">
-              <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-              <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-    </el-card>
-
-    <el-card body-style="padding:5px;">
-      <el-row>
-        <el-col :span="2">
-          <el-button @click="handleAdd" size="small " icon="el-icon-plus" type="primary">新增</el-button>
-        </el-col>
-        <!-- <el-col :span="2">
+          <!-- <el-col :span="2">
           <el-button size="small " icon="el-icon-upload2" type="primary">导入</el-button>
         </el-col>
         <el-col :span="2">
           <el-button size="small " icon="el-icon-download" type="primary">导出</el-button>
-        </el-col> -->
-      </el-row>
-    </el-card>
-    <!-- table区域 -->
-    <el-card body-style="padding:2px;">
-      <el-table border :data="Data" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
-        :cell-style="{ padding: '2px' }" style="width: 100%;">
-        <template v-for="item in columns">
-          <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
-            v-if="item.colvisible" show-overflow-tooltip>
-          </el-table-column>
-        </template>
-        <el-table-column width="100" fixed="right" label="操作">
-          <template slot-scope="scope">
-            <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
-            <el-popconfirm title="确定删除吗？"  @onConfirm="handleDelete(scope.row)">
-              <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>
-              <!-- <el-button slot="reference">删除</el-button> -->
-            </el-popconfirm>
-            
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-card>
+          </el-col>-->
+        </el-row>
+      </el-card>
+    </el-row>
+    <el-row type="flex" class="layout" body-style="padding:2px;">
+      <el-main class="layout-main">
+        <el-container class="layout-main-container">
+          <el-table
+            border
+            :data="Data"
+            :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
+            v-loading="loading"
+            :cell-style="{ padding: '2px' }"
+            style="width: 100%;"
+            height="auto"
+            class="layout-table"
+          >
+            <template v-for="item in columns">
+              <el-table-column
+                :key="item.prop"
+                :prop="item.prop"
+                :label="item.label"
+                :width="item.width"
+                v-if="item.colvisible"
+                show-overflow-tooltip
+              ></el-table-column>
+            </template>
+            <el-table-column width="100" fixed="right" label="操作">
+              <template slot-scope="scope">
+                <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
+                <el-popconfirm title="确定删除吗？" @onConfirm="handleDelete(scope.row)">
+                  <el-button slot="reference" type="text" size="small" class="del-btn">删除</el-button>
+                  <!-- <el-button slot="reference">删除</el-button> -->
+                </el-popconfirm>
+              </template>
+            </el-table-column>
+          </el-table>
 
-    <!-- 分页区域 -->
-    <pagination :total="PageData.totalCount" :fpage-size.sync="PageData.pageSize"
-      :fcurrent-page.sync="PageData.currentPage" @pagination="getModelList" />
-
+          <!-- 分页区域 -->
+          <pagination
+            :total="PageData.totalCount"
+            :fpage-size.sync="PageData.pageSize"
+            :fcurrent-page.sync="PageData.currentPage"
+            @pagination="getModelList"
+          />
+        </el-container>
+      </el-main>
+    </el-row>
     <!-- <el-card body-style="padding:2px;">
       <el-table :row-style="{ height: '30' }" :cell-style="{ padding: '2px' }"
         :header-row-style="{ height: '30', font: 'normal' }"
@@ -103,13 +135,13 @@
           </template>
         </el-table-column>
       </el-table>
-    </el-card> -->
+    </el-card>-->
 
     <!-- <el-card body-style="padding:0">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
         :page-sizes="[10, 20, 30, 40]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="0">
       </el-pagination>
-    </el-card> -->
+    </el-card>-->
 
     <!-- <el-dialog title="仓库管理---新增" :show-close="true" :visible.sync="outerVisible">
       <div :style="{          
@@ -155,120 +187,121 @@
 
 
 
-    </el-dialog> -->
+    </el-dialog>-->
     <warehouse-dialog ref="dialogForm" @ok="getModelList"></warehouse-dialog>
   </div>
 </template>
 
-<script>
-  import {
-    ALFModelListMixins
-  } from "@/mixins/ALFModelListMixins";
-  import Pagination from "@/components/Pagination";
-  import WarehouseDialog from "./WarehouseDialog";
-  export default {
-    mixins: [ALFModelListMixins],
-    components: {
-      Pagination,
-      WarehouseDialog
-    },
-    data() {
-      return {
-        queryParam: {
-          Warehouseno: "",
-          Warehousename: "",
-          Createtime: ""
-        },
-        apiUrl: {
-          query: "/Warehouse/GetT_WarehouseListByPage",
-          delete: "/Warehouse/DeleteT_WarehouseAsync"          
-        },
-        columns: [{
-            label: "Id",
-            prop: "Id",
-            colvisible: false
-          },
-          {
-            label: "仓库编码",
-            prop: "Warehouseno",
-            colvisible: true
-          },
-          {
-            label: "仓库名称",
-            prop: "Warehousename",
-            colvisible: true
-          },
-          {
-            label: "仓库描述",
-            prop: "Locationdesc",
-            colvisible: true
-          },
-          {
-            label: "联系人",
-            prop: "Contactuser",
-            colvisible: true
-          },
-          {
-            label: "联系电话",
-            prop: "Contactphone",
-            colvisible: true
-          },
-          {
-            label: "地址",
-            prop: "Address",
-            colvisible: true
-          },
-          {
-            label: "先进先出",
-            prop: "StrFifo",
-            colvisible: true
-          },
-          {
-            label: "创建人",
-            prop: "Creater",
-            colvisible: true
-          },
-          {
-            label: "创建时间",
-            prop: "Createtime",
-            colvisible: true
-          }
-        ]
-      };
-    }
-  };
+<style lang="scss" scoped>
+@import "@/styles/layout.scss";
+</style>
 
+<script>
+import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
+import Pagination from "@/components/Pagination";
+import WarehouseDialog from "./WarehouseDialog";
+export default {
+  mixins: [ALFModelListMixins],
+  components: {
+    Pagination,
+    WarehouseDialog
+  },
+  data() {
+    return {
+      queryParam: {
+        Warehouseno: "",
+        Warehousename: "",
+        Createtime: ""
+      },
+      apiUrl: {
+        query: "/Warehouse/GetT_WarehouseListByPage",
+        delete: "/Warehouse/DeleteT_WarehouseAsync"
+      },
+      columns: [
+        {
+          label: "Id",
+          prop: "Id",
+          colvisible: false
+        },
+        {
+          label: "仓库编码",
+          prop: "Warehouseno",
+          colvisible: true
+        },
+        {
+          label: "仓库名称",
+          prop: "Warehousename",
+          colvisible: true
+        },
+        {
+          label: "仓库描述",
+          prop: "Locationdesc",
+          colvisible: true
+        },
+        {
+          label: "联系人",
+          prop: "Contactuser",
+          colvisible: true
+        },
+        {
+          label: "联系电话",
+          prop: "Contactphone",
+          colvisible: true
+        },
+        {
+          label: "地址",
+          prop: "Address",
+          colvisible: true
+        },
+        {
+          label: "先进先出",
+          prop: "StrFifo",
+          colvisible: true
+        },
+        {
+          label: "创建人",
+          prop: "Creater",
+          colvisible: true
+        },
+        {
+          label: "创建时间",
+          prop: "Createtime",
+          colvisible: true
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  >>>.element.style {
-    margin: 0;
-  }
+>>> .element.style {
+  margin: 0;
+}
 
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409eff;
-  }
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
 
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 
-  >>>.el-dialog {
-    margin: 5vh auto 50px !important;
-  }
+>>> .el-dialog {
+  margin: 5vh auto 50px !important;
+}
 
-  >>>.el-dialog__title {
-    font-size: 14px;
-    color: #fff;
-  }
+>>> .el-dialog__title {
+  font-size: 14px;
+  color: #fff;
+}
 
-  >>>.el-dialog__header {
-    background-color: #3b9bf5e6;
-  }
+>>> .el-dialog__header {
+  background-color: #3b9bf5e6;
+}
 
-  .el-form-item {
-    margin: 10px;
-  }
-
+.el-form-item {
+  margin: 10px;
+}
 </style>

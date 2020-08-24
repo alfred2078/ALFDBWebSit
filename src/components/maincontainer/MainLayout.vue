@@ -16,9 +16,9 @@
       <!-- 左边 -->
       <side-bar class="leftLayout" ></side-bar>
       <!-- 右边 -->
-      <el-container  v-bind:class="[this.isCollap?'rigthLayoutTrue':'rigthLayoutFalse']">
-        <el-main>
-          <main-tab></main-tab>
+      <el-container  v-bind:class="[this.isCollap?'rigthLayoutTrue':'rigthLayoutFalse']"  >
+        <el-main style="height:100% ;">
+          <main-tab style="height:93%;"></main-tab>
         </el-main>
       </el-container>
     </el-container>
@@ -46,6 +46,9 @@
     },
     computed: {    
       ...mapGetters(["isCollap"])
+    },
+　　  methods:{
+       
     }
   };
 
@@ -58,7 +61,7 @@
   //     flex-direction: column;
   //   }
   // }
-
+ 
 
   .leftLayout {
   
@@ -80,21 +83,21 @@
     right: 0;
     top: 50px;
     bottom: 0;
-    padding-bottom: 30px;
+
     -webkit-transition: left .3s ease-in-out;
     transition: left .3s ease-in-out;
     background: #f0f0f0;
   }
 
   .rigthLayoutTrue {
-
+ 
     float: left;
     position: absolute;
     left: 67px;
     right: 0;
     top: 50px;
     bottom: 0;
-    padding-bottom: 30px;
+
     -webkit-transition: left .3s ease-in-out;
     transition: left .3s ease-in-out;
     background: #f0f0f0;
