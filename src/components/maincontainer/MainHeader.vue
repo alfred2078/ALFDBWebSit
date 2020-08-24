@@ -2,8 +2,8 @@
   <el-header>
     <div class="header">
       <logo style="width:250px"></logo>
-      <div class="headeritem1" @click="toggleCollapse">
-       <i :class="icon"></i>
+      <div class="headeritem1" >
+       <i :class="icon" @click="toggleCollapse"></i>
         <span>{{$t('header.iconMessage')}}</span>
       </div>
       <div class="headeritem2">
