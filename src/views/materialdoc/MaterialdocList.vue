@@ -169,7 +169,7 @@ export default {
           label: "ERP单号",
           prop: "Erpvoucherno",
           colvisible: true,
-          width: 145
+          width: 200
         },
         {
           label: "行号",
@@ -187,7 +187,7 @@ export default {
           label: "物料描述",
           prop: "Materialdesc",
           colvisible: true,
-          width: 200
+          width: 260
         },
         // {
         //   label: "客户料号",
@@ -204,7 +204,7 @@ export default {
           label: "凭证号",
           prop: "Materialdoc",
           colvisible: true,
-          width: 100
+          width: 200
         },
         {
           label: "数量",
@@ -222,13 +222,25 @@ export default {
           label: "GUID",
           prop: "Guid",
           colvisible: true,
-          width: 140
+          width: 300
         },
         {
           label: "错误信息",
           prop: "Errormsg",
           colvisible: true,
           width: 300
+        },
+        {
+          label: "过账人",
+          prop: "Creater",
+          colvisible: true,
+          width: 100
+        },
+        {
+          label: "过账时间",
+          prop: "Createtime",
+          colvisible: true,
+          width: 200
         }
       ]
     };

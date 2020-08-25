@@ -188,7 +188,7 @@ export default {
         },
         {
           label: "单据名称",
-          prop: "StrVoucherType",
+          prop: "Strvouchertype",
           colvisible: true,
           width: 120
         },
@@ -244,7 +244,7 @@ export default {
           label: "数量",
           prop: "Qty",
           colvisible: true,
-          width: 60
+          width: 150
         },
         {
           label: "收货人",
@@ -300,7 +300,7 @@ export default {
   methods: {
     getParameterList() {
       // queryParam.Groupname = "VoucherRec_Type"
-      let type = "VoucherRec_Type";
+      let type = "VoucherRec_Name";
       getParameterList({ Groupname: type }).then(res => {
         if (res.Result === 1) {
           // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
