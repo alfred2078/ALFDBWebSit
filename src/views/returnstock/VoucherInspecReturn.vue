@@ -118,7 +118,7 @@
           <el-table-column prop="Towarehouseno" label="仓库名称"></el-table-column>
           <el-table-column prop="Materialno" label="物料编码"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称"></el-table-column>
-          <el-table-column prop="Voucherqty" label="销退数量"></el-table-column>
+          <el-table-column prop="Voucherqty" label="验退数量"></el-table-column>
           <el-table-column prop="Unitname" label="单位名称"></el-table-column>
           <el-table-column prop="Batchno" label="批次"></el-table-column>
         </el-table>

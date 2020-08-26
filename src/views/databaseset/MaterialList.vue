@@ -11,7 +11,7 @@
             </el-col>
             <el-col :span="5">
               <el-form-item label>
-                <el-input v-model="queryParam.Materialdescen" placeholder="物料名称" clearable></el-input>
+                <el-input v-model="queryParam.Materialdesc" placeholder="物料名称" clearable></el-input>
               </el-form-item>
             </el-col>
             <!-- <el-col :span="5">
@@ -155,7 +155,7 @@
       title="物料管理---编辑"
       :show-close="true"
       :visible.sync="outerVisible"
-      width="65%"
+      width="75%"
       :close-on-click-modal="false"
       :before-close="handleClose"
     >
@@ -200,28 +200,28 @@
             :show-overflow-tooltip="true"
           ></el-table-column>
 
-          <el-table-column label="外69码" width="150">
+          <el-table-column label="外69码" width="220">
             <template slot-scope="scope">
               <el-input
                 v-show="doubleclick==scope.$index+1"
                 placeholder="请输入内容"
                 v-model.number="scope.row.OuterWatercode"
                 size="mini"
-                width="150"
+                width="220"
                 clearable
               ></el-input>
               <span v-show="doubleclick!=scope.$index+1">{{scope.row.OuterWatercode}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="69码" width="150">
+          <el-table-column label="69码" width="220">
             <template slot-scope="scope">
               <el-input
                 v-show="doubleclick==scope.$index+1"
                 placeholder="请输入内容"
                 v-model.number="scope.row.Watercode"
                 size="mini"
-                width="150"
+                width="220"
                 clearable
               ></el-input>
               <span v-show="doubleclick!=scope.$index+1">{{scope.row.Watercode}}</span>
@@ -255,6 +255,7 @@ import {
 import { USER_NAME } from "@/store/mutation-types";
 import Vue from "vue";
 export default {
+  name: "Materia",
   mixins: [ALFModelListMixins],
   components: {
     Pagination
@@ -267,9 +268,10 @@ export default {
       screenHeight: null,
       queryParam: {
         Materialno: "",
-        Materialdescen: "",
+        Materialdesc: "",
         Createtime: ""
       },
+      Operate: { Materialno: 11,Materialdesc:11 },
       apiUrl: {
         query: "/Material/GetT_MaterialListByPage"
       },

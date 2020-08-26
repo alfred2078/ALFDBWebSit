@@ -82,9 +82,11 @@
         if (this.tempForm.Password && this.tempForm.Password !== this.tempForm.RePassword) {
           return;
         }
-        debugger;
+      
         var userModel={};
         var user = Vue.ls.get(USER_INFO);
+        console.log('userInfo')
+        console.log(user)
         var Userno =user.Userno;
         userModel.Userno = Userno;
         userModel.Password =this.tempForm.Password;

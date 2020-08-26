@@ -402,7 +402,7 @@ import {  USER_INFO } from "@/store/mutation-types";
     },
     methods:{
       exp(){
-        debugger;
+         
         var min = this;
      
 
@@ -412,7 +412,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getMaterialDocPoststatuse(min.modelListWarehouse).then(res=>{
           console.log(1+'--end---'+new Date());
           if (res.Result === 1) {
-            debugger;
+             
           
                   min.expCount=res.Data.Poststatus;
                   min.expOrderQty = res.Data.newPoststatus;
@@ -424,7 +424,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         })
        /*  getReceiveSumQty(min.modelListWarehouse).then(res=>{
           if (res.Result === 1) {
-              debugger;
+               
               console.log(2);
                   min.recPercentage=res.Data.Qty;
                   min.recOrderQty = res.Data.Count;
@@ -438,7 +438,7 @@ import {  USER_INFO } from "@/store/mutation-types";
      getOutStockTranSumQty(min.modelListWarehouse).then(res=>{
        
           if (res.Result === 1) {
-              debugger;
+               
               console.log(3+'--end---'+new Date());
                   min.pickPercentage=res.Data.Qty;
                   min.pickOrderQty = res.Data.Count;
@@ -452,7 +452,7 @@ import {  USER_INFO } from "@/store/mutation-types";
        getQualityDetailLinestatus(min.modelListWarehouse).then(res=>{
           
           if (res.Result === 1) {
-              debugger;
+               
                console.log(4+'--end---'+new Date());
                   min.reviPercentage=res.Data.Linestatus;
                   min.reviOrderQty = res.Data.newLinestatus;
@@ -466,7 +466,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getReceiveTranGroupByMonth(min.modelListWarehouse).then(res=>{
       
             if (res.Result === 1) {
-              debugger;
+               
               console.log(5+'--end---'+new Date());
                   min.chartData.rows.forEach(t=>{
                     res.Data.forEach(d=>{
@@ -486,7 +486,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getReceiveTranGroupByWarehou(min.modelListWarehouse).then(res=>{
         
             if (res.Result === 1) {
-              debugger;
+               
               console.log(6+'--end---'+new Date());
                   min.chartData1.rows=res.Data;
             }
@@ -499,7 +499,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getReceiveTranGroupByMaterialno(min.modelListWarehouse).then(res=>{
            
             if (res.Result === 1) {
-              debugger;
+               
               console.log(7+'--end---'+new Date());
                   min.chartData3.rows=res.Data;
             }
@@ -513,7 +513,7 @@ import {  USER_INFO } from "@/store/mutation-types";
       outmobthClick()
       {
         var min = this;
-     debugger;
+      
 
         var user = Vue.ls.get(USER_INFO);
         min.modelListWarehouse =user.modelListWarehouse;
@@ -521,7 +521,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getOutStockGroupByMonth(min.modelListWarehouse).then(res=>{
       
             if (res.Result === 1) {
-              debugger;
+               
               console.log(5+'--end---'+new Date());
                   min.outchartData.rows.forEach(t=>{
                     res.Data.forEach(d=>{
@@ -541,7 +541,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         getOutStockGroupByWarehou(min.modelListWarehouse).then(res=>{
         
             if (res.Result === 1) {
-              debugger;
+            
               console.log(6+'--end---'+new Date());
                   min.outchartData1.rows=res.Data;
             }
@@ -554,7 +554,7 @@ import {  USER_INFO } from "@/store/mutation-types";
         GetOutStockGroupByMaterialno(min.modelListWarehouse).then(res=>{
            
             if (res.Result === 1) {
-              debugger;
+            
               console.log(7+'--end---'+new Date());
                   min.outchartData3.rows=res.Data;
             }

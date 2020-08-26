@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small ">
+        <el-form :model="queryParam" size="small "  @keyup.enter.native="search">
           <el-row>
             <el-col :span="5">
               <el-form-item label-width label>
@@ -25,7 +25,7 @@
             <el-col :span="8">
               <el-form-item label-width label>
                 <el-date-picker
-                  v-model="value1"
+                  v-model="queryParam.Createtime"
                   type="daterange"
                   range-separator="至"
                   start-placeholder="开始日期"
@@ -92,7 +92,7 @@
             <el-table-column type="selection" width="55" height="auto" class="layout-table"></el-table-column>
 
             <el-table-column prop="Trackingnumber" label="物流单号" width="180"></el-table-column>
-            <el-table-column prop="LogisticsCompany" label="物流公司" width="200"></el-table-column>
+            <el-table-column prop="LogisticsCompany" label="发货物流" width="200"></el-table-column>
             <el-table-column prop="Address" label="到站" width="250"></el-table-column>
             <el-table-column prop="Contacts" label="收货人" width="100"></el-table-column>
             <el-table-column prop="Tel" label="收货电话" width="120"></el-table-column>
@@ -170,14 +170,15 @@
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
-import { getWayBillDetailHeaderidsub, getWayBillDetail } from "@/api/api";
+import { getWayBillDetailHeaderidsub, getWayBillDetail,windowpost } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
   mixins: [ALFModelListMixins],
 
   components: {
-    Pagination
+    Pagination,
+    windowpost
   },
   data() {
     return {
@@ -198,7 +199,7 @@ export default {
       CheckChangeData: {}, // 当前选中的值
       tHeader: [
         "物流单号",
-        "物流公司",
+        "发货物流",
         "到站",
         "收货人",
         "收货电话",
@@ -305,6 +306,7 @@ export default {
       this.$refs.Table.toggleRowSelection(val);
     },
     PrintClick() {
+      debugger;
       if (this.CheckChangeData.length == 1) {
         var Erpvoucherno = this.CheckChangeData[0].Erpvoucherno;
         windowpost(Erpvoucherno, "TWayBill");

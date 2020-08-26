@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-form  size="small"  :model="queryParam"  >
+      <el-form  size="small"  :model="queryParam"  @keyup.enter.native="SelectList">
         <el-row>
           <el-col :span="6" >
             <el-form-item label="">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card >
-      <el-form :model="checkFrom" size="small" @keyup.enter.native="getInfo">
+      <el-form :model="checkFrom" size="small">
         <el-row>
           <el-col :span="5">
             <el-form-item label-width="" label="">
@@ -11,7 +11,7 @@
           
           <el-col :span="5">
             <el-form-item label-width="" label="">
-              <el-input v-model="checkFrom.Remarks" placeholder="备注"></el-input>
+              <el-input v-model="checkFrom.Remarks" placeholder="备注" clearable></el-input>
             </el-form-item>
           </el-col>
          
@@ -22,13 +22,13 @@
 
     <el-card shadow="hover" class="box-card">
      <!--  <el-tag type="success"  effect="plain">查询条件</el-tag> -->
-        <el-form :model="TStock" size="small ">
+        <el-form :model="TStock" size="small " @keyup.enter.native="getInfo">
           <el-row>
             
 
             <el-col :span="5">
               <el-form-item label-width="" label="">
-                <el-input v-model="TStock.Materialno" placeholder="物料编码"></el-input>
+                <el-input v-model="TStock.Materialno" placeholder="物料编码" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="5">
@@ -187,10 +187,7 @@
           vm.getTCHECKERPVOUCHERNO()
       })
     },
-    watch:function(){
-
-      
-    },
+   
     mounted:function(){
       this.getTCHECKERPVOUCHERNO();
     },
@@ -229,6 +226,7 @@
         );
       },
       getInfo(){
+        debugger;
         var min = this;
         min.pageModel.TStock=min.TStock;
         min.pageModel.Checktypecode =min.Checktypecode;
@@ -266,6 +264,7 @@
               });
               return;
         }
+        debugger;
         min.pageCheckModel.T_Check=min.checkFrom;
         min.pageCheckModel.T_Check.Creater=Vue.ls.get(USER_NAME);
         min.pageCheckModel.V_Area=min.areaList;

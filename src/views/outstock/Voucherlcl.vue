@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small ">
+        <el-form :model="queryParam" size="small "  @keyup.enter.native="getModelList">
           <el-row>
             <el-col :span="5">
               <el-form-item label-width label>

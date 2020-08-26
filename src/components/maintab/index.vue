@@ -2,20 +2,20 @@
   <div >
     <el-tabs v-model="activePage"  closable @tab-click="clickTab" @tab-remove="removeTab" >
       <el-tab-pane
-        v-for="(item, index) in pageList"
+        v-for="(item) in pageList"
         :key="item.fullPath"
         :label="item.meta.title"
         :name="item.fullPath"
       ></el-tab-pane>
     </el-tabs>
     <div style="margin: 0;height:100% ;" >
-      <el-collapse-transition style="height:100% ;">
-        <keep-alive>
+
+        <keep-alive >
           <router-view style="height:97% ;"></router-view>
         </keep-alive>
-      </el-collapse-transition>      
+
     </div>
-    <!-- <router-view></router-view> -->
+   
   </div>
 </template>
 
@@ -72,6 +72,7 @@ export default {
   },
   watch: {
     $route: function(newRoute) {
+   debugger;
       this.activePage = newRoute.fullPath;
       if (this.linkList.indexOf(newRoute.fullPath) < 0) {
         this.linkList.push(newRoute.fullPath);
@@ -83,15 +84,20 @@ export default {
           oldIndex,
           1,
           Object.assign({}, newRoute, { meta: oldPositionRoute.meta })
-        );
+        ); 
       }
+      console.log("this.pageList");
+      console.log(this.pageList);
     },
     activePage: function(key) {
+
       let index = this.linkList.lastIndexOf(key);
       let waitRouter = this.pageList[index];
       this.$router.push(Object.assign({}, waitRouter)).catch(err => {
         err;
       });
+      console.log("waitRouter");
+      console.log(waitRouter);
     }
   }
 };
