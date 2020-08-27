@@ -65,6 +65,7 @@
   } from "@/store/mutation-types";
   import Vue from "vue";
 
+
   export default {
     data() {
       return {
@@ -162,6 +163,8 @@
         this.$refs["tempForm"].validate(valid => {
           if (valid) {
             let postObj;
+            delete this.tempForm.Createtime;
+            debugger;
             if (!this.tempForm.Id) {              
               //创建人
               this.tempForm.Creater = Vue.ls.get(USER_NAME);
@@ -202,6 +205,7 @@
       },
       getWarehouseListAll() {
         getWarehouseListAll().then(res => {
+          debugger;
           if (res.Result === 1) {
             this.warehouseListAll = res.Data
           }
