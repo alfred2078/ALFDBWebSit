@@ -422,7 +422,7 @@ import {  USER_INFO } from "@/store/mutation-types";
               }
 
         })
-       /*  getReceiveSumQty(min.modelListWarehouse).then(res=>{
+        getReceiveSumQty(min.modelListWarehouse).then(res=>{
           if (res.Result === 1) {
                
               console.log(2);
@@ -433,7 +433,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                 min.$message.error(res.ResultValue);
               }
 
-        }) */
+        })
      console.log(3+'--begin---'+new Date());
      getOutStockTranSumQty(min.modelListWarehouse).then(res=>{
        
