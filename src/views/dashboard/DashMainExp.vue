@@ -5,7 +5,7 @@
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="异常说明" placement="right-start">
           <i class="el-icon-chat-dot-round"></i>
         </el-tooltip>        
-        <span slot="footerSlot">{{ `当日异常总数：${expOrderQty}` }}</span>
+        <span slot="footerSlot">{{ `当日凭证总数：${expOrderQty}` }}</span>
       </chart-card>
       <chart-card class="dash-header-item-receivetran" :total="`${recPercentage}`" title="当日收货总数">
         <el-tooltip slot="cardTitle" class="item" effect="dark" content="指标说明" placement="right-start">
