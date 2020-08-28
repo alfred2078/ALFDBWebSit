@@ -431,7 +431,7 @@ import {  USER_INFO } from "@/store/mutation-types";
               }
               else {
                 min.$message.error(res.ResultValue);
-              }
+              } 
 
         })
      console.log(3+'--begin---'+new Date());
