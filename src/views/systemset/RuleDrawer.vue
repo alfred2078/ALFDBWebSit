@@ -68,7 +68,7 @@
         // this.tempForm.Currentruleid = this.Currentruleid;
         this.tempForm.defaultChecked = this.$refs.treeMenu.getCheckedKeys()
           .concat(this.$refs.treeMenu.getHalfCheckedKeys());
-
+        delete this.tempForm.Createtime;
         SaveRuleMenu(this.tempForm).then(res => {
           if (res.Result === 1) {
             this.dvisible = false;

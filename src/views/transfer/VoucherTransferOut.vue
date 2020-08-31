@@ -116,8 +116,7 @@
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
           style="width: 100%"
           row-key="id"
-          height="auto"
-          class="layout-table"
+          
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
           <el-table-column prop="Fromwarehouseno" label="拨出仓库"></el-table-column>
@@ -128,7 +127,7 @@
           <el-table-column prop="Materialdesc" label="物料名称" width="180"></el-table-column>
           <el-table-column prop="Unitname" label="单位名称"></el-table-column>
           <el-table-column prop="Voucherqty" label="调拨数量"></el-table-column>
-          <el-table-column prop="Outstockqty" label="实际调拨数量" width="100"></el-table-column>
+          <el-table-column prop="Outstockqty" label="实际调拨数量" width="120"></el-table-column>
           <el-table-column prop="Postqty" label="过账数量"></el-table-column>
           <el-table-column prop="Batchno" label="拨入批次"></el-table-column>
           <el-table-column prop="Batchno" label="拨出批次"></el-table-column>

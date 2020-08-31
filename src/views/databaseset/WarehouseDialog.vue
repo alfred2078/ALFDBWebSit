@@ -32,6 +32,10 @@
           <el-checkbox v-model="checked">强制先进先出</el-checkbox>
         </el-form-item>
 
+        <el-form-item label="打印">
+          <el-checkbox v-model="Isprint">是否打印拼箱</el-checkbox>
+        </el-form-item>
+
         <el-form-item>
           <el-button @click="SaveModel" type="primary">保存</el-button>
           <el-button @click="visible = false" type="primary">关闭</el-button>
@@ -50,6 +54,7 @@
     USER_NAME
   } from "@/store/mutation-types";
   import Vue from "vue";
+/* import { delete } from 'vue/types/umd'; */
 
   export default {
     data() {
@@ -58,6 +63,7 @@
         visible: false,
         disabled: false,
         checked: false,
+        Isprint:false,
         tempForm: {
           Id: "",
           Warehouseno: "",
@@ -71,7 +77,8 @@
           Strongholdcode: "YL",
           Isfifo: "",
           Creater: "",
-          Modifyer: ""
+          Modifyer: "",
+          Isprint:""
         },
         rules: {
           Warehouseno: [{
@@ -120,6 +127,7 @@
         this.visible = true;
         this.tempForm = Object.assign({}, record);
         this.checked = this.tempForm.Isfifo == 2 ? true : false;
+        this.Isprint=this.tempForm.Isprint ==2?true:false;
         this.$nextTick(() => {
           this.$refs["tempForm"].clearValidate();
         });
@@ -129,6 +137,10 @@
           if (valid) {
             let postObj;
             this.tempForm.Isfifo = this.checked === true ? 2 : 1;
+            this.tempForm.Isprint = this.Isprint ===true?2:1;
+        
+            console.log(this.tempForm);
+            delete this.tempForm.Createtime;
             if (!this.tempForm.Id) {
               //创建人
               this.tempForm.Creater = Vue.ls.get(USER_NAME);

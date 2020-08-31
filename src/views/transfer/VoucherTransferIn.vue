@@ -99,7 +99,7 @@
       </el-main>
     </el-row>
 
-    <el-dialog title="调拨单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
+    <el-dialog title="调拨单---详情" width="85%" :show-close="true" :visible.sync="outerVisible">
       <div
         :style="{          
           border: '1px solid #e9e9e9',
@@ -118,18 +118,18 @@
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-          <el-table-column prop="Fromwarehouseno" label="拨出仓库"></el-table-column>
-          <el-table-column prop="Towarehouseno" label="拨入仓库"></el-table-column>
-          <el-table-column prop="Rowno" label="项次"></el-table-column>
-          <el-table-column prop="Rownodel" label="项序"></el-table-column>
-          <el-table-column prop="Materialno" label="物料编码" width="100"></el-table-column>
+          <el-table-column prop="Fromwarehouseno" label="拨出仓库" width="100"></el-table-column>
+          <el-table-column prop="Towarehouseno" label="拨入仓库" width="100"></el-table-column>
+          <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
+          <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
+          <el-table-column prop="Materialno" label="物料编码"  width="120"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称" width="180"></el-table-column>
-          <el-table-column prop="Unitname" label="单位名称"></el-table-column>
-          <el-table-column prop="Voucherqty" label="调拨数量"></el-table-column>
-          <el-table-column prop="Receiveqty" label="实际调拨数量" width="100"></el-table-column>
-          <el-table-column prop="Postqty" label="过账数量"></el-table-column>
-          <el-table-column prop="Batchno" label="拨入批次"></el-table-column>
-          <el-table-column prop="Batchno" label="拨出批次"></el-table-column>
+          <el-table-column prop="Unitname" label="单位名称"  width="120"></el-table-column>
+          <el-table-column prop="Voucherqty" label="调拨数量"  width="120"></el-table-column>
+          <el-table-column prop="Receiveqty" label="实际调拨数量" width="140"></el-table-column>
+          <el-table-column prop="Postqty" label="过账数量"  width="120"></el-table-column>
+          <el-table-column prop="Batchno" label="拨入批次"  width="120"></el-table-column>
+          <el-table-column prop="Batchno" label="拨出批次"  width="120"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
