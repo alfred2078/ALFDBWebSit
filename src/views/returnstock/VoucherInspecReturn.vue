@@ -22,7 +22,7 @@
             <el-col :span="5">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
-                <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
+               <!--  <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
               </el-form-item>
             </el-col>
           </el-row>
