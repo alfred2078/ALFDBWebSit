@@ -93,8 +93,8 @@
       SaveModel() {
         this.$refs["tempForm"].validate(valid => {
           if (valid) {
-            let postObj;
-            
+            let postObj;  
+           delete this.tempForm.Createtime; 
             if (!this.tempForm.Id) {
               //创建人
               this.tempForm.Creater = Vue.ls.get(USER_NAME);

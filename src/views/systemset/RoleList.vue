@@ -89,7 +89,7 @@
                 show-overflow-tooltip
               ></el-table-column>
             </template>
-            <el-table-column width="130" fixed="right" label="操作">
+            <el-table-column width="130"  label="操作">
               <template slot-scope="scope">
                 <el-button @click="handleGrant(scope.row)" type="text" size="small">授权</el-button>
                 <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
