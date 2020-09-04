@@ -89,7 +89,7 @@
           Strongholdcode: "YL",
           Creater: "",
           Modifyer: "",
-          warehouseListSelect: [], //选择的仓库ID
+
           ruleListSelect: [] //选择的权限ID
         },
         rules: {
@@ -149,12 +149,17 @@
         });
       },
       edit(record) {
-        this.visible = true;        
+        this.visible = true;       
+        
         this.tempForm = Object.assign({}, record);
+        delete this.tempForm.Createtime; 
         this.getWarehouseListAll();
+     debugger;
         this.getWarehouseListByUserID(this.tempForm);
         this.getRuleListAll();
         this.getRuleListByUserID(this.tempForm);
+        console.log("123");
+        console.log(this.warehouseListSelect)
         this.$nextTick(() => {
           this.$refs["tempForm"].clearValidate();
         });
@@ -215,8 +220,10 @@
         });
       },
       getWarehouseListByUserID(record) {
+        debugger;
         getWarehouseListByUserID(record).then(res => {
           if (res.Result === 1) {
+            debugger;
             this.warehouseListSelect = res.Data.map(item => item.Warehouseid)
           }
           // else {

@@ -117,6 +117,7 @@
         });
       },
       SaveModel() {
+        delete this.tempForm.Createtime; 
         this.$refs["tempForm"].validate(valid => {
           if (valid) {
             let postObj;
