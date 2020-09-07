@@ -190,7 +190,7 @@ export default {
         },
         {
           label: "单据名称",
-          prop: "StrVoucherType",
+          prop: "Strvouchertype",
           colvisible: true,
           width: 120
         },
@@ -220,7 +220,7 @@ export default {
         },
         {
           label: "客户件号",
-          prop: "CusMaterialno",
+          prop: "Cusmaterialno",
           colvisible: true,
           width: 120
         },
@@ -289,12 +289,12 @@ export default {
         "Strongholdcode",
         "Towarehouseno",
         "Toareano",
-        "StrVoucherType",
+        "Strvouchertype",
         "Erpvoucherno",
         "Customerno",
         "Customername",
         "Materialno",
-        "CusMaterialno",
+        "Cusmaterialno",
         "Materialdesc",
         "Barcode",
         "Batchno",
@@ -308,7 +308,7 @@ export default {
   methods: {
     getParameterList() {
       // queryParam.Groupname = "VoucherRec_Type"
-      let type = "VoucherOut_Type";
+      let type = "VoucherOut_Name";
       getParameterList({ Groupname: type }).then(res => {
         if (res.Result === 1) {
           // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
