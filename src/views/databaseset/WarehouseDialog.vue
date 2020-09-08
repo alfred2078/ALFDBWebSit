@@ -6,13 +6,19 @@
         background: '#fff'
       }">
       <el-form ref="tempForm" :model="tempForm" :rules="rules" label-width="80px">
+        <el-form-item label="据点编号" prop="Strongholdcode">
+          <el-input v-model="tempForm.Strongholdcode" placeholder="据点编号"></el-input>
+        </el-form-item>
+        <el-form-item label="据点名称" prop="Strongholdname">
+          <el-input v-model="tempForm.Strongholdname" placeholder="据点名称"></el-input>
+        </el-form-item>
         <el-form-item label="仓库编码" prop="Warehouseno">
           <el-input v-model="tempForm.Warehouseno" placeholder="仓库编码" :disabled="disabled"></el-input>
         </el-form-item>
         <el-form-item label="仓库名称" prop="Warehousename">
           <el-input v-model="tempForm.Warehousename" placeholder="仓库名称"></el-input>
         </el-form-item>
-        <el-form-item label="客户编号" prop="WCustomerno">
+        <el-form-item label="客户编号" prop="WCustomerno" v-if="false">
           <el-input v-model="tempForm.WCustomerno" placeholder="客户编号" ></el-input>
         </el-form-item>
         <el-form-item label="联系人">
@@ -27,12 +33,7 @@
         <el-form-item label="仓库描述">
           <el-input v-model="tempForm.Locationdesc" placeholder="仓库描述"></el-input>
         </el-form-item>
-        <el-form-item label="据点编号">
-          <el-input v-model="tempForm.Strongholdcode" placeholder="据点编号"></el-input>
-        </el-form-item>
-        <el-form-item label="据点名称">
-          <el-input v-model="tempForm.Strongholdname" placeholder="据点名称"></el-input>
-        </el-form-item>
+      
 
         <el-form-item label="发货规则">
           <el-checkbox v-model="checked">强制先进先出</el-checkbox>
@@ -96,6 +97,16 @@
           Istransfer:""
         },
         rules: {
+          Strongholdcode: [{
+            required: true,
+            message: "请输入据点编号",
+            trigger: "blur"
+          }],
+          Strongholdname: [{
+            required: true,
+            message: "请输入据点名称",
+            trigger: "blur"
+          }],
           Warehouseno: [{
             required: true,
             message: "请输入仓库编码",
