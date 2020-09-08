@@ -83,7 +83,7 @@
                 show-overflow-tooltip
               ></el-table-column>
             </template>
-            <el-table-column width="100" fixed="right" label="操作">
+            <el-table-column width="100"  label="操作">
               <template slot-scope="scope">
                 <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
                 <el-popconfirm title="确定删除吗？" @onConfirm="handleDelete(scope.row)">

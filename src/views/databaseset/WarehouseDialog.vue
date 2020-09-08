@@ -27,6 +27,12 @@
         <el-form-item label="仓库描述">
           <el-input v-model="tempForm.Locationdesc" placeholder="仓库描述"></el-input>
         </el-form-item>
+        <el-form-item label="据点编号">
+          <el-input v-model="tempForm.Strongholdcode" placeholder="据点编号"></el-input>
+        </el-form-item>
+        <el-form-item label="据点名称">
+          <el-input v-model="tempForm.Strongholdname" placeholder="据点名称"></el-input>
+        </el-form-item>
 
         <el-form-item label="发货规则">
           <el-checkbox v-model="checked">强制先进先出</el-checkbox>
@@ -34,6 +40,11 @@
 
         <el-form-item label="打印">
           <el-checkbox v-model="Isprint">是否打印拼箱</el-checkbox>
+          
+        </el-form-item>
+
+        <el-form-item label="调拨">
+          <el-checkbox v-model="Istransfer">是否调拨</el-checkbox>
         </el-form-item>
 
         <el-form-item>
@@ -64,6 +75,7 @@
         disabled: false,
         checked: false,
         Isprint:false,
+        Istransfer:false,
         tempForm: {
           Id: "",
           Warehouseno: "",
@@ -72,13 +84,16 @@
           Contactuser: "",
           Contactphone: "",
           Locationdesc: "",
+          Strongholdcode:"",
+          Strongholdname:"",
           Address: "",
           Isfifo: "",
           Strongholdcode: "YL",
           Isfifo: "",
           Creater: "",
           Modifyer: "",
-          Isprint:""
+          Isprint:"",
+          Istransfer:""
         },
         rules: {
           Warehouseno: [{
@@ -109,6 +124,8 @@
           Contactuser: "",
           Contactphone: "",
           Locationdesc: "",
+          Strongholdcode:"",
+          Strongholdname:"",
           Address: "",
           Isfifo: "",
           Strongholdcode: "",
@@ -120,7 +137,7 @@
       add() {
         this.resetTempForm();
         this.edit({
-          Strongholdcode: "YL"
+        //  Strongholdcode: "YL"
         });
       },
       edit(record) {
@@ -128,6 +145,7 @@
         this.tempForm = Object.assign({}, record);
         this.checked = this.tempForm.Isfifo == 2 ? true : false;
         this.Isprint=this.tempForm.Isprint ==2?true:false;
+        this.Istransfer=this.tempForm.Istransfer ==2?true:false;
         this.$nextTick(() => {
           this.$refs["tempForm"].clearValidate();
         });
@@ -138,7 +156,7 @@
             let postObj;
             this.tempForm.Isfifo = this.checked === true ? 2 : 1;
             this.tempForm.Isprint = this.Isprint ===true?2:1;
-        
+            this.tempForm.Istransfer = this.Istransfer ===true?2:1;
             console.log(this.tempForm);
             delete this.tempForm.Createtime;
             if (!this.tempForm.Id) {
