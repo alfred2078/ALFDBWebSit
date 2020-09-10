@@ -214,12 +214,12 @@ export default {
         },
         {
           label: "角色分配",
-          prop: "role",
+          prop: "Rulename",
           colvisible: true
         },
         {
           label: "负责仓库",
-          prop: "warehouse",
+          prop: "Warehouseno",
           colvisible: true
         },
         {
