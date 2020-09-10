@@ -56,21 +56,21 @@
         :header-row-style="{ height: '30', font: 'normal' }"
         :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" style="width: 100%" row-key="id"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="Remarks" label="盈亏情况" fixed> </el-table-column>
-        <el-table-column prop="Warehouseno" label="仓库编码" fixed> </el-table-column>
-        <el-table-column prop="Materialno" label="物料编码" fixed> </el-table-column>
-        <el-table-column prop="Materialdesc" label="物料名称"> </el-table-column>
-        <el-table-column prop="Strongholdcode" label="据点"> </el-table-column>
-        <el-table-column prop="Serialno" label="序列号"> </el-table-column>
-        <el-table-column prop="Areano" label="实盘库位"> </el-table-column>
-        <el-table-column prop="Qty" label="实盘数量"></el-table-column>
-        <el-table-column prop="Sareano" label="帐存库位"></el-table-column>
-        <el-table-column prop="Bqty" label="帐存数量"></el-table-column>
-        <el-table-column prop="Yqty" label="盘盈数量"></el-table-column>
-        <el-table-column prop="Kqty" label="盘亏数量"></el-table-column>
-        <el-table-column prop="Creater" label="盘点人"></el-table-column>
-        <el-table-column prop="Createtime" label="盘点时间"></el-table-column>
+       <!--  <el-table-column type="selection" width="55"> </el-table-column> -->
+        <el-table-column prop="Remarks" label="盈亏情况" fixed width='100'> </el-table-column>
+        <el-table-column prop="Warehouseno" label="仓库编码" fixed width='100'> </el-table-column>
+        <el-table-column prop="Materialno" label="物料编码" fixed width='120'> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width='180'> </el-table-column>
+        <el-table-column prop="Strongholdcode" label="据点" width='80'> </el-table-column>
+        <el-table-column prop="Serialno" label="序列号" width='120'> </el-table-column>
+        <el-table-column prop="Areano" label="实盘库位" width='100'> </el-table-column>
+        <el-table-column prop="Qty" label="实盘数量" width='100'></el-table-column>
+        <el-table-column prop="Sareano" label="帐存库位" width='100'></el-table-column>
+        <el-table-column prop="Bqty" label="帐存数量" width='100'></el-table-column>
+        <el-table-column prop="Yqty" label="盘盈数量" width='100'></el-table-column>
+        <el-table-column prop="Kqty" label="盘亏数量" width='100'></el-table-column>
+        <el-table-column prop="Creater" label="盘点人" width='80'></el-table-column>
+        <el-table-column prop="Createtime" label="盘点时间" width='200'></el-table-column>
 
 
       </el-table>

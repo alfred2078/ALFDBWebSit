@@ -90,7 +90,9 @@
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           >
             <el-table-column type="selection" width="55" height="auto" class="layout-table"></el-table-column>
-
+            <el-table-column prop="Erpvoucherno" label="托运单号" width="180"></el-table-column>
+            <el-table-column prop="Customerno" label="客户编码" width="120"></el-table-column>
+            <el-table-column prop="Customername" label="客户名称" width="180"></el-table-column>
             <el-table-column prop="Trackingnumber" label="物流单号" width="180"></el-table-column>
             <el-table-column prop="LogisticsCompany" label="发货物流" width="200"></el-table-column>
             <el-table-column prop="Address" label="到站" width="250"></el-table-column>
@@ -198,6 +200,9 @@ export default {
       WayBillDetaillList: [],
       CheckChangeData: {}, // 当前选中的值
       tHeader: [
+        "托运单号",
+        "客户编码",
+        "客户名称",
         "物流单号",
         "发货物流",
         "到站",
@@ -221,6 +226,9 @@ export default {
         "创建时间"
       ],
       filterVal: [
+        "Erpvoucherno",
+        "Customerno",
+        "Customername",
         "Trackingnumber",
         "LogisticsCompany",
         "Address",

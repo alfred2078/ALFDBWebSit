@@ -50,6 +50,7 @@
             <el-col :span="5">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+              
               </el-form-item>
             </el-col>
           </el-row>
@@ -199,7 +200,7 @@ import {
   updateTCheckAsync,
   getTParameterList
 } from "@/api/api";
-import { USER_NAME } from "@/store/mutation-types";
+import { USER_NAME,USER_INFO } from "@/store/mutation-types";
 import Vue from "vue";
 import store from "@/store";
 
@@ -232,9 +233,10 @@ export default {
         Erpvoucherno: "",
         Checkstatus: "",
         Isdel: "1",
-        Createtime: ""
+        Createtime: "",
+       /*  Towarehouseno:"811,201" */
       },
-      Operate: { Erpvoucherno: 11 },
+      Operate: { Erpvoucherno: 11 ,Towarehouseno:11},
       apiUrl: {
         query: "/Check/GetT_CheckListByPage"
       },
@@ -287,23 +289,33 @@ export default {
   created() {
     this.getTParameter();
     this.getTParameterIsDel();
+    //this.UserId();
   },
 
   /*    beforeRouteLeave (to, from, next) {
-     debugger;
+      
    // 销毁组件，避免通过vue-router再次进入时，仍是上次的history缓存的状态
    this.$destroy(true)
    next()
  }　　, */
   methods: {
     SaveT_Check() {},
+    UserId(){
+   debugger;
+      var userInfo =Vue.ls.get(USER_INFO);
+      var userid = userInfo.Id;
+   
+      this.queryParam.Userid=userid;
+
+    },
     //重置
     reset() {
       this.isdelvalue = "";
+     
     },
     //盈亏分析跳转页面
     Proloss() {
-      debugger;
+       
       store.dispatch("getErpvoucherno", this.CheckChangeData[0].Erpvoucherno);
       this.$router.push({
         path: "/instore/inventoryproloss"
@@ -314,11 +326,11 @@ export default {
       });
 
       /*  let s = this.$route.params.Erpvoucherno;
-        debugger; */
+          */
     },
     //查询
     getInfo() {
-      debugger;
+       
       var min = this;
       min.model = {};
       var erpvoucherno = { Field: "Erpvoucherno", Value: min.Erpvoucherno };
@@ -358,7 +370,7 @@ export default {
     },
     //状态下拉框
     getTParameter() {
-      debugger;
+       
       var min = this;
       min.model = {};
       min.model.Groupname = "Check_Status";
@@ -387,7 +399,7 @@ export default {
     },
     //详情
     detail(val) {
-      debugger;
+       
       var min = this;
       min.outerVisible = true;
       min.detailsData = [];
@@ -404,7 +416,7 @@ export default {
     },
     //终止
     updateCheck(val) {
-      debugger;
+       
       var min = this;
       min.model = {};
       min.model.Erpvoucherno = val.Erpvoucherno;
@@ -424,7 +436,7 @@ export default {
       min.getModelList();
     },
     updateTCheckAsync(model) {
-      debugger;
+       
       var min = this;
       updateTCheckAsync(model).then(res => {
         if (res.Result === 1) {
@@ -439,7 +451,7 @@ export default {
     },
     //table选中，只能选中一行 不能多选
     GetCheckChange(val) {
-      debugger;
+       
       if (val.length > 1) {
         this.$refs.Table.clearSelection();
         this.$refs.Table.toggleRowSelection(val.pop());
@@ -456,7 +468,7 @@ export default {
     //复盘
     ReCheck() {
       var min = this;
-      debugger;
+       
       var checkmodel = {};
       //checkmodel.Erpvoucherno =
       if (
@@ -478,7 +490,7 @@ export default {
         });
         return;
       }
-      debugger;
+       
       min.CheckChangeData[0].Creater = Vue.ls.get(USER_NAME);
       delete min.CheckChangeData[0].Createtime;
       reSaveTCheck(min.CheckChangeData[0]).then(res => {

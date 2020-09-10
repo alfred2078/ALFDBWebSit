@@ -36,15 +36,7 @@
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
-              <el-form-item label>
-                <el-input v-model="queryParam.CusMaterialno" placeholder="客户件号" clearable></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="4">
+             <el-col :span="4">
               <el-form-item label>
                 <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
               </el-form-item>
@@ -54,6 +46,10 @@
                 <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
               </el-form-item>
             </el-col>
+          </el-row>
+
+          <el-row>
+           
             <el-col :span="4">
               <el-form-item label>
                 <el-input v-model="queryParam.Barcode" placeholder="条码" clearable></el-input>
@@ -92,6 +88,14 @@
               type="primary"
             >导出</el-button>
           </el-col>
+          <el-col :span="2">
+            <el-button
+              @click="iscolumn=true"
+              size="small "
+              icon="el-icon-view"
+              type="primary"
+            >自定义列</el-button>
+          </el-col>
         </el-row>
       </el-card>
     </el-row>
@@ -107,6 +111,7 @@
             class="layout-table"
             :cell-style="{ padding: '2px' }"
             style="width: 100%;"
+            ref="multipleTable"
           >
             <template v-for="item in columns">
               <el-table-column
@@ -130,6 +135,28 @@
         </el-container>
       </el-main>
     </el-row>
+<el-dialog title="自定义列"  :show-close="true"  :visible.sync="iscolumn">
+  <el-card
+        :style="{          
+          padding: '10px 50px',
+          background: '#fff'
+        }" 
+      >
+    <el-transfer
+      
+        v-model="concealData"
+       
+        :titles="['显示列', '隐藏列']"
+        @change="handleChange"
+        :data="showData"
+    ></el-transfer>
+  </el-card>
+   <div slot="footer" class="dialog-footer">
+    <el-button @click="iscolumn = false">取 消</el-button>
+    <el-button type="primary" @click="saveColumn">保 存</el-button>
+  </div>
+</el-dialog>
+
   </div>
 </template>
 <style lang="scss" scoped>
@@ -148,19 +175,22 @@ export default {
   },
   data() {
     return {
+      iscolumn:false,
+      showData: [],
+      concealData: [],
       xlsname: "出库记录",
       queryParam: {
         Strongholdcode: "",
         Towarehouseno: "",
         Erpvoucherno: "",
-        CusMaterialno: "",
+   
         Materialno: "",
         Batchno: "",
         Barcode: "",
         Createtime: "",
         Vouchertype: ""
       },
-      Operate: { Erpvoucherno: 11, Materialno: 11, Batchno: 11, Barcode: 11 },
+      Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 },
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
       apiUrl: {
@@ -171,96 +201,106 @@ export default {
       },
       columns: [
         {
+         
           label: "据点",
           prop: "Strongholdcode",
           colvisible: true,
           width: 60
         },
         {
+         
           label: "仓库",
           prop: "Towarehouseno",
           colvisible: true,
           width: 80
         },
         {
+          
           label: "库位",
           prop: "Toareano",
           colvisible: true,
           width: 80
         },
         {
+          key:4,
           label: "单据名称",
           prop: "Strvouchertype",
           colvisible: true,
           width: 120
         },
         {
+         
           label: "ERP单号",
           prop: "Erpvoucherno",
           colvisible: true,
           width: 145
         },
         {
+         
           label: "客户编码",
           prop: "Customerno",
           colvisible: true,
           width: 100
         },
         {
+         
           label: "客户名称",
           prop: "Customername",
           colvisible: true,
           width: 270
         },
         {
+         
           label: "物料编码",
           prop: "Materialno",
           colvisible: true,
           width: 120
         },
         {
+        
           label: "客户件号",
           prop: "Cusmaterialno",
           colvisible: true,
           width: 120
         },
         {
+         
           label: "物料描述",
           prop: "Materialdesc",
           colvisible: true,
           width: 200
         },
         {
+         
           label: "条码",
           prop: "Barcode",
           colvisible: true,
           width: 450
         },
         {
+         
           label: "批次",
           prop: "Batchno",
           colvisible: true,
           width: 100
         },
         {
+          
           label: "数量",
           prop: "Qty",
           colvisible: true,
           width: 60
         },
+       
         {
-          label: "寄售",
-          prop: "Specialstock",
-          colvisible: true,
-          width: 60
-        },
-        {
+         
           label: "出库人",
           prop: "Struserno",
           colvisible: true,
           width: 90
         },
         {
+          
           label: "出库时间",
           prop: "Createtime",
           colvisible: true,
@@ -281,7 +321,7 @@ export default {
         "条码",
         "批次",
         "数量",
-        "寄售",
+      
         "出库人",
         "出货时间"
       ],
@@ -299,12 +339,13 @@ export default {
         "Barcode",
         "Batchno",
         "Qty",
-        "Specialstock",
+     
         "Struserno",
         "Createtime"
       ]
     };
   },
+
   methods: {
     getParameterList() {
       // queryParam.Groupname = "VoucherRec_Type"
@@ -315,10 +356,45 @@ export default {
           this.voucherTyleListAll = res.Data;
         }
       });
+    },
+    customColumns(){
+      this.showData=[];
+      var keyList ={};
+      this.columns.forEach(t => {
+        keyList.key = t.label;
+        this.showData.push(keyList);
+        keyList={};
+      });
+    },
+    saveColumn(){
+      
+      this.columns.forEach(t => {
+       if(this.concealData.length==0)
+       {
+         if(!t.colvisible)
+         t.colvisible=true;
+       }
+       this.concealData.every(ts=>{
+          debugger;
+          if(t.label==ts)
+          {
+            t.colvisible=false;
+            return false;
+          }else
+          {
+            t.colvisible=true;
+            return true;
+          }
+        });
+      });
+      this.$nextTick(()=>{ this.$refs.multipleTable.doLayout() })
+      this.iscolumn=false;
+
     }
   },
   created() {
     this.getParameterList();
+    this.customColumns();
   }
 };
 </script>

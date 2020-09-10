@@ -117,7 +117,7 @@
           <el-button icon="el-icon-search" @click="getGroupTMaterial"  type="primary">查询</el-button>
         </el-card>
         <el-card body-style="padding:2px;" >
-          <el-table :data="GroupTMaterial" @selection-change="handleSelectionChange">
+          <el-table :data="GroupTMaterial" @selection-change="handleSelectionChange" height="400">
             <el-table-column type="selection" width="55" > </el-table-column>
             <el-table-column prop="Checktypename" label="盘点分类"> </el-table-column>
           </el-table>
@@ -303,6 +303,7 @@
       getGroupTMaterial(){
         var min = this;
         getGroupTMaterial(min.Materialmodel).then(res=>{
+          debugger;
           if (res.Result === 1) {
             min.GroupTMaterial = res.Data;
           }

@@ -158,7 +158,7 @@ export default {
         Createtime: "",
         Vouchertype: ""
       },
-      Operate: { Erpvoucherno: 11, Materialno: 11, Batchno: 11, Barcode: 11 },
+      Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 },
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
       apiUrl: {
