@@ -68,6 +68,7 @@
         <el-container class="layout-main-container">
           <el-table
             border
+            v-loading="loading"
             :row-style="{ height: '30' }"
             :cell-style="{ padding: '2px' }"
             :header-row-style="{ height: '30', font: 'normal' }"
@@ -154,6 +155,7 @@
           :data="PurchaseOrderDateilList"
           style="width: 100%"
           row-key="id"
+          
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
           <el-table-column prop="Towarehouseno" label="仓库编码"></el-table-column>
@@ -195,7 +197,7 @@ export default {
         Suppliername: "",
         Createtime: ""
       },
-      Operate: { Erpvoucherno: 11, Suppliername: "" },
+      Operate: { Erpvoucherno: 9, Suppliername: 9 },
       apiUrl: {
         query: "/Purchase/GetV_PurchaseOrderListByPage",
         exportXls: "/Purchase/GetV_PurchaseorderdetailListByExp"

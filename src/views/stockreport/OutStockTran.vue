@@ -88,14 +88,14 @@
               type="primary"
             >导出</el-button>
           </el-col>
-          <el-col :span="2">
+          <!-- <el-col :span="2">
             <el-button
               @click="iscolumn=true"
               size="small "
               icon="el-icon-view"
               type="primary"
             >自定义列</el-button>
-          </el-col>
+          </el-col> -->
         </el-row>
       </el-card>
     </el-row>

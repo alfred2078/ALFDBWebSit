@@ -78,7 +78,7 @@
             <el-table-column prop="Creater" label="创建人"></el-table-column>
             <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
 
-            <el-table-column fixed="right" label="操作" :render-header="renderHeader">
+            <el-table-column  label="操作" :render-header="renderHeader">
               <template slot-scope="scope">
                 <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
                 <!-- <el-dropdown>
@@ -122,6 +122,7 @@
           :data="WorkOrderdateilDateilList"
           style="width: 100%"
           row-key="id"
+          height="500"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
           <el-table-column prop="Towarehouseno" label="仓库编码"></el-table-column>
@@ -160,7 +161,7 @@ export default {
         Erpvoucherno: "",
         Createtime: ""
       },
-      Operate: { Erpvoucherno: 11 },
+      Operate: { Erpvoucherno: 9 },
       apiUrl: {
         query: "/WorkOrder/GetV_WorkOrderListByPage",
         exportXls: "/WorkOrder/GetV_WorkOrderDetailListExp"
