@@ -43,11 +43,14 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            <el-col :span="9">
               <el-form-item label-width="" label="">
                 <el-input v-model="TStock.Areano" placeholder="库位" clearable></el-input>
               </el-form-item>
             </el-col>
+            </el-row>
+            <el-row>
+
             <el-col :span="5">
             <el-form-item label-width="" label="">
                          
