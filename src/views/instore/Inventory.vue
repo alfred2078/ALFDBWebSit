@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="4">
               <el-form-item label-width label>
@@ -40,16 +40,17 @@
               <el-form-item label-width label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
-                  type="daterange"
+                  type="datetimerange"
                   range-separator="至"
                   start-placeholder="创建开始日期"
                   end-placeholder="创建结束日期"
+                  :default-time="['00:00:00', '23:59:59']"
                 ></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               
               </el-form-item>
             </el-col>
@@ -236,7 +237,7 @@ export default {
         Createtime: "",
        /*  Towarehouseno:"811,201" */
       },
-      Operate: { Erpvoucherno: 11 ,Towarehouseno:11},
+      Operate: { Erpvoucherno: 9 ,Towarehouseno:9},
       apiUrl: {
         query: "/Check/GetT_CheckListByPage"
       },
@@ -331,7 +332,8 @@ export default {
     //查询
     getInfo() {
        
-      var min = this;
+   
+     /*  var min = this;
       min.model = {};
       var erpvoucherno = { Field: "Erpvoucherno", Value: min.Erpvoucherno };
       var checkstatus = { Field: "Checkstatus", Value: min.selectvalue };
@@ -366,7 +368,7 @@ export default {
         } else {
           min.$message.error(res.ResultValue);
         }
-      });
+      }); */
     },
     //状态下拉框
     getTParameter() {

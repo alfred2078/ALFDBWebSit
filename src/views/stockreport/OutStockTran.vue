@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="3">
               <el-form-item>
@@ -70,7 +70,7 @@
 
             <el-col :span="3">
               <el-form-item>
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
             </el-col>
           </el-row>

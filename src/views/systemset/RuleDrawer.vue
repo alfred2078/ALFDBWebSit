@@ -66,6 +66,7 @@
         // this.Currentruleid = this.$refs.treeMenu.getCheckedKeys().join(',');
         // console.log(this.Currentruleid)
         // this.tempForm.Currentruleid = this.Currentruleid;
+        debugger;
         this.tempForm.defaultChecked = this.$refs.treeMenu.getCheckedKeys()
           .concat(this.$refs.treeMenu.getHalfCheckedKeys());
         delete this.tempForm.Createtime;
@@ -84,6 +85,7 @@
       getMenuList() {
         getMenuList().then(res => {
           if (res.Result === 1) {
+            debugger;
             this.treeMenu = res.Data
             this.defaultExpanded = this.treeMenu.map(item => item.Id)            
           }
@@ -97,6 +99,7 @@
           "Id": ruleId
         }).then(res => {
           if (res.Result === 1) {
+            debugger;
             this.defaultChecked = res.Data.map(item => item.Menuid)
             // console.log(this.defaultChecked)
           }

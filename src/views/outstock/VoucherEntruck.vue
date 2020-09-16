@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small "  @keyup.enter.native="search">
+        <el-form :model="queryParam" size="small "  @keyup.enter.native="getInfo">
           <el-row>
             <el-col :span="5">
               <el-form-item label-width label>
@@ -35,7 +35,7 @@
             </el-col>
             <el-col :span="1">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getInfo">查询</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -254,6 +254,10 @@ export default {
     };
   },
   methods: {
+    getInfo(){
+      this.PageData.currentPage=1;
+      this.search();
+    },
     search() {
       var min = this;
       if (

@@ -3,7 +3,7 @@
     <!-- 查询区域 -->
     <el-row>
       <el-card type="flex">
-      <el-form label-width="" :model="queryParam" size="small " @keyup.enter.native="getModelList">
+      <el-form label-width="" :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
         <el-row>
           <el-col :span="4">
             <el-form-item label="">
@@ -27,7 +27,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item>
-              <el-button type="primary" icon="el-icon-search" @click="getModelList">查询</el-button>
+              <el-button type="primary" icon="el-icon-search" @click="getModelListPage">查询</el-button>
               <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
             </el-form-item>
             <!-- <el-form-item>

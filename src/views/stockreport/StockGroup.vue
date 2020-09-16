@@ -6,7 +6,7 @@
         :model="queryParam"
         label-width="0px"
         size="small "
-        @keyup.enter.native="getModelList"
+        @keyup.enter.native="getModelListPage"
       >
         <el-row>
           <el-col :span="4">
@@ -54,7 +54,7 @@
               <el-button
                 icon="el-icon-search"
                 type="primary"
-                @click="getModelList"
+                @click="getModelListPage"
               >查询</el-button>
             </el-form-item>
           </el-col>

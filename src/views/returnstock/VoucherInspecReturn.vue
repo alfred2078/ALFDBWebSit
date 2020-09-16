@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small" @keyup.enter.native="getModelList">
+        <el-form :model="queryParam" size="small" @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="5">
               <el-form-item>
@@ -21,7 +21,7 @@
             </el-col>
             <el-col :span="5">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
                <!--  <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
               </el-form-item>
             </el-col>
@@ -38,7 +38,7 @@
             <el-button size="small" icon type="primary" @click="PrintClick()">单据打印</el-button>
           </el-col>
           <el-col :span="2">
-            <el-dropdown>
+           <!--  <el-dropdown>
               <el-button size="small" type="primary">
                 导出
                 <i class="el-icon-download"></i>
@@ -47,7 +47,7 @@
                 <el-dropdown-item>导出当前页</el-dropdown-item>
                 <el-dropdown-item>导出查询结果</el-dropdown-item>
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown> -->
           </el-col>
         </el-row>
       </el-card>

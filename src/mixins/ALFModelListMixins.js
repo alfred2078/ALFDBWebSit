@@ -38,6 +38,11 @@ export const ALFModelListMixins = {
     };
   },
   methods: {
+    getModelListPage(){
+      this.PageData.currentPage=1;
+      this.getModelList();
+
+    },
     /**查询 */
     getModelList() {
       if (!this.apiUrl.query) {

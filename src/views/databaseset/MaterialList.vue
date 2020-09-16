@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelList">
+        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="5">
               <el-form-item label>
@@ -32,7 +32,7 @@
             </el-col>
             <el-col :span="5">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -271,7 +271,7 @@ export default {
         Materialdesc: "",
         Createtime: ""
       },
-      Operate: { Materialno: 11,Materialdesc:11 },
+      Operate: { Materialno: 9,Materialdesc:9 },
       apiUrl: {
         query: "/Material/GetT_MaterialListByPage"
       },

@@ -7,7 +7,7 @@
           :model="queryParam"
           label-width="0px"
           size="small "
-          @keyup.enter.native="getModelList"
+          @keyup.enter.native="getModelListPage"
         >
           <el-row>
             <el-col :span="5">
@@ -36,7 +36,7 @@
 
             <el-col :span="5">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
                 <!-- <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
               </el-form-item>
             </el-col>
@@ -224,6 +224,18 @@ export default {
           colvisible: false
         },
         {
+          label: "据点编码",
+          prop: "Strongholdcode",
+          colvisible: true,
+          width:100
+        },
+        {
+          label: "据点名称",
+          prop: "Strongholdname",
+          colvisible: true,
+          width:120
+        },
+        {
           label: "仓库编码",
           prop: "Warehouseno",
           colvisible: true
@@ -231,7 +243,8 @@ export default {
         {
           label: "仓库名称",
           prop: "Warehousename",
-          colvisible: true
+          colvisible: true,
+          width:120
         },
         {
           label: "仓库描述",
@@ -266,7 +279,8 @@ export default {
         {
           label: "创建时间",
           prop: "Createtime",
-          colvisible: true
+          colvisible: true,
+          width:180
         }
       ]
     };

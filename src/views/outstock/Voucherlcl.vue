@@ -2,7 +2,7 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small "  @keyup.enter.native="getModelList">
+        <el-form :model="queryParam" size="small "  @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="5">
               <el-form-item label-width label>
@@ -36,7 +36,7 @@
 
             <el-col :span="1">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getModelList">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -84,16 +84,19 @@
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
             height="auto"
             class="layout-table"
+           
           >
             <el-table-column prop="Erpvoucherno" label="发货通知单号" width="180"></el-table-column>
             <el-table-column prop="PackageSeq" label="箱号" width="80"></el-table-column>
             <el-table-column prop="Customerno" label="客户编码" width="120"></el-table-column>
-            <el-table-column prop="Customername" label="客户名称" width="120"></el-table-column>
-            <el-table-column prop="Materialno" label="物料编码"></el-table-column>
+            <el-table-column prop="Customername" label="客户名称" width="180"></el-table-column>
+            <el-table-column prop="Materialno" label="物料编码" width="120"></el-table-column>
             <el-table-column prop="Materialdesc" label="物料名称" width="200"></el-table-column>
-            <el-table-column prop="Batchno" label="批次"></el-table-column>
-            <el-table-column prop="Qty" label="数量"></el-table-column>
-            <el-table-column prop="Creater" label="创建人"></el-table-column>
+            <el-table-column prop="Batchno" label="批次" width="120"></el-table-column>
+            <el-table-column prop="Qty" label="数量" width="80"></el-table-column>
+            <el-table-column prop="ZQty" label="整箱个数" width="100"></el-table-column>
+            <el-table-column prop="SQty" label="散箱个数" width="100"></el-table-column>
+            <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
             <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
           </el-table>
 
@@ -163,6 +166,33 @@ export default {
         "Createtime"
       ]
     };
+  },
+  methods:{
+    /* getSummaries(param) {
+      debugger;
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = "合计";
+          return;
+        }
+
+        const values = data.map(item => Number(item[column.property]))
+        if (column.property === 'ZQty' || column.property === 'SQty' ) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)          
+        }
+      });
+
+      return sums;
+    } */
   }
 };
 </script>
