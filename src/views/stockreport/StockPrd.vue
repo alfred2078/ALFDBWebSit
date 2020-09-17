@@ -55,7 +55,7 @@
           <el-col :span="9">
             <el-form-item label="">
               <el-date-picker v-model="queryParam.Createtime" type="daterange" range-separator="至"
-                start-placeholder="开始日期" end-placeholder="结束日期">
+                start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
               </el-date-picker>
             </el-form-item>
           </el-col>

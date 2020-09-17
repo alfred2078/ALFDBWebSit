@@ -30,6 +30,7 @@
                   range-separator="至"
                   start-placeholder="创建开始日期"
                   end-placeholder="创建结束日期"
+                  value-format="yyyy-MM-dd"
                 ></el-date-picker>
               </el-form-item>
             </el-col>

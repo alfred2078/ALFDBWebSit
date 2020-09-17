@@ -40,11 +40,11 @@
               <el-form-item label-width label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
-                  type="datetimerange"
+                  type="daterange"
                   range-separator="至"
                   start-placeholder="创建开始日期"
                   end-placeholder="创建结束日期"
-                  :default-time="['00:00:00', '23:59:59']"
+                 value-format="yyyy-MM-dd"
                 ></el-date-picker>
               </el-form-item>
             </el-col>

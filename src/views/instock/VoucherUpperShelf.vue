@@ -45,7 +45,7 @@
           <el-col :span="10">
             <el-form-item label="创建日期">
               <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期"
-                end-placeholder="结束日期">
+                end-placeholder="结束日期" value-format="yyyy-MM-dd">
               </el-date-picker>
             </el-form-item>
           </el-col>
