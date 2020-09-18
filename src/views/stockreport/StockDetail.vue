@@ -50,7 +50,7 @@
       <el-card ref="refButton" body-style="padding:10px;" type="flex">
         <el-row>
           <el-col :span="2">
-            <!--  <el-button @click="newAdd" size="small " icon="el-icon-download" type="primary">导出</el-button> -->
+             <el-button @click="print" size="small " icon="el-icon-download" type="primary">批量打印</el-button>
           </el-col>
         </el-row>
       </el-card>
@@ -68,7 +68,9 @@
             :max-height="screenHeight"
             height="auto"
             class="layout-table"
+            @selection-change="changeFun"
           >
+          <el-table-column type="selection" width="55"></el-table-column>
             <template v-for="item in columns">
               <el-table-column
                 :key="item.prop"
@@ -99,10 +101,12 @@
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
+import {  windowpost } from "@/api/api";
 export default {
   mixins: [ALFModelListMixins],
   components: {
-    Pagination
+    Pagination,
+    windowpost
   },
   data() {
     return {
@@ -115,7 +119,7 @@ export default {
         Cusmaterialno: "",
         Strongholdcode: ""
       },
-      Operate: { Areano: 11, Materialno: 11, Batchno: 11, Cusmaterialno: 11 },
+      Operate: { Areano: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9 },
       outerVisible: false,
       screenHeight: null,
       idshow: false,
@@ -244,10 +248,24 @@ export default {
         //   colvisible: true,
         //   width:100
         // },
-      ]
+      ],
+      multipleSelection:[]
     };
   },
-  mounted() {}
+  methods:{
+    changeFun(val){
+      this.multipleSelection =val;
+
+    },
+    print(){
+       if (this.multipleSelection.length>0) {
+        windowpost(JSON.stringify(this.multipleSelection), "PalletList");
+      }
+      
+    }
+
+
+  }
 };
 </script>
 
