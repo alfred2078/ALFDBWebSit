@@ -3,7 +3,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css"; // progress bar style
 import router from "./router";
 import store from "@/store";
-import { ACCESS_TOKEN } from "@/store/mutation-types";
+import { ACCESS_TOKEN,USER_INFO,UserLoginIs } from "@/store/mutation-types";
 
 import { generateRouter } from "@/router/menurouter";
 
@@ -13,6 +13,8 @@ NProgress.configure({
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
+debugger;
+    
 
   if (to.path === "/") {
     next({
@@ -22,7 +24,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.path === "/user/login") {
     next();
     NProgress.done();
-  } else {
+  } else if (Vue.ls.get(UserLoginIs)){
     next();
     NProgress.done();
     //装载菜单
@@ -71,6 +73,12 @@ router.beforeEach((to, from, next) => {
       next();
       NProgress.done();
     }
+  }else
+  {
+    next({
+      path: "/user/login"
+    });
+    NProgress.done();
   }
 
   // if (Vue.ls.get(ACCESS_TOKEN))
