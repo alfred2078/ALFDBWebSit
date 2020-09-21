@@ -58,6 +58,7 @@
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
        <!--  <el-table-column type="selection" width="55"> </el-table-column> -->
         <el-table-column prop="Remarks" label="盈亏情况" fixed width='100'> </el-table-column>
+        <el-table-column prop="Sparametername" label="状态" fixed width='100'> </el-table-column>
         <el-table-column prop="Warehouseno" label="仓库编码" fixed width='100'> </el-table-column>
         <el-table-column prop="Materialno" label="物料编码" fixed width='120'> </el-table-column>
         <el-table-column prop="Materialdesc" label="物料名称" width='180'> </el-table-column>
@@ -101,11 +102,11 @@
         },
         outerVisible: true,
         tableData: [],
-        filterVal: ['Remarks', 'Warehouseno', 'Materialno', 'Materialdesc',
+        filterVal: ['Remarks','Sparametername', 'Warehouseno', 'Materialno', 'Materialdesc',
           'Strongholdcode', 'Serialno', 'Areano', 'Qty', 'Sareano', 'Bqty', 'Yqty'
           , 'Kqty', 'Creater', 'Createtime'
         ],
-        tHeader: ['盈亏情况', '仓库编码', '物料编码', '物料名称',
+        tHeader: ['盈亏情况','状态', '仓库编码', '物料编码', '物料名称',
           '据点', '序列号', '实盘库位', '实盘数量', '帐存库位', '帐存数量', '盘盈数量'
           , '盘亏数量', '盘点人', '盘点时间'
         ],
