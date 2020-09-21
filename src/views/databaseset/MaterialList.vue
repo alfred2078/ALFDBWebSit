@@ -156,7 +156,7 @@
       title="物料管理---编辑"
       :show-close="true"
       :visible.sync="outerVisible"
-      width="75%"
+      width="80%"
       :close-on-click-modal="false"
       :before-close="handleClose"
     >
@@ -215,6 +215,20 @@
             </template>
           </el-table-column>
 
+          <el-table-column label="外69码数量" width="120">
+            <template slot-scope="scope">
+              <el-input
+                v-show="doubleclick==scope.$index+1"
+                placeholder="请输入内容"
+                v-model.number="scope.row.OuterQty"
+                size="mini"
+                width="120"
+                clearable
+              ></el-input>
+              <span v-show="doubleclick!=scope.$index+1">{{scope.row.OuterQty}}</span>
+            </template>
+          </el-table-column>
+
           <el-table-column label="69码" width="220">
             <template slot-scope="scope">
               <el-input
@@ -234,6 +248,7 @@
               <el-popconfirm title="确定删除吗" @onConfirm="deleteClick(scope.row)">
                 <el-button slot="reference" type="text" size="small">删除</el-button>
               </el-popconfirm>
+              <el-button size="small" type="text" @click="HandleEdit(scope.$index, scope.row)">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -272,7 +287,7 @@ export default {
         Materialdesc: "",
         Createtime: ""
       },
-      Operate: { Materialno: 9,Materialdesc:9 },
+      Operate: { Materialno: 9, Materialdesc: 9 },
       apiUrl: {
         query: "/Material/GetT_MaterialListByPage"
       },
@@ -312,6 +327,18 @@ export default {
           type: "warning"
         });
         return;
+      } else if (
+        min.materialPackData.length != 0 &&
+        min.materialPackData[min.materialPackData.length - 1].OuterWatercode !=
+          "" &&
+        min.materialPackData[min.materialPackData.length - 1].OuterQty == 0
+        && min.addList.length!=0
+      ) {
+        min.$message({
+          message: "外69码已输入，外69码数量不可为0",
+          type: "warning"
+        });
+        return;
       }
       var addmodel = {};
       addmodel.Strongholdcode = min.materialModel.Strongholdcode;
@@ -321,6 +348,8 @@ export default {
       addmodel.Headerid = min.materialModel.Id;
       addmodel.OuterWatercode = "";
       addmodel.Watercode = "";
+      addmodel.OuterQty = 0;
+      addmodel.id=0;
       min.materialPackData.push(addmodel); //模态所有的数据
       min.addList.push(addmodel); //仅限用户此模态新增
       min.doubleclick = min.materialPackData.length;
@@ -328,14 +357,25 @@ export default {
     SaveMaterialPack() {
       var min = this;
       var aData = new Date();
+      var WatercodeIsNull = false;
+      var OuterQty = false;
       debugger;
       min.addList.forEach(t => {
         t.Creater = Vue.ls.get(USER_NAME);
         t.Createtime = aData;
-        t.Watercode =
-          t.Watercode == null || t.Watercode == "" ? null : t.Watercode + "";
-        t.OuterWatercode = t.OuterWatercode =
-          null || t.OuterWatercode == "" ? null : t.OuterWatercode + "";
+        if (t.Watercode == null || t.Watercode == "") {
+          WatercodeIsNull = true;
+        }
+        t.Watercode = t.Watercode + "";
+        t.OuterWatercode =
+          t.OuterWatercode == null ||
+          t.OuterWatercode == "" ||
+          t.OuterWatercode == "null"
+            ? null
+            : t.OuterWatercode + "";
+        if (t.OuterWatercode != null && t.OuterQty == 0) {
+          OuterQty = true;
+        }
       });
       //判断当前页面是否输入了重复的69码
       var find = false;
@@ -357,10 +397,23 @@ export default {
           type: "warning"
         });
         return;
+      } else if (WatercodeIsNull) {
+        min.$message({
+          message: "69码不允许为空值",
+          type: "warning"
+        });
+        return;
+      } else if (OuterQty) {
+        min.$message({
+          message: "外69码已输入，外69码数量不可为0",
+          type: "warning"
+        });
+        return;
       }
-
-      //只提交用户新增的
-      saveMaterialPack(min.addList).then(res => {
+      //当前页面全部提交
+      console.log('---保存提交数据---');
+      console.log(min.materialPackData);
+      saveMaterialPack(min.materialPackData).then(res => {
         if (res.Result == 1) {
           min.$message({
             message: "保存成功",
@@ -368,7 +421,9 @@ export default {
           });
           min.doubleclick = null;
           min.addList = [];
+          min.outerVisible=false;
         } else {
+          min.outerVisible=false;
           min.$message.error(res.ResultValue);
         }
       });
@@ -386,6 +441,11 @@ export default {
           min.$message.error(res.ResultValue);
         }
       });
+    },
+    // 行编辑按钮
+    HandleEdit(index, row) {
+      //this.$message((index + 1) + '行,你点击了编辑');
+      this.doubleclick = index+1;
     },
     //重置按钮
     reset() {
@@ -444,5 +504,4 @@ export default {
 .el-form-item {
   margin: 3px;
 }
-
 </style>
