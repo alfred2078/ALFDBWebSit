@@ -124,6 +124,7 @@ import Pagination from "@/components/Pagination";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "outstock-voucherlcl",
   mixins: [ALFModelListMixins],
 
   components: {

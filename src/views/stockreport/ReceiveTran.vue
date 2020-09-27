@@ -142,6 +142,7 @@ import { getParameterList } from "@/api/api";
 
 import Pagination from "@/components/Pagination";
 export default {
+  name:"stockreport-receivetran",
   mixins: [ALFModelListMixins],
   components: {
     Pagination

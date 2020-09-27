@@ -194,6 +194,7 @@ import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
 import HouseDialog from "./HouseDialog";
 export default {
+  name:"databaseset-house",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,

@@ -184,6 +184,7 @@ import Pagination from "@/components/Pagination";
 import UserDialog from "./UserDialog";
 
 export default {
+  name:"systemset-user",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,

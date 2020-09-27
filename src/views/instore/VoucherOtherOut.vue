@@ -127,6 +127,7 @@ import { getVOtherOutDetail } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "instore-voucherotherout",
   mixins: [ALFModelListMixins],
 
   components: {

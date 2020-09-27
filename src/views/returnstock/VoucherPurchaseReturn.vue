@@ -165,6 +165,7 @@ import { getPurchasereturndateil, windowpost } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "returnstock-voucherpurchasereturn",
   mixins: [ALFModelListMixins],
 
   components: {

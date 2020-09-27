@@ -52,7 +52,7 @@ import {
 
 import  purchaseLabel from  "./PurchaseLabelDialog"
   export default {
-    name: "purchase",
+    name: "labelprint-materiallabel",
      components:{
       getMaterilOrderList:getMaterilOrderList,
            purchaseLabel:purchaseLabel

@@ -130,6 +130,7 @@
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
 export default {
+  name:"stockreport-stockgroup",
   mixins: [ALFModelListMixins],
   components: {
     Pagination

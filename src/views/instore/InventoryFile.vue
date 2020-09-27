@@ -147,6 +147,7 @@
   } from "@/store/mutation-types";
   import Vue from "vue";
   export default {
+    name: "instore-inventoryfile",
     data() {
       return {
         checkFrom: {

@@ -152,6 +152,7 @@ import { getRawmaterialOutDetail } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "outstock-vouchermaterialReq",
   mixins: [ALFModelListMixins],
 
   components: {

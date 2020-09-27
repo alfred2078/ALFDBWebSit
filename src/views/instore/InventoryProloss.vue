@@ -94,6 +94,7 @@ import { USER_NAME } from "@/store/mutation-types";
 import Vue from "vue";
 
 export default {
+  name: "instore-inventoryproloss",
   data() {
     return {
       Checkrefserial: {

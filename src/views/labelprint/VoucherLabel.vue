@@ -52,7 +52,7 @@ import {
 
 import  purchaseLabel from  "./PurchaseLabelDialog"
   export default {
-    name: "purchase",
+    name: "labelprint-voucherlabel",
      components:{
       purchaseLabel:purchaseLabel
     

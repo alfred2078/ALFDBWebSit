@@ -161,6 +161,7 @@ import { getOutStockDetail } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "outstock-voucherdelivery",
   mixins: [ALFModelListMixins],
 
   components: {

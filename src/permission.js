@@ -70,6 +70,7 @@ debugger;
           console.log(error);
         });
     } else {
+      console.log(router);
       next();
       NProgress.done();
     }

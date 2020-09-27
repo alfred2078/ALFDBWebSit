@@ -150,6 +150,7 @@ import { getTParameterList } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "quality-voucherquality",
   mixins: [ALFModelListMixins],
 
   components: {

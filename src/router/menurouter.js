@@ -17,7 +17,8 @@ export function generateRouter(data) {
     // redirectk: '/dashboard',
     children: [
       ...generateChildRouters(data)
-    ]
+    ],
+
   },
   // {
   //   "path": "*",
@@ -63,11 +64,14 @@ function generateChildRouters(data) {
         icon: item.meta.icon,
         url: item.meta.url,
         permissionList: item.meta.permissionList,
-        keepAlive: item.meta.keepAlive,
+        keepAlive: false,
         /*update_begin author:wuxianquan date:20190908 for:赋值 */
-        internalOrExternal: item.meta.internalOrExternal
+        internalOrExternal: item.meta.internalOrExternal,
+        cachedViews:[],
+        keepPath:''
         /*update_end author:wuxianquan date:20190908 for:赋值 */
-      }
+      },
+ 
     }
     if (item.alwaysShow) {
       menu.alwaysShow = true;

@@ -188,6 +188,7 @@
   import AreaDialog from "./AreaDialog";
 
   export default {
+    name:"databaseset-area",
     mixins: [ALFModelListMixins],
     components: {
       Pagination,

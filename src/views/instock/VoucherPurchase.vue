@@ -185,6 +185,7 @@ import { getPurchaseOrderDateil } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "instock-voucherpurchase",
   mixins: [ALFModelListMixins],
 
   components: {

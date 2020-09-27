@@ -54,7 +54,7 @@ import {
 
 import  purchaseLabel from  "./PurchaseLabelDialog"
   export default {
-    name: "WORKORDER",
+    name: "labelprint-workorderlabel",
      components:{
       getWorkOrderList:getWorkOrderList,
       purchaseLabel:purchaseLabel,

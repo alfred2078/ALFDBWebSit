@@ -233,6 +233,7 @@ import RuleDialog from "./RuleDialog";
 import RuleDrawer from "./RuleDrawer";
 
 export default {
+  name:"systemset-role",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,

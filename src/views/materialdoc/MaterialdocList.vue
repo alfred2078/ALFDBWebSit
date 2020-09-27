@@ -122,6 +122,7 @@ import Pagination from "@/components/Pagination";
 import { getParameterList } from "@/api/api";
 
 export default {
+  name: "materialdoc-mdoclist",
   mixins: [ALFModelListMixins],
   components: {
     Pagination

@@ -106,6 +106,7 @@ export{
     saveArea,
     updateArea,
     getWarehouseListAll,
+    
     getWarehouseListByUserID,
     saveRule,
     updateRule,

@@ -150,6 +150,7 @@ import { getWorkOrderDetailList } from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "instock-voucherproduce",
   mixins: [ALFModelListMixins],
 
   components: {

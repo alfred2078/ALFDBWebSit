@@ -92,6 +92,7 @@ import {  USER_INFO } from "@/store/mutation-types";
   }
 
   export default {
+    name:"dashboard-dashmain",
     components: {
       chartCard,
       OutstockChart
@@ -398,7 +399,7 @@ import {  USER_INFO } from "@/store/mutation-types";
     },
     created(){
       this.exp();
-      this.outmobthClick()
+    //  this.outmobthClick()
     },
     methods:{
       exp(){
@@ -448,7 +449,7 @@ import {  USER_INFO } from "@/store/mutation-types";
               }
 
         })
-        console.log(4+'--begin---'+new Date());
+      /*   console.log(4+'--begin---'+new Date());
        getQualityDetailLinestatus(min.modelListWarehouse).then(res=>{
           
           if (res.Result === 1) {
@@ -461,8 +462,8 @@ import {  USER_INFO } from "@/store/mutation-types";
                 min.$message.error(res.ResultValue);
               }
 
-        })
-        console.log(5+'--begin---'+new Date());
+        }) */
+        /* console.log(5+'--begin---'+new Date());
         getReceiveTranGroupByMonth(min.modelListWarehouse).then(res=>{
       
             if (res.Result === 1) {
@@ -478,7 +479,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                   })       
               }
               else {
-                min.$message.error(res.ResultValue);
+                min.$message.error('5');
               }
 
         })
@@ -491,7 +492,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                   min.chartData1.rows=res.Data;
             }
             else {
-                min.$message.error(res.ResultValue);
+                min.$message.error("6");
             }
  
         })  
@@ -504,10 +505,10 @@ import {  USER_INFO } from "@/store/mutation-types";
                   min.chartData3.rows=res.Data;
             }
             else {
-                min.$message.error(res.ResultValue);
+                min.$message.error('7');
             }
 
-        })
+        }) */
       
       },
       outmobthClick()

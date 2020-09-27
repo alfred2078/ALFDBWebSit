@@ -103,6 +103,7 @@ import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
 import {  windowpost } from "@/api/api";
 export default {
+  name:"stockreport-stockdetail",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,

@@ -202,6 +202,7 @@ import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
 import WarehouseDialog from "./WarehouseDialog";
 export default {
+  name: "database-warehouse",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,

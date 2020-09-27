@@ -33,7 +33,7 @@ import {
 import axios from "axios";
 import XLSX from 'xlsx'
  export default {
-    name: "loadfile",
+    name: "labelprint-uploadFile",
      components:{
       UploadFile:UploadFile,
       axios:axios,

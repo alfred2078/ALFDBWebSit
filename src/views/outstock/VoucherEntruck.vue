@@ -177,6 +177,7 @@ import { getWayBillDetailHeaderidsub, getWayBillDetail,windowpost } from "@/api/
 import Vue from "vue";
 import store from "@/store";
 export default {
+  name: "outstock-voucherentruck",
   mixins: [ALFModelListMixins],
 
   components: {

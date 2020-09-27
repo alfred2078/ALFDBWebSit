@@ -136,7 +136,7 @@ import Pagination from "@/components/Pagination";
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 export default {
   mixins: [ALFModelListMixins],
-  name: "inspecreturn",
+  name: "returnstock-VoucherInspecReturn",
   components: {
     Pagination,
     windowpost,

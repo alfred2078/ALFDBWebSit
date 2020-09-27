@@ -271,7 +271,7 @@ import {
 import { USER_NAME } from "@/store/mutation-types";
 import Vue from "vue";
 export default {
-  name: "Materia",
+  name: "databaseset-materialList",
   mixins: [ALFModelListMixins],
   components: {
     Pagination

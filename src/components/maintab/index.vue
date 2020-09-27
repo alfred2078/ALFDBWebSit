@@ -21,7 +21,7 @@
 
 <script>
 const indexKey = "/dashboard/dashmain";
-
+import Vue from "vue";
 export default {
   name: "MainTab",
   data() {
@@ -48,31 +48,42 @@ export default {
     this.pageList.push(this.$route);
     this.linkList.push(this.$route.fullPath);
     this.activePage = this.$route.fullPath;
+    
   },
-  computed: {},
   methods: {
     clickTab(key) {
+     
       this.activePage = key.name;
     },
     removeTab(key) {
+        debugger;
         if (key == indexKey) {
           this.$message.warning('首页不能关闭!')
           return
         }
+       
         if (this.pageList.length === 1) {
           this.$message.warning('这是最后一页，不能再关闭了啦')
           return
         }
+       
         this.pageList = this.pageList.filter(item => item.fullPath !== key)
         let index = this.linkList.indexOf(key)
         this.linkList = this.linkList.filter(item => item !== key)
         index = index >= this.linkList.length ? this.linkList.length - 1 : index
-        this.activePage = this.linkList[index]
+        this.activePage = this.linkList[index];
+        this.$route.meta.cachedViews =[];
+        this.pageList.forEach(t => {
+          this.$route.meta.cachedViews.push(t.name);
+        });
+        this.$route.meta.keepPath=this.activePage;
       },
   },
   watch: {
     $route: function(newRoute) {
-   debugger;
+      debugger;
+      console.log(this.$route.meta)
+      
       this.activePage = newRoute.fullPath;
       if (this.linkList.indexOf(newRoute.fullPath) < 0) {
         this.linkList.push(newRoute.fullPath);
@@ -86,8 +97,13 @@ export default {
           Object.assign({}, newRoute, { meta: oldPositionRoute.meta })
         ); 
       }
-      console.log("this.pageList");
-      console.log(this.pageList);
+      this.$route.meta.cachedViews =[];
+        this.pageList.forEach(t => {
+          this.$route.meta.cachedViews.push(t.name);
+        });
+         this.$route.meta.keepPath=this.activePage;
+      console.log("this.$route.meta.cachedViews");
+      console.log(this.$route.meta.cachedViews);
     },
     activePage: function(key) {
 
