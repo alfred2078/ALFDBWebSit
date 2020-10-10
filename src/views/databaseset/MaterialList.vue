@@ -206,7 +206,7 @@
               <el-input
                 v-show="doubleclick==scope.$index+1"
                 placeholder="请输入内容"
-                v-model.number="scope.row.OuterWatercode"
+                v-model="scope.row.OuterWatercode"
                 size="mini"
                 width="220"
                 clearable
@@ -234,7 +234,7 @@
               <el-input
                 v-show="doubleclick==scope.$index+1"
                 placeholder="请输入内容"
-                v-model.number="scope.row.Watercode"
+                v-model="scope.row.Watercode"
                 size="mini"
                 width="220"
                 clearable
@@ -361,6 +361,7 @@ export default {
       var OuterQty = false;
       debugger;
       min.addList.forEach(t => {
+        debugger;
         t.Creater = Vue.ls.get(USER_NAME);
         t.Createtime = aData;
         if (t.Watercode == null || t.Watercode == "") {
