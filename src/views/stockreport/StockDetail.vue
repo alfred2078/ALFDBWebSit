@@ -2,44 +2,77 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
+        <el-form
+          :model="queryParam"
+          size="small "
+          @keyup.enter.native="getModelListPage"
+        >
           <el-row>
             <el-col :span="3">
               <el-form-item label>
-                <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Strongholdcode"
+                  placeholder="据点"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="3">
               <el-form-item label>
-                <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Towarehouseno"
+                  placeholder="仓库"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="3">
               <el-form-item label>
-                <el-input v-model="queryParam.Areano" placeholder="库位" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Areano"
+                  placeholder="库位"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="4">
               <el-form-item label>
-                <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Materialno"
+                  placeholder="物料编码"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="4">
               <el-form-item label>
-                <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Batchno"
+                  placeholder="批次"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="4">
               <el-form-item label>
-                <el-input v-model="queryParam.Qualityno" placeholder="检验单号" clearable></el-input>
+                <el-input
+                  v-model="queryParam.Qualityno"
+                  placeholder="检验单号"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="3">
               <el-form-item>
-                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
+                <el-button
+                  icon="el-icon-search"
+                  type="primary"
+                  @click="getModelListPage"
+                  >查询</el-button
+                >
               </el-form-item>
             </el-col>
           </el-row>
@@ -49,8 +82,28 @@
     <el-row>
       <el-card ref="refButton" body-style="padding:10px;" type="flex">
         <el-row>
+          <el-col :span="3">
+            <el-select
+              style="width:100%"
+              v-model="printType"
+              placeholder="单据名称"
+            >
+              <el-option
+                v-for="item in printTypeList"
+                :key="item.printTypeid"
+                :label="item.printTypename"
+                :value="item.printTypeid"
+              ></el-option>
+            </el-select>
+          </el-col>
           <el-col :span="2">
-             <el-button @click="print" size="small " icon="el-icon-download" type="primary">批量打印</el-button>
+            <el-button
+              @click="print"
+              size="small "
+              icon="el-icon-download"
+              type="primary"
+              >批量打印</el-button
+            >
           </el-col>
         </el-row>
       </el-card>
@@ -70,7 +123,7 @@
             class="layout-table"
             @selection-change="changeFun"
           >
-          <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column type="selection" width="55"></el-table-column>
             <template v-for="item in columns">
               <el-table-column
                 :key="item.prop"
@@ -101,9 +154,9 @@
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
-import {  windowpost } from "@/api/api";
+import { windowpost } from "@/api/api";
 export default {
-  name:"stockreport-stockdetail",
+  name: "stockreport-stockdetail",
   mixins: [ALFModelListMixins],
   components: {
     Pagination,
@@ -129,7 +182,11 @@ export default {
         save: "",
         update: ""
       },
-
+      printTypeList: [
+        { printTypeid: 1, printTypename: "激光打印机" },
+        { printTypeid: 2, printTypename: "台式打印机" }
+      ],
+      printType: 1,
       columns: [
         {
           label: "据点",
@@ -197,7 +254,7 @@ export default {
         },
         {
           label: "69码",
-          prop: "watercode",
+          prop: "Watercode",
           colvisible: true,
           width: 140
         },
@@ -243,29 +300,21 @@ export default {
           colvisible: true,
           width: 180
         }
-        // {
-        //   label: "锁定",
-        //   prop: "StrIsretention",
-        //   colvisible: true,
-        //   width:100
-        // },
       ],
-      multipleSelection:[]
+      multipleSelection: []
     };
   },
-  methods:{
-    changeFun(val){
-      this.multipleSelection =val;
-
+  methods: {
+    changeFun(val) {
+      this.multipleSelection = val;
     },
-    print(){
-       if (this.multipleSelection.length>0) {
+    print() {
+      this.multipleSelection[0].Printertype = this.printType;
+      console.log(this.multipleSelection);
+      if (this.multipleSelection.length > 0) {
         windowpost(JSON.stringify(this.multipleSelection), "PalletList");
       }
-      
     }
-
-
   }
 };
 </script>
