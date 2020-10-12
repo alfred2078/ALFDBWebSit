@@ -1,6 +1,6 @@
 <template>
   <div>
- <el-card>
+ <el-card  class="el-card_head" >
     <input type="file" ref="upload" accept=".xls,.xlsx" class="outputlist_upload" hidden>
     <el-button icon="el-icon-upload2" type="primary"  @click="ClickUpload()">上传</el-button>
  </el-card>
@@ -82,15 +82,16 @@ import XLSX from 'xlsx'
               prop:"Watercode",
               colvisible:true
             }, {
-              label:"总数量",
-              prop:"Voucherqty",
+              label:"托数",
+              prop:"qty",
               colvisible:true
             },
              {
-              label:"托/个数",
+              label:"个数/托",
               prop:"singnqty",
               colvisible:true
-            }, {
+            }, 
+            {
               label:"打印人",
               prop:"Creater",
               colvisible:true
@@ -113,8 +114,6 @@ methods: {
         this.$Message.error('上传格式不正确，请上传xls或者xlsx格式');
         return false;
         }
-        debugger;
-       
         const fileReader = new FileReader();
         fileReader.onload = (ev) => {
         try {
@@ -126,14 +125,16 @@ methods: {
             const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]);//生成json表格内容
              var userinfo=Vue.ls.get(USER_INFO);
               var UserName=userinfo.Userno;
+            
               for(i=0;i<ws.length;i++){
               ws[i].Companycode=ws[i].Companycode+'';
               ws[i].Strongholdcode=ws[i].Strongholdcode+'';
               ws[i].Materialno=ws[i].Materialno+'';
               ws[i].Batchno=ws[i].Batchno+'';
-              ws[i].Watercode=ws[i].Watercode+'';
               ws[i].Creater=UserName;
-              ws[i].qty=0;
+            //  ws[i].singnqty=ws[i].singnqty+'';
+            //  ws[i].Watercode= ws[i].Watercode+'';
+             // ws[i].qty=ws[i].qty+"";
               }
            // console.log(ws);
             that.DataList =  ws;
@@ -154,20 +155,15 @@ methods: {
         fileReader.readAsBinaryString(files[0]);
     
     }, PrintLabel:function (record) {
-      debugger;
       var data;
          var json= JSON.stringify(record);
             UploadFile(json).then(res => {
             if (res.Result === 1) {
-             debugger
              //调用预览打印
                data= JSON.stringify(res.Data);
-      
-
           }else{
               alert(res.ResultValue);
             }
-            debugger;
            windowpost(data,"pallet");
         });
       //   var userinfo=Vue.ls.get(USER_INFO);
@@ -191,7 +187,8 @@ methods: {
 </script>
 
 <style lang="scss" scoped>
-.el-card__body {
+.el-card_head {
     padding: 7px;
+   
 }
 </style>
