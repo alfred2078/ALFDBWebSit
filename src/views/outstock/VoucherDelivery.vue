@@ -131,6 +131,7 @@
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           max-height="500"
         >
+          <el-table-column prop="Arrvoucherno" label="发货通知单号" width="200"></el-table-column>
           <el-table-column prop="Towarehouseno" label="仓库" width="80"></el-table-column>
           <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
