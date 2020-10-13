@@ -42,9 +42,9 @@
           <el-card body-style="padding:0;" class="dash-header-item" v-if="recmonth=='recmonth'">
             <ve-histogram colors="#60ACFC"  :data="chartData" :grid="grid" :settings="chartSettings"></ve-histogram>
           </el-card>
-         <!--  <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
-            <ve-histogram colors="#e6a23c"  :data="chartData1" :grid="grid" :settings="chartSettings1"></ve-histogram>
-          </el-card> -->
+          <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
+            <ve-histogram colors="#e6a23c"  :data="chartData1" :grid="grids" :settings="chartSettings1" :extend="chartSettings1.extend"></ve-histogram>
+          </el-card>
           <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
             <ve-pie :data="chartData3" :settings="piechartSettings"></ve-pie>
           </el-card>
@@ -54,7 +54,7 @@
               <ve-histogram colors="#60ACFC"  :data="outchartData" :grid="grid" :settings="outchartSettings"></ve-histogram>
             </el-card>
             <el-card class="dash-header-item" v-if="recmonth=='outmobth'">
-              <ve-histogram colors="#e6a23c"  :data="outchartData1" :grid="grid" :settings="outchartSettings1"></ve-histogram>
+              <ve-histogram colors="#e6a23c"  :data="outchartData1" :grid="grids" :settings="outchartSettings1" :extend="chartSettings1.extend"></ve-histogram>
             </el-card>
             <el-card class="dash-header-item" v-if="recmonth=='outmobth'">
               <ve-pie :data="outchartData3" :settings="outpiechartSettings"></ve-pie>
@@ -112,6 +112,26 @@ import {  USER_INFO } from "@/store/mutation-types";
           'warehousename': '仓库',
           'sum': '入库数量'
         },
+        extend: {
+          xAxis:{
+            axisLabel:{
+                showMaxLabel:true,
+                showMinLabel:true,
+                color:'#3a3a3a',
+                rotate:270, //刻度文字旋转，防止文字过多不显示
+                //margin:50,//文字离x轴的距离
+                boundaryGap:true,
+                // backgroundColor:'#0f0',
+                formatter:(v)=>{
+                  // console.log('x--v',v)
+                  if(v.length>3){
+                    return v.substring(0,3)+'...'
+                  }
+                  return v
+                },
+              }
+          }
+        }
       };
       this.piechartSettings = {
           radius: 120,
@@ -134,6 +154,7 @@ import {  USER_INFO } from "@/store/mutation-types";
           'warehousename': '仓库',
           'sum': '出库数量'
         },
+        
       };
       this.outpiechartSettings = {
           radius: 120,
@@ -147,6 +168,10 @@ import {  USER_INFO } from "@/store/mutation-types";
         grid:{
           top:80,
           bottom:50
+        },
+        grids:{
+          top:80,
+          bottom:20
         },
         recmonth: "recmonth",
         outStockData,
@@ -205,51 +230,11 @@ import {  USER_INFO } from "@/store/mutation-types";
         },
         chartData1: {
           columns: ["warehousename", "sum"],
-          rows: [{
-              warehousename: "成品仓库1",
-              sum: 55
-            },
-            {
-              warehousename: "成品仓库2",
-              sum: 77
-            },
-            {
-              warehousename: "成品仓库3",
-              sum: 88
-            },
-            {
-              warehousename: "成品仓库4",
-              sum: 22
-            }
-          ]
+          rows: []
         },
         chartData3: {
           columns: ['materialdesc', 'sum'],
-          rows: [{
-              'materialdesc': '酸梅膏',
-              'sum': 0
-            },
-            {
-              'materialdesc': '酸多多糖浆',
-              'sum': 0
-            },
-            {
-              'materialdesc': '牛奶',
-              'sum': 0
-            },
-            {
-              'materialdesc': '纸杯',
-              'sum': 0
-            },
-            {
-              'materialdesc': '冰淇淋专用植脂末',
-              'sum': 0
-            },
-            {
-              'materialdesc': '核桃豆味粉',
-              'sum': 0
-            }
-          ]
+          rows: []
         },
         outchartData: {
           columns: ["month", "sum"],
@@ -280,7 +265,7 @@ import {  USER_INFO } from "@/store/mutation-types";
             },
             {
               month: 7,
-              sum: 500
+              sum: 0
             },
             {
               month: 8,
@@ -301,56 +286,15 @@ import {  USER_INFO } from "@/store/mutation-types";
             {
               month: 12,
               sum: 0
-            }
-          ]
+            }]
         },
         outchartData1: {
           columns: ["warehousename", "sum"],
-          rows: [{
-              warehousename: "成品仓库1",
-              sum: 55
-            },
-            {
-              warehousename: "成品仓库2",
-              sum: 77
-            },
-            {
-              warehousename: "成品仓库3",
-              sum: 88
-            },
-            {
-              warehousename: "成品仓库4",
-              sum: 22
-            }
-          ]
+          rows: []
         },
         outchartData3: {
           columns: ['materialdesc', 'sum'],
-          rows: [{
-              'materialdesc': '酸梅膏',
-              'sum': 0
-            },
-            {
-              'materialdesc': '酸多多糖浆',
-              'sum': 0
-            },
-            {
-              'materialdesc': '牛奶',
-              'sum': 0
-            },
-            {
-              'materialdesc': '纸杯',
-              'sum': 0
-            },
-            {
-              'materialdesc': '冰淇淋专用植脂末',
-              'sum': 0
-            },
-            {
-              'materialdesc': '核桃豆味粉',
-              'sum': 0
-            }
-          ]
+          rows: []
         },
         modelListWarehouse:{}
       };
@@ -479,7 +423,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                   })       
               }
               else {
-                min.$message.error('5');
+                min.$message.error(res.ResultValue);
               }
 
         })
@@ -492,7 +436,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                   min.chartData1.rows=res.Data;
             }
             else {
-                min.$message.error("6");
+                min.$message.error(res.ResultValue);
             }
  
         })  
@@ -505,7 +449,7 @@ import {  USER_INFO } from "@/store/mutation-types";
                   min.chartData3.rows=res.Data;
             }
             else {
-                min.$message.error('7');
+                min.$message.error(res.ResultValue);
             }
 
         })

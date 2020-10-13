@@ -65,6 +65,27 @@
               </el-form-item>
             </el-col>
 
+            
+          </el-row>
+          <el-row>
+            <el-col :span="9">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Barcode"
+                  placeholder="条码"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="5">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Serialno"
+                  placeholder="序列号"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="3">
               <el-form-item>
                 <el-button
@@ -84,7 +105,7 @@
         <el-row>
           <el-col :span="3">
             <el-select
-              style="width:100%"
+              style="width:90%"
               v-model="printType"
               placeholder="单据名称"
             >
@@ -171,9 +192,11 @@ export default {
         Batchno: "",
         Createtime: "",
         Cusmaterialno: "",
-        Strongholdcode: ""
+        Strongholdcode: "",
+        Serialno:"",
+        Barcode:""
       },
-      Operate: { Areano: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9 },
+      Operate: { Areano: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9,Serialno:9 },
       outerVisible: false,
       screenHeight: null,
       idshow: false,
@@ -239,6 +262,12 @@ export default {
           prop: "Batchno",
           colvisible: true,
           width: 120
+        },
+        {
+          label: "序列号",
+          prop: "Serialno",
+          colvisible: true,
+          width: 150
         },
         {
           label: "数量",
