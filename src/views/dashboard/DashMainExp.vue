@@ -42,9 +42,9 @@
           <el-card body-style="padding:0;" class="dash-header-item" v-if="recmonth=='recmonth'">
             <ve-histogram colors="#60ACFC"  :data="chartData" :grid="grid" :settings="chartSettings"></ve-histogram>
           </el-card>
-          <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
+         <!--  <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
             <ve-histogram colors="#e6a23c"  :data="chartData1" :grid="grid" :settings="chartSettings1"></ve-histogram>
-          </el-card>
+          </el-card> -->
           <el-card class="dash-header-item" v-if="recmonth=='recmonth'">
             <ve-pie :data="chartData3" :settings="piechartSettings"></ve-pie>
           </el-card>
@@ -399,7 +399,7 @@ import {  USER_INFO } from "@/store/mutation-types";
     },
     created(){
       this.exp();
-    //  this.outmobthClick()
+      this.outmobthClick()
     },
     methods:{
       exp(){
@@ -449,7 +449,7 @@ import {  USER_INFO } from "@/store/mutation-types";
               }
 
         })
-      /*   console.log(4+'--begin---'+new Date());
+        console.log(4+'--begin---'+new Date());
        getQualityDetailLinestatus(min.modelListWarehouse).then(res=>{
           
           if (res.Result === 1) {
@@ -462,8 +462,8 @@ import {  USER_INFO } from "@/store/mutation-types";
                 min.$message.error(res.ResultValue);
               }
 
-        }) */
-        /* console.log(5+'--begin---'+new Date());
+        })
+        console.log(5+'--begin---'+new Date());
         getReceiveTranGroupByMonth(min.modelListWarehouse).then(res=>{
       
             if (res.Result === 1) {
@@ -508,13 +508,13 @@ import {  USER_INFO } from "@/store/mutation-types";
                 min.$message.error('7');
             }
 
-        }) */
+        })
       
       },
       outmobthClick()
       {
         var min = this;
-      
+
 
         var user = Vue.ls.get(USER_INFO);
         min.modelListWarehouse =user.modelListWarehouse;
