@@ -202,13 +202,13 @@
         var min = this;
         getTCHECKERPVOUCHERNO().then(res=>
           {
-          
+          debugger;
             if (res.Result === 1) {
               let data = new Date();
               let y = data.getFullYear();
               let m = data.getMonth() +1; 
               let d = data.getDate();
-              let newTime=y+min.DateAdd(m)+min.DateAdd(d);
+              let newTime=y+''+min.DateAdd(m)+''+min.DateAdd(d);
               let oldTime=res.Data.Erpvoucherno.substr(0,8);
               let erpSub;
               if(newTime==oldTime)
