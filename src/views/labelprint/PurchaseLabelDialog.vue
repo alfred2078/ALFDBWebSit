@@ -92,10 +92,17 @@ import {
         }
       },methods:{
          print(record,text){
-           debugger;
+           debugger
           this.visible = true;  
           this.title=text;  
           this.purchaseForm = Object.assign({}, record);
+
+          if(this.purchaseForm.PackQty!=0&&this.purchaseForm.PackQty!=undefined){
+            this.purchaseForm.Printqty=this.purchaseForm.Remainqty/this.purchaseForm.PackQty;
+            if(isNaN(this.purchaseForm.Printqty)){
+               this.purchaseForm.Printqty=0;
+            }
+          }
           if(this.purchaseForm.Vouchertype=="45"){
            this.dispaly=true;
           }else{
@@ -106,7 +113,6 @@ import {
            }
          },
          printLabel:function(){
-           debugger;
            if(this.purchaseForm.PackQty==0||this.purchaseForm.PackQty==""){
              alert("请输入包装量");
              return;
@@ -115,9 +121,8 @@ import {
              return;
            }
            var data=JSON.stringify(this.purchaseForm);
-           debugger;
            this.purchaseForm.Vouchertype=1;
-           windowpost(data,"data");
+         //  windowpost(data,"data");
          }
       }
   }

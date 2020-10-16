@@ -149,12 +149,13 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       }
       },
       PrintLabel:function (record) {
+        debugger;
            record.Vouchertype=22;
         //打印
         if(record.PackQty==0){
             record.Printqty=record.Remainqty;
         }else{
-           record.Printqty=record.Remainqty%record.Packqty;
+           record.Printqty=record.Remainqty%record.PackQty;
         }
          record.PrintRemainqty=record.Remainqty;  
         this.$refs.purchaseDialog.print(record,this.dialogtitle);

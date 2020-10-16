@@ -3,6 +3,17 @@
  <el-card  class="el-card_head" >
     <input type="file" ref="upload" accept=".xls,.xlsx" class="outputlist_upload" hidden>
     <el-button icon="el-icon-upload2" type="primary"  @click="ClickUpload()">上传</el-button>
+     <el-select
+              v-model="printType"
+              placeholder="打印类型"
+            >
+              <el-option
+                v-for="item in printTypeList"
+                :key="item.printTypeid"
+                :label="item.printTypename"
+                :value="item.printTypeid"
+              ></el-option>
+            </el-select>
  </el-card>
     <el-card body-style="padding:2px;">
       <el-table border :data="DataList" :header-cell-style="{ padding: '2px', background: '#f6f6f6' }" v-loading="loading"
@@ -44,6 +55,11 @@ import XLSX from 'xlsx'
     return {
         outputs: [],
         DataList:[],
+              printTypeList: [
+        { printTypeid: 1, printTypename: "激光打印机" },
+        { printTypeid: 2, printTypename: "台式打印机" }
+              ],
+                printType: 1,
             columns: [{
             label: "单位编号",
             prop: "Companycode",
@@ -95,6 +111,11 @@ import XLSX from 'xlsx'
               label:"打印人",
               prop:"Creater",
               colvisible:true
+            },
+               {
+              label:"打印类型",
+              prop:"Printertype",
+              colvisible:false
             }
             ]
     }
@@ -155,11 +176,16 @@ methods: {
         fileReader.readAsBinaryString(files[0]);
     
     }, PrintLabel:function (record) {
-      var data;
+       record.Printertype = this.printType
+         var data;
          var json= JSON.stringify(record);
             UploadFile(json).then(res => {
             if (res.Result === 1) {
              //调用预览打印
+               if(res.Data.length>0){
+                 res.Data[0].Printertype=  record.Printertype;
+               }
+               debugger;
                data= JSON.stringify(res.Data);
           }else{
               alert(res.ResultValue);

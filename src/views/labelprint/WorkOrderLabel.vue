@@ -112,7 +112,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
             // colvisible: true
             ,{
             label:"包装量",
-              prop:"Packqty",
+              prop:"PackQty",
               colvisible:false
             },{
                label:"批次",
@@ -177,7 +177,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       if(record.PackQty==0){
             record.Printqty=record.Remainqty;
         }else{
-           record.Printqty=record.Remainqty%record.Packqty;
+           record.Printqty=record.Remainqty%record.PackQty;
         }
         record.PrintRemainqty=record.Remainqty;
         this.$refs.purchaseDialog.print(record,this.dialogtitle);

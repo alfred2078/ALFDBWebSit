@@ -107,7 +107,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
             colvisible: false
             },{
             label:"包装量",
-              prop:"Packqty",
+              prop:"PackQty",
               colvisible:true
             },{
                label:"批次",

@@ -110,7 +110,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
             colvisible: true
             },{
             label:"包装量",
-              prop:"Packqty",
+              prop:"PackQty",
               colvisible:false
             },{
                label:"批次",
@@ -141,7 +141,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       PrintLabel:function (record) {
         //打印
         debugger;
-        record.Printqty=record.Remainqty%record.Packqty;
+        record.Printqty=record.Remainqty%record.PackQty;
         this.$refs.purchaseDialog.print(record,this.dialogtitle);
       }
     }
