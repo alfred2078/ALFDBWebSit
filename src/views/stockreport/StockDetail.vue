@@ -328,6 +328,18 @@ export default {
           prop: "Arrvoucherno",
           colvisible: true,
           width: 180
+        },
+        {
+          label: "创建人",
+          prop: "Creater",
+          colvisible: true,
+          width: 120
+        },
+        {
+          label: "创建时间",
+          prop: "Createtime",
+          colvisible: true,
+          width: 180
         }
       ],
       multipleSelection: []

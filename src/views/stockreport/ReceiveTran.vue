@@ -56,7 +56,11 @@
                 <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
               </el-form-item>
             </el-col>
-
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Serialno" placeholder="序列号" clearable></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="9">
               <el-form-item label>
                 <el-date-picker
@@ -158,9 +162,10 @@ export default {
         Batchno: "",
         Barcode: "",
         Createtime: "",
-        Vouchertype: ""
+        Vouchertype: "",
+        Serialno:""
       },
-      Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 },
+      Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 ,Serialno:9},
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
       apiUrl: {
