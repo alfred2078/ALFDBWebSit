@@ -122,7 +122,7 @@ import {
            }
            var data=JSON.stringify(this.purchaseForm);
            this.purchaseForm.Vouchertype=1;
-         //  windowpost(data,"data");
+           windowpost(data,"data");
          }
       }
   }
