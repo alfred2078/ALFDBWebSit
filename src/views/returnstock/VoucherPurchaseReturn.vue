@@ -52,9 +52,9 @@
           <el-col :span="2">
             <!-- <el-button size="small" icon="el-icon-upload2" type="primary">导入</el-button> -->
           </el-col>
-          <el-col :span="2">
+          <!-- <el-col :span="2">
             <el-button size="small" icon type="primary" @click="PrintClick">单据打印</el-button>
-          </el-col>
+          </el-col> -->
           <el-col :span="2">
             <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
             <el-button size="small" type="primary" @click="handleExportXls">

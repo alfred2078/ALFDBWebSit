@@ -25,13 +25,13 @@
           <el-input v-model="tempForm.Email" clearable placeholder="邮箱"></el-input>
         </el-form-item>
         <el-form-item label="角色">
-          <el-select style="width:100%" v-model="ruleListSelect" multiple placeholder="请选择">
+          <el-select style="width:100%" v-model="ruleListSelect" filterable multiple placeholder="请选择">
             <el-option v-for="item in ruleListAll" :key="item.Id" :label="item.Ruleno" :value="item.Id">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="所属仓库">
-          <el-select style="width:100%" v-model="warehouseListSelect" multiple placeholder="请选择">
+          <el-select style="width:100%" v-model="warehouseListSelect" filterable multiple placeholder="请选择">
             <el-option v-for="item in warehouseListAll" :key="item.Id" :label="item.Warehouseno" :value="item.Id">
             </el-option>
           </el-select>

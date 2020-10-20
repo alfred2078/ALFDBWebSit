@@ -101,7 +101,7 @@
             ></el-table-column>
             <el-table-column prop="Spec" label="规格型号" width="150" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column prop="Unit" label="库存单位" width="120"></el-table-column>
-            <el-table-column prop="Packqty" label="包装数量" width="120"></el-table-column>
+            <el-table-column prop="PackQty" label="包装数量" width="120"></el-table-column>
             <el-table-column
               prop="Maintypecode"
               label="产品分类码"
@@ -320,10 +320,10 @@ export default {
       var min = this;
       if (
         min.materialPackData.length != 0 &&
-        min.materialPackData[min.materialPackData.length - 1].Watercode == ""
+        (min.materialPackData[min.materialPackData.length - 1].Watercode == ""&&min.materialPackData[min.materialPackData.length - 1].OuterWatercode == "")
       ) {
         min.$message({
-          message: "请输入上一行的69码",
+          message: "请输入上一行的69码或外69码",
           type: "warning"
         });
         return;
@@ -364,7 +364,7 @@ export default {
         debugger;
         t.Creater = Vue.ls.get(USER_NAME);
         t.Createtime = aData;
-        if (t.Watercode == null || t.Watercode == "") {
+        if ((t.Watercode == null || t.Watercode == "")&&(t.OuterWatercode == null || t.OuterWatercode == "")) {
           WatercodeIsNull = true;
         }
         t.Watercode = t.Watercode + "";
@@ -384,7 +384,7 @@ export default {
         for (var j = i + 1; j < min.materialPackData.length; j++) {
           if (
             min.materialPackData[i].Watercode ==
-            min.materialPackData[j].Watercode
+            min.materialPackData[j].Watercode && min.materialPackData[i].Watercode!="" && min.materialPackData[i].Watercode!=null
           ) {
             find = true;
             break;
@@ -400,7 +400,7 @@ export default {
         return;
       } else if (WatercodeIsNull) {
         min.$message({
-          message: "69码不允许为空值",
+          message: "请必填一项69码或外69码",
           type: "warning"
         });
         return;
