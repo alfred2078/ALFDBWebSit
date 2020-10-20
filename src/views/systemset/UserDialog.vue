@@ -149,12 +149,15 @@
         });
       },
       edit(record) {
+        this.warehouseListSelect=[];
+        this.ruleListSelect=[];
         this.visible = true;       
-        
+        debugger;
         this.tempForm = Object.assign({}, record);
+        
         delete this.tempForm.Createtime; 
         this.getWarehouseListAll();
-     debugger;
+     
         this.getWarehouseListByUserID(this.tempForm);
         this.getRuleListAll();
         this.getRuleListByUserID(this.tempForm);
