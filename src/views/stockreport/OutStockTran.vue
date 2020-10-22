@@ -36,26 +36,31 @@
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="ERP单号" clearable></el-input>
               </el-form-item>
             </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Barcode" placeholder="条码" clearable></el-input>
+              </el-form-item>
+            </el-col>
              <el-col :span="4">
               <el-form-item label>
                 <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
-              <el-form-item label>
-                <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
-              </el-form-item>
-            </el-col>
+            
           </el-row>
 
           <el-row>
            
             <el-col :span="4">
               <el-form-item label>
-                <el-input v-model="queryParam.Barcode" placeholder="条码" clearable></el-input>
+                <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
               </el-form-item>
             </el-col>
-
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Serialno" placeholder="序列号" clearable></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="9">
               <el-form-item label>
                 <el-date-picker
