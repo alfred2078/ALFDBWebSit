@@ -196,7 +196,7 @@ export default {
         Serialno:"",
         Barcode:""
       },
-      Operate: { Areano: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9,Serialno:9 },
+      Operate: { Areano: 9,Towarehouseno: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9,Serialno:9 },
       outerVisible: false,
       screenHeight: null,
       idshow: false,
