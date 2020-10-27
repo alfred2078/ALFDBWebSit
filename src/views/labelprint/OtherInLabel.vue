@@ -8,16 +8,15 @@
               <el-input v-model="queryParam.Erpvoucherno" placeholder="杂入单号" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <!-- <el-col :span="6">
             <el-form-item label="">
               <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
 
           <el-col :span="8">
             <el-form-item>
               <el-button icon="el-icon-search" type="primary"  @click="SelectList()">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
 
@@ -63,7 +62,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         queryParam: {
           Erpvoucherno: "",
           Vouchertype:44,
-          Materialno:""
+          Materialno:"",
+           PcOrPda:1
         },
         DataList:[],
         // idshow: false,
@@ -136,10 +136,11 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
            if(this.queryParam.Materialno==""&&this.queryParam.Erpvoucherno==""){
       }else{
          var json= JSON.stringify(this.queryParam);
+       
             getOtherOrderList(json).then(res => {
-              debugger;
+            
             if (res.Result === 1) {
-              this.DataList = res.Data[0].Detail;
+              this.DataList = res.Data.Detail;
             }else{
               alert(res.ResultValue);
             }
@@ -148,13 +149,14 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       PrintLabel:function (record) {
         //打印
       record.Vouchertype=44;
+    
         //打印
       if(record.PackQty==0){
             record.Printqty=record.Remainqty;
         }else{
            record.Printqty=record.Remainqty%record.PackQty;
         }
-        record.Printqty=record.Remainqty%record.PackQty;
+      //  record.Printqty=record.Remainqty%record.PackQty;
         record.PrintRemainqty=record.Remainqty;
         this.$refs.purchaseDialog.print(record,this.dialogtitle);
       }
