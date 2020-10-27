@@ -34,9 +34,9 @@
         <el-form-item label="未收数量"  v-if="ismaterial" >
           <el-input v-model="purchaseForm.Remainqty" clearable placeholder="未收数量" readonly></el-input>
         </el-form-item>
-         <el-form-item label="打印数量">
+         <!-- <el-form-item label="打印数量" v-if="dispaly" >
           <el-input v-model="purchaseForm.PrintRemainqty" clearable placeholder="打印数量" ></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="包装量">
            <el-input v-model="purchaseForm.PackQty" clearable placeholder="包装量"></el-input>
         </el-form-item>
@@ -92,7 +92,7 @@ import {
         }
       },methods:{
          print(record,text){
-           debugger
+        
           this.visible = true;  
           this.title=text;  
           this.purchaseForm = Object.assign({}, record);
@@ -103,6 +103,7 @@ import {
                this.purchaseForm.Printqty=0;
             }
           }
+         
           if(this.purchaseForm.Vouchertype=="45"){
            this.dispaly=true;
           }else{
