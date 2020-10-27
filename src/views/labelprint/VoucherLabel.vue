@@ -17,7 +17,6 @@
           <el-col :span="8">
             <el-form-item>
               <el-button icon="el-icon-search" type="primary"  @click="SelectList()">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
 
@@ -63,7 +62,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         queryParam: {
           Erpvoucherno: "",
           Vouchertype:22,
-          Materialno:""
+          Materialno:"",
+          PcOrPda:1
         },
         DataList:[],
         // idshow: false,
@@ -134,12 +134,13 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       }
     },methods:{
    SelectList() {
-     debugger;
+   
       if(this.queryParam.Materialno==""&&this.queryParam.Erpvoucherno==""){
       }else{
            var json= JSON.stringify(this.queryParam);
+        
             getPurchasList(json).then(res => {
-              debugger;
+          
             if (res.Result === 1) {
               this.DataList = res.Data.Detail;
             }else{
@@ -149,7 +150,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       }
       },
       PrintLabel:function (record) {
-        debugger;
+    
            record.Vouchertype=22;
         //打印
         if(record.PackQty==0){
