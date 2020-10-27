@@ -17,7 +17,6 @@
           <el-col :span="8">
             <el-form-item>
               <el-button icon="el-icon-search" type="primary"  @click="SelectList()">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
 
@@ -126,7 +125,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       }
     },methods:{
    SelectList() {
-     debugger;
+   
          var json= JSON.stringify(this.queryParam);
             getMaterilOrderList(json).then(res => {
             if (res.Result === 1) {
@@ -138,7 +137,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
       },
       PrintLabel:function (record) {
         //打印
-        debugger;
+     
         if(record.PackQty==undefined){
           record.PackQty=0;
         }
