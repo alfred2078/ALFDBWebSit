@@ -146,7 +146,6 @@ methods: {
             const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]);//生成json表格内容
              var userinfo=Vue.ls.get(USER_INFO);
               var UserName=userinfo.Userno;
-            
               for(i=0;i<ws.length;i++){
               ws[i].Companycode=ws[i].Companycode+'';
               ws[i].Strongholdcode=ws[i].Strongholdcode+'';
@@ -190,6 +189,7 @@ methods: {
           }else{
               alert(res.ResultValue);
             }
+            debugger;
            windowpost(data,"pallet");
         });
       //   var userinfo=Vue.ls.get(USER_INFO);
