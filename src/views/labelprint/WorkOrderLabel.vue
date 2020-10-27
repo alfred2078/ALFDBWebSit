@@ -8,15 +8,14 @@
               <el-input v-model="queryParam.Erpvoucherno" placeholder="成品订单号" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <!-- <el-col :span="6">
             <el-form-item label="">
               <el-input  v-on:keyup.enter="SelectList"  v-model="queryParam.Materialno"  placeholder="物料编码" clearable ></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="8">
             <el-form-item>
               <el-button icon="el-icon-search" type="primary"  @click="SelectList()">查询</el-button>
-              <el-button icon="el-icon-refresh-right" type="primary">重置</el-button>
             </el-form-item>
           </el-col>
 
@@ -66,6 +65,7 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         queryParam: {
           Erpvoucherno: "",
           Vouchertype:45,
+           PcOrPda:1
         },
         DataList:[],
         // idshow: false,
@@ -103,18 +103,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
             prop: "Voucherqty",
             colvisible: true
             } 
-            // label: "已收数量",
-            // prop: "Receiveqty",
-            // colvisible: true
-            // },{
-            // label: "未收数量",
-            // prop: "Remainqty",
-            // colvisible: true
-            ,{
-            label:"包装量",
-              prop:"PackQty",
-              colvisible:false
-            },{
+
+           ,{
                label:"批次",
               prop:"Batchno",
               colvisible:false
@@ -148,6 +138,11 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
               prop:"PrintRemainqty",
               colvisible:false
             }
+             ,{
+            label:"包装量",
+              prop:"PackQty",
+              colvisible:false
+            }
             ]
       }
     },mounted(){
@@ -174,6 +169,9 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         record.Remainqty=record.Voucherqty;
         record.Vouchertype=45;
         //打印
+        if(isNaN(record.PackQty)){
+          record.PackQty=0;
+        }
       if(record.PackQty==0){
             record.Printqty=record.Remainqty;
         }else{
