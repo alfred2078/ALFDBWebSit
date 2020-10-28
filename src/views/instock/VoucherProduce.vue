@@ -161,7 +161,8 @@ export default {
       xlsname: "生产订单",
       queryParam: {
         Erpvoucherno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
       Operate: { Erpvoucherno: 9 },
       apiUrl: {

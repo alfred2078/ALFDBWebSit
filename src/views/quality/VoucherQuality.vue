@@ -165,13 +165,14 @@ export default {
         Arrvoucherno: "",
         Materialno: "",
         Erpstatuscode: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
       Operate: {
-        Erpvoucherno: 11,
-        Qualityno: 11,
-        Arrvoucherno: 11,
-        Materialno: 11
+        Erpvoucherno: 9,
+        Qualityno: 9,
+        Arrvoucherno: 9,
+        Materialno: 9
       },
       apiUrl: {
         query: "/Quality/GetT_QualityDetailListByPage",

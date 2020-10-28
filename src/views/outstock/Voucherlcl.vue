@@ -136,9 +136,10 @@ export default {
       queryParam: {
         Erpstatuscode: "",
         Customerno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
-      Operate: { Erpstatuscode: 11, Customerno: 11 },
+      Operate: { Erpstatuscode: 9, Customerno: 9 },
       apiUrl: {
         query: "/PackageCarton/Get_PackageCartonListByPage",
         exportXls: "/PackageCarton/Get_PackageCartonListExp"

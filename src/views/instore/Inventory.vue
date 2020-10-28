@@ -4,13 +4,17 @@
       <el-card ref="refForm" type="flex">
         <el-form :model="queryParam" size="small " @keyup.enter.native="getModelListPage">
           <el-row>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label-width label>
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="盘点单号" clearable></el-input>
               </el-form-item>
             </el-col>
-
             <el-col :span="3">
+              <el-form-item label-width label>
+                <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
               <el-form-item>
                 <el-select v-model="queryParam.Checkstatus" placeholder="请选择盘点状态" clearable>
                   <el-option
@@ -48,12 +52,15 @@
                 ></el-date-picker>
               </el-form-item>
             </el-col>
-            <el-col :span="5">
+            <el-col :span="2">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               
               </el-form-item>
             </el-col>
+          </el-row>
+          <el-row>
+            
           </el-row>
         </el-form>
       </el-card>
@@ -91,9 +98,9 @@
             <el-button size="small" icon type="primary" @click="Proloss">盈亏分析</el-button>
           </el-col>
           <el-col :span="2">
-            <el-popconfirm title="您确定要对此盘点单进行差异复盘吗？" @onConfirm="ReCheck">
+           <!--  <el-popconfirm title="您确定要对此盘点单进行差异复盘吗？" @onConfirm="ReCheck">
               <el-button size="small" type="primary" slot="reference">差异复盘</el-button>
-            </el-popconfirm>
+            </el-popconfirm> -->
           </el-col>
         </el-row>
       </el-card>
@@ -152,12 +159,13 @@
         </el-container>
       </el-main>
     </el-row>
-    <el-dialog title="盘点单---详情" width="70%" :show-close="true" :visible.sync="outerVisible">
+    <el-dialog title="盘点单---详情" width="90%"  :show-close="true" :visible.sync="outerVisible">
       <div
         :style="{          
           border: '1px solid #e9e9e9',
           padding: '5px 10px',
-          background: '#fff'
+          background: '#fff',
+          
         }"
       >
         <el-table
@@ -168,6 +176,7 @@
           :header-row-style="{ height: '30', font: 'normal' }"
           :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
           style="width: 100%"
+          height="500"
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
@@ -235,7 +244,7 @@ export default {
         Checkstatus: "",
         Isdel: "1",
         Createtime: "",
-       /*  Towarehouseno:"811,201" */
+        Towarehouseno:""
       },
       Operate: { Erpvoucherno: 9 ,Towarehouseno:9},
       apiUrl: {
@@ -290,7 +299,7 @@ export default {
   created() {
     this.getTParameter();
     this.getTParameterIsDel();
-    //this.UserId();
+    this.UserId();
   },
 
   /*    beforeRouteLeave (to, from, next) {
@@ -304,9 +313,9 @@ export default {
     UserId(){
    debugger;
       var userInfo =Vue.ls.get(USER_INFO);
-      var userid = userInfo.Id;
-   
-      this.queryParam.Userid=userid;
+      var modelListWarehouse = userInfo.modelListWarehouse;
+      console.log(modelListWarehouse);
+      //this.queryParam.Userid=userid;
 
     },
     //重置

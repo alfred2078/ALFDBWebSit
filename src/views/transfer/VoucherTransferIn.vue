@@ -159,9 +159,10 @@ export default {
       xlsname: "调拨入单",
       queryParam: {
         Erpvoucherno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
-      Operate: { Erpvoucherno: 11 },
+      Operate: { Erpvoucherno: 9 },
       apiUrl: {
         query: "/Transferin/Get_VTransferinListByPage",
         exportXls: "/Transferin/Get_TransferindetailListByExp"

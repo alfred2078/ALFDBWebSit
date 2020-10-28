@@ -178,9 +178,10 @@ export default {
       queryParam: {
         Erpvoucherno: "",
         Suppliername: "",
-        Createtime: ""
+        Createtime: "",
+        //Towarehouseno: ""
       },
-      Operate: { Erpvoucherno: 11, Suppliername: 11 },
+      Operate: { Erpvoucherno: 9, Suppliername: 9 },
       apiUrl: {
         query: "/PurchaseReturn/GetV_PurchasereturnListByPage",
         exportXls: "/PurchaseReturn/Get_PurchasereturndetailListByExp"

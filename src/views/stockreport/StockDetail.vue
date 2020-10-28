@@ -126,6 +126,15 @@
               >批量打印</el-button
             >
           </el-col>
+
+        <el-col :span="2">
+          <el-button
+            @click="Exp"
+            size="small "
+            icon="el-icon-download"
+            type="primary"
+          >导出</el-button>
+        </el-col>
         </el-row>
       </el-card>
     </el-row>
@@ -185,6 +194,7 @@ export default {
   },
   data() {
     return {
+      xlsname: "库存明细",
       queryParam: {
         Towarehouseno: "",
         Areano: "",
@@ -203,13 +213,58 @@ export default {
       apiUrl: {
         query: "/Stock/GetV_StockListByPage",
         save: "",
-        update: ""
+        update: "",
+        exportXls: "/Stock/GetV_StockListExp"
       },
       printTypeList: [
         { printTypeid: 1, printTypename: "激光打印机" },
         { printTypeid: 2, printTypename: "台式打印机" }
       ],
       printType: 1,
+      tHeader: [
+        "据点",
+        "仓库",
+        "库位",
+        "物料编码",
+        "物料描述",       
+        "条码",
+        "批次",
+        "序列号",
+        "数量",
+        "效期",
+        "69码",
+        "质检状态",
+        "限制性",
+        "供应商",       
+        "供应商名称",
+        "拣货数量",
+        "检验单号",
+        "到货单号",
+        "创建人",
+        "创建时间",
+      ],
+      filterVal: [
+        "Strongholdcode",
+        "Towarehouseno",
+        "Areano",
+        "Materialno",
+        "Materialdesc",
+        "Barcode",
+        "Batchno",
+        "Serialno",
+        "Qty",
+        "Edate",
+        "Watercode",
+        "Strstatus",
+        "StrIslimitstock",
+        "Supplierno",
+        "Suppliername",
+        "TaskQty",
+        "Qualityno",
+        "Arrvoucherno",
+        "Creater",
+        "Createtime",
+      ],
       columns: [
         {
           label: "据点",
@@ -355,6 +410,27 @@ export default {
       if (this.multipleSelection.length > 0) {
         windowpost(JSON.stringify(this.multipleSelection), "PalletList");
       }
+    },
+    Exp(){
+    
+      if(this.queryParam.Towarehouseno=='' 
+        && this.queryParam.Areano==''
+        && this.queryParam.Materialno==''
+        && this.queryParam.Batchno==''
+        && this.queryParam.Createtime==''
+        && this.queryParam.Cusmaterialno==''
+        && this.queryParam.Strongholdcode==''
+        && this.queryParam.Serialno==''
+        && this.queryParam.Barcode=='' )
+      {
+         this.$message({
+          message: "请输入条件后，在进行导出！",
+          type: "warning"
+         });
+         return;
+      }
+      
+      this.handleExportXls();
     }
   }
 };

@@ -88,6 +88,7 @@
             <el-table-column prop="Address" label="送货地址" width="250"></el-table-column>
             <el-table-column prop="Contacts" label="客户联络人姓名" width="150"></el-table-column>
             <el-table-column prop="Tel" label="联络人电话" width="150"></el-table-column>
+            <el-table-column prop="LineNo" label="月台" width="150"></el-table-column>
             <el-table-column prop="Weighttotal" label="总重量" width="100"></el-table-column>
             <el-table-column prop="Costtotal" label="总费用" width="100"></el-table-column>
             <el-table-column prop="Outcosttotal" label="送货上门费" width="100"></el-table-column>
@@ -176,7 +177,7 @@ export default {
         Customerno: "",
         Createtime: ""
       },
-      Operate: { Erpstatuscode: 11, Customerno: 11 },
+      Operate: { Erpstatuscode: 9, Customerno: 9 },
       apiUrl: {
         query: "/OutStock/GetV_OutStockListByPage",
         exportXls: "/OutStock/GetV_OutStockDetailListExp"
@@ -194,6 +195,7 @@ export default {
         "送货地址",
         "客户联络人姓名",
         "联络人电话",
+        "月台",
         "总重量",
         "总费用",
         "送货上门费",
@@ -222,6 +224,7 @@ export default {
         "Address",
         "Contacts",
         "Tel",
+        "LineNo",
         "Weighttotal",
         "Costtotal",
         "Outcosttotal",

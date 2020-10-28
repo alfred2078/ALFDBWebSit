@@ -302,9 +302,11 @@ export default {
   mounted() {},
   methods: {
     handleClick(val) {
+      debugger;
       var min = this;
       min.outerVisible = true;
       min.materialModel = val;
+      delete val.Createtime; 
       getMaterialPack(val).then(res => {
         if (res.Result == 1) {
           min.doubleclick = null;

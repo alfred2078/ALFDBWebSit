@@ -157,11 +157,14 @@
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-          <el-table-column prop="Materialdesc" label="商品名称"></el-table-column>
+        <el-table-column prop="Arrvoucherno" label="发货通知单号" width="180"></el-table-column>
+        <el-table-column prop="Materialno" label="物料编码"></el-table-column>
+          <el-table-column prop="Materialdesc" label="物料名称" width="220"></el-table-column>
           <el-table-column prop="Parametername" label="业务类型"></el-table-column>
           <el-table-column prop="Qty" label="数量"></el-table-column>
           <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
+          <el-table-column prop="Sumqty" label="总件数" width="80"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -193,7 +196,7 @@ export default {
         Createtime: ""
       },
       Arrvoucherno: "",
-      Operate: { Erpstatuscode: 11, customerno: 11 },
+      Operate: { Erpstatuscode: 9, customerno: 9 },
       apiUrl: {
         query: "/WayBill/Get_WayBillListByPage",
         exportXls: "/WayBill/GetWayBillDetailExp"
@@ -202,6 +205,7 @@ export default {
       WayBillDetaillList: [],
       CheckChangeData: {}, // 当前选中的值
       tHeader: [
+        "发货通知单号",
         "托运单号",
         "客户编码",
         "客户名称",
@@ -219,15 +223,18 @@ export default {
         "运费",
         "结算方式",
         "提货方式",
-        "商品名称",
+        "物料编码",
+        "物料名称",
         "业务类型",
         "数量",
         "项次",
         "项序",
+        "总件数",
         "创建人",
         "创建时间"
       ],
       filterVal: [
+        "Arrvoucherno",
         "Erpvoucherno",
         "Customerno",
         "Customername",
@@ -245,11 +252,13 @@ export default {
         "CostTotal",
         "SettlementMethodNames",
         "SendMethodNames",
+        "Materialno",
         "Materialdesc",
         "Parametername",
         "Qty",
         "Rowno",
         "Rownodel",
+        "Sumqty",
         "Creater",
         "Createtime"
       ]
@@ -292,8 +301,8 @@ export default {
       min.outerVisible = true;
 
       var model = {};
-      model.Erpvoucherno = val.Erpvoucherno;
-
+      model = val;
+      delete model.Createtime;
       getWayBillDetail(model).then(res => {
         debugger;
         if (res.Result == 1) {

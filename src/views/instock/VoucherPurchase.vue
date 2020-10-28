@@ -197,7 +197,8 @@ export default {
       queryParam: {
         Erpvoucherno: "",
         Suppliername: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
       Operate: { Erpvoucherno: 9, Suppliername: 9 },
       apiUrl: {

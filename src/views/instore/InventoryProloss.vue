@@ -16,12 +16,23 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            <el-col :span="3">
               <el-form-item label-width label>
                 <el-input v-model="Checkrefserial.Areano" placeholder="库位" clearable></el-input>
               </el-form-item>
             </el-col>
-
+             <el-col :span="5">
+              <el-form-item>
+                <el-select v-model="Differencevalues" placeholder="盈亏类型" multiple clearable>
+                  <el-option
+                    v-for="item in DifferenceList"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
             <el-col :span="5">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" @click="getInfo" type="primary">查询</el-button>
@@ -100,8 +111,21 @@ export default {
       Checkrefserial: {
         Erpvoucherno: "",
         Materialno: "",
-        Areano: ""
+        Areano: "",
+        Difference:""
       },
+      Differencevalues:[],
+      DifferenceList:[{
+      
+        id:1,
+        name:'赢'
+      },{
+        id:2,
+        name:'亏'
+      },{
+        id:3,
+        name:'平'
+      }],
       outerVisible: true,
       tableData: [],
       filterVal: [
@@ -165,6 +189,8 @@ export default {
         });
         return;
       }
+      debugger;
+      min.Checkrefserial.Difference = min.Differencevalues.join(',');
       getTCheckAnalyze(min.Checkrefserial).then(res => {
         debugger;
         if (res.Result === 1) {
@@ -190,6 +216,7 @@ export default {
       });
     },
     exportToExcel() {
+      this.getInfo();
       debugger;
       require.ensure([], () => {
         const { export_json_to_excel } = require("exportexcel/Export2Excel");

@@ -138,9 +138,10 @@ export default {
       xlsname: "杂出单",
       queryParam: {
         Erpvoucherno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
-      Operate: { Erpvoucherno: 11 },
+      Operate: { Erpvoucherno: 9 },
       apiUrl: {
         query: "/OtherOut/Get_VOtherOutListByPage",
         exportXls: "/OtherOut/Get_VOtherOutDetailListByExp"

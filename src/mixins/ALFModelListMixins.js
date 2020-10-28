@@ -1,7 +1,8 @@
 import {
   postAction
 } from "@/api/manage";
-
+import Vue from "vue";
+import { USER_NAME,USER_INFO } from "@/store/mutation-types";
 export const ALFModelListMixins = {
   data() {
     return {
@@ -54,6 +55,7 @@ export const ALFModelListMixins = {
       }
      
       var params = this.getQueryParams();
+
       this.loading = true;
       debugger;
       postAction(this.apiUrl.query, params)
@@ -93,6 +95,7 @@ export const ALFModelListMixins = {
         });
     },
     getQueryParams() {
+      debugger;
       let pageReuquest = {};
       let FilterGroup = {};      
       let arrRoles = this.getQueryField(this.queryParam);
@@ -106,26 +109,49 @@ export const ALFModelListMixins = {
     },
     getQueryField(queryParam) {      
       let Rules = [];
-      
+      debugger
       let objKeys = Object.keys(queryParam);
       let OperateLike =  Object.keys(this.Operate);
+      let userInfo =Vue.ls.get(USER_INFO);
+      let modelListWarehouse = userInfo.modelListWarehouse;
+      
+      var Towarehouseno="";
+      console.log(modelListWarehouse);
       for (let [index,key] of objKeys.entries()) {
+        debugger;
         if (
           queryParam[key] !== null &&
           queryParam[key] !== undefined &&
           queryParam[key] !== ""
         ) {
+          debugger;
           var Operates =3;
           for(let [LikeIndex,LikeKey] of OperateLike.entries())
           {
-            debugger;
+           
             if(LikeKey==key)
             {
               Operates=this.Operate[LikeKey]
               break;
             }
           }
-         
+          if(key=="Towarehouseno" || key=="Warehouseno")
+          {debugger;
+          
+            let Warehouse =modelListWarehouse.map(t=>t.Warehouseno);
+            let indexs = Warehouse.indexOf(queryParam[key]+'');
+            if(indexs<0)
+            {
+              this.$message({
+                message: "您没有此仓库权限！",
+                type: "warning"
+              });
+              return;
+              queryParam[key]='';
+            }
+           
+            
+          }
           if (key !== "Createtime") {
             Rules.push({
               Field: key,
@@ -136,6 +162,7 @@ export const ALFModelListMixins = {
           } else {
             let disArr = Array.from(new Set(queryParam[key]));
             for (let j = 0, len = disArr.length; j < len; j++) {
+              debugger;
               if (j === 0) {
                 Rules.push({
                   Field: key,
@@ -150,6 +177,19 @@ export const ALFModelListMixins = {
                 });
               }
             }
+          }
+        }else
+        {
+          debugger;
+          if(key=="Towarehouseno" || key=="Warehouseno")
+          {debugger;
+            Towarehouseno = modelListWarehouse.map(t=>t.Warehouseno).join(',');
+            Rules.push({
+              Field: key,
+              Value: Towarehouseno+'',
+              Operate: 3
+
+            });
           }
         }
       }
@@ -171,6 +211,7 @@ export const ALFModelListMixins = {
         this.$message.error("请先配置删除URL");
         return;
       }
+      delete record.Createtime; 
       postAction(this.apiUrl.delete, record)
         .then(res => {
           if (res.Result === 1) {
@@ -201,6 +242,7 @@ export const ALFModelListMixins = {
       var params = this.getQueryParams();
       postAction(this.apiUrl.exportXls, params)
         .then(res => {
+          debugger
           if (res.Result === 1) {
             this.exportList = res.Data;
           } else {

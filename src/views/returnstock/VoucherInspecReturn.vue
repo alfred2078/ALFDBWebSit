@@ -147,7 +147,8 @@ export default {
       queryParam: {
         Erpvoucherno: "",
         Supplierno: "",
-        Suppliername: ""
+        Suppliername: "",
+        Towarehouseno: ""
       },
       checked: null, // 如果使用单选框,定义一个model值
       currentSelectItem: {}, // 当前选中的值
@@ -191,7 +192,7 @@ export default {
         },
         {
           label: "创建时间",
-          prop: "Createtime",
+          prop: "Createtime", 
           colvisible: true
         }
       ],

@@ -10,11 +10,11 @@
               <el-input v-model="queryParam.Warehouseno" placeholder="仓库编码" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="4">
+          <!-- <el-col :span="4">
             <el-form-item label="">
               <el-input v-model="queryParam.Warehousename" placeholder="仓库名称" clearable></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="4">
             <el-form-item label="">
               <el-input v-model="queryParam.Areano" placeholder="库位编码" clearable></el-input>
