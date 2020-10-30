@@ -164,8 +164,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         }
       },
       PrintLabel:function (record) {
-        var userinfo=Vue.ls.get(USER_INFO);
-        record.UserName=userinfo.Userno;
+          var userinfo=Vue.ls.get(USER_INFO);
+        record.UserName=userinfo.Username;
         record.Remainqty=record.Voucherqty;
         record.Vouchertype=45;
         //打印
