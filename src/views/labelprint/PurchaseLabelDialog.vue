@@ -96,9 +96,9 @@ import {
           this.visible = true;  
           this.title=text;  
           this.purchaseForm = Object.assign({}, record);
-
+debugger;
           if(this.purchaseForm.PackQty!=0&&this.purchaseForm.PackQty!=undefined){
-            this.purchaseForm.Printqty=this.purchaseForm.Remainqty/this.purchaseForm.PackQty;
+            this.purchaseForm.Printqty=  Math.ceil(this.purchaseForm.Remainqty/this.purchaseForm.PackQty);
             if(isNaN(this.purchaseForm.Printqty)){
                this.purchaseForm.Printqty=0;
             }
