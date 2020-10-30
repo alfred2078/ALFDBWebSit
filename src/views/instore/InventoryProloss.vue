@@ -63,6 +63,7 @@
           <el-table
             :data="tableData"
             border
+            v-loading="loading"
             :row-style="{ height: '30' }"
             :cell-style="{ padding: '2px' }"
             :header-row-style="{ height: '30', font: 'normal' }"

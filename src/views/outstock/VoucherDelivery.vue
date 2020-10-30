@@ -173,11 +173,11 @@ export default {
     return {
       xlsname: "发货通知单",
       queryParam: {
-        Erpstatuscode: "",
+        Erpvoucherno: "",
         Customerno: "",
         Createtime: ""
       },
-      Operate: { Erpstatuscode: 9, Customerno: 9 },
+      Operate: { Erpvoucherno: 9, Customerno: 9 },
       apiUrl: {
         query: "/OutStock/GetV_OutStockListByPage",
         exportXls: "/OutStock/GetV_OutStockDetailListExp"

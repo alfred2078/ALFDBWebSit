@@ -160,7 +160,8 @@ export default {
       xlsname: "调拨出单",
       queryParam: {
         Erpvoucherno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno:""
       },
       Operate: { Erpvoucherno: 11 },
       apiUrl: {

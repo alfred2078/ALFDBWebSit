@@ -179,7 +179,7 @@ export default {
         Erpvoucherno: "",
         Suppliername: "",
         Createtime: "",
-        //Towarehouseno: ""
+        Towarehouseno: ""
       },
       Operate: { Erpvoucherno: 9, Suppliername: 9 },
       apiUrl: {

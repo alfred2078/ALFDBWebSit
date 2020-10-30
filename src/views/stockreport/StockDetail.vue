@@ -68,6 +68,15 @@
             
           </el-row>
           <el-row>
+            <el-col :span="5">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Checktypecode"
+                  placeholder="盘点分类"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="9">
               <el-form-item label>
                 <el-input
@@ -204,7 +213,8 @@ export default {
         Cusmaterialno: "",
         Strongholdcode: "",
         Serialno:"",
-        Barcode:""
+        Barcode:"",
+        Checktypecode:""
       },
       Operate: { Areano: 9,Towarehouseno: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9,Serialno:9 },
       outerVisible: false,
@@ -240,6 +250,8 @@ export default {
         "拣货数量",
         "检验单号",
         "到货单号",
+        "盘点分类编号",
+        "盘点分类名称",
         "创建人",
         "创建时间",
       ],
@@ -262,6 +274,8 @@ export default {
         "TaskQty",
         "Qualityno",
         "Arrvoucherno",
+        "Checktypecode",
+        "Checktypename",
         "Creater",
         "Createtime",
       ],
@@ -383,6 +397,18 @@ export default {
           prop: "Arrvoucherno",
           colvisible: true,
           width: 180
+        },
+        {
+          label: "盘点分类编号",
+          prop: "Checktypecode",
+          colvisible: true,
+          width: 120
+        },
+        {
+          label: "盘点分类名称",
+          prop: "Checktypename",
+          colvisible: true,
+          width: 120
         },
         {
           label: "创建人",

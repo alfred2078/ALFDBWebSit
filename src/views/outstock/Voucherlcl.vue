@@ -4,13 +4,18 @@
       <el-card ref="refForm" type="flex">
         <el-form :model="queryParam" size="small "  @keyup.enter.native="getModelListPage">
           <el-row>
-            <el-col :span="5">
+            <el-col :span="4
+            ">
               <el-form-item label-width label>
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="发货通知单号" clearable></el-input>
               </el-form-item>
             </el-col>
-
             <el-col :span="4">
+              <el-form-item label-width label>
+                <el-input v-model="queryParam.PackageCode" placeholder="拼箱码" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
               <el-form-item label-width label>
                 <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
               </el-form-item>
@@ -22,7 +27,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="9">
+            <el-col :span="8">
               <el-form-item label-width label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
@@ -134,12 +139,14 @@ export default {
     return {
       xlsname: "发货通知单",
       queryParam: {
-        Erpstatuscode: "",
+        Erpvoucherno: "",
+        PackageCode:"",
         Customerno: "",
         Createtime: "",
+        PackageSeq:"",
         Towarehouseno:""
       },
-      Operate: { Erpstatuscode: 9, Customerno: 9 },
+      Operate: { Erpvoucherno: 9,PackageCode:9, Customerno: 9 },
       apiUrl: {
         query: "/PackageCarton/Get_PackageCartonListByPage",
         exportXls: "/PackageCarton/Get_PackageCartonListExp"

@@ -2,11 +2,11 @@
   <div class="layout">
     <el-row>
       <el-card ref="refForm" type="flex">
-        <el-form :model="queryParam" size="small "  @keyup.enter.native="getInfo">
+        <el-form :model="queryParam" size="small "  @keyup.enter.native="getModelListPage">
           <el-row>
             <el-col :span="5">
               <el-form-item label-width label>
-                <el-input v-model="Arrvoucherno" placeholder="发货通知单号" clearable></el-input>
+                <el-input v-model="queryParam.Arrvoucherno" placeholder="发货通知单号" clearable></el-input>
               </el-form-item>
             </el-col>
 
@@ -36,7 +36,7 @@
             </el-col>
             <el-col :span="1">
               <el-form-item label-width="0">
-                <el-button icon="el-icon-search" type="primary" @click="getInfo">查询</el-button>
+                <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -92,6 +92,7 @@
           >
             <el-table-column type="selection" width="55" height="auto" class="layout-table"></el-table-column>
             <el-table-column prop="Erpvoucherno" label="托运单号" width="180"></el-table-column>
+            <el-table-column prop="Arrvoucherno" label="发货通知单号" width="180"></el-table-column>
             <el-table-column prop="Customerno" label="客户编码" width="120"></el-table-column>
             <el-table-column prop="Customername" label="客户名称" width="180"></el-table-column>
             <el-table-column prop="Trackingnumber" label="物流单号" width="180"></el-table-column>
@@ -133,7 +134,7 @@
             :total="PageData.totalCount"
             :fpage-size.sync="PageData.pageSize"
             :fcurrent-page.sync="PageData.currentPage"
-            @pagination="search"
+            @pagination="getModelList"
           />
         </el-container>
       </el-main>
@@ -191,12 +192,14 @@ export default {
     return {
       xlsname: "托运单",
       queryParam: {
+        Arrvoucherno:"",
         Erpvoucherno: "",
         Customerno: "",
-        Createtime: ""
+        Createtime: "",
+        Towarehouseno: ""
       },
       Arrvoucherno: "",
-      Operate: { Erpstatuscode: 9, customerno: 9 },
+      Operate: {Arrvoucherno:9, Erpvoucherno: 9, customerno: 9 },
       apiUrl: {
         query: "/WayBill/Get_WayBillListByPage",
         exportXls: "/WayBill/GetWayBillDetailExp"
@@ -301,8 +304,9 @@ export default {
       min.outerVisible = true;
 
       var model = {};
-      model = val;
-      delete model.Createtime;
+      //model = val;
+     // delete model.Createtime;
+     model.Erpvoucherno = val.Erpvoucherno;
       getWayBillDetail(model).then(res => {
         debugger;
         if (res.Result == 1) {
