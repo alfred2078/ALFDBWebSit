@@ -393,6 +393,10 @@ export default {
           }
         }
         if (find) break;
+        if(min.materialPackData[i].OuterQty==""||min.materialPackData[i].OuterQty==null)
+        {
+          min.materialPackData[i].OuterQty=0;
+        }
       }
       if (find) {
         min.$message({
@@ -413,6 +417,7 @@ export default {
         });
         return;
       }
+
       //当前页面全部提交
       console.log('---保存提交数据---');
       console.log(min.materialPackData);

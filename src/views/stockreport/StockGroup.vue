@@ -144,7 +144,7 @@ export default {
         Materialno: "",
         Checktypecode:""
       },
-      Operate:{Materialno:9,Batchno:9},
+      Operate:{Materialno:9},
       apiUrl: {
         query: "/Stock/GetT_StockListGroup",
         exportXls: "/Stock/GetT_StockListByExp"
