@@ -181,6 +181,7 @@
                 :prop="item.prop"
                 :label="item.label"
                 :width="item.width"
+                :sortable="item.sortable"
                 v-if="item.colvisible"
                 show-overflow-tooltip
               ></el-table-column>
@@ -320,6 +321,7 @@ export default {
         {
           label: "物料编码",
           prop: "Materialno",
+          sortable:true,
           colvisible: true,
           width: 150
         },
@@ -433,6 +435,7 @@ export default {
         {
           label: "创建时间",
           prop: "Createtime",
+          sortable:true,
           colvisible: true,
           width: 180
         }
