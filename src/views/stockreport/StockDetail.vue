@@ -164,8 +164,11 @@
             :data="Data"
             :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
             v-loading="loading"
+            
             :cell-style="{ padding: '2px' }"
             style="width: 100%;"
+            ref="table"
+
             :max-height="screenHeight"
             height="auto"
             class="layout-table"
@@ -230,6 +233,7 @@ export default {
       outerVisible: false,
       screenHeight: null,
       idshow: false,
+
       apiUrl: {
         query: "/Stock/GetV_StockListByPage",
         save: "",
@@ -437,6 +441,34 @@ export default {
     };
   },
   methods: {
+    /* getSummaries(param) {
+      debugger;
+ 
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = "合计";
+          return;
+        }
+
+        const values = data.map(item => Number(item[column.property]))
+        if (column.property === 'Qty' || column.property === 'TaskQty' ) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)          
+        }
+      });
+this.$nextTick(() => {
+        this.$refs.table.doLayout();
+      });
+      return sums;
+    }, */
     changeFun(val) {
       this.multipleSelection = val;
     },

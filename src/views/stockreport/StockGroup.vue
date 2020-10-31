@@ -42,8 +42,8 @@
           <el-col :span="5">
             <el-form-item label="">
               <el-input
-                v-model="queryParam.Batchno"
-                placeholder="批次"
+                v-model="queryParam.Checktypecode"
+                placeholder="盘点分类"
                 clearable
               ></el-input>
             </el-form-item>
@@ -142,7 +142,7 @@ export default {
         Strongholdcode: "",
         Towarehouseno: "",
         Materialno: "",
-        Batchno: ""
+        Checktypecode:""
       },
       Operate:{Materialno:9,Batchno:9},
       apiUrl: {
@@ -181,8 +181,8 @@ export default {
           colvisible: true
         },
         {
-          label: "批次",
-          prop: "Batchno",
+          label: "盘点分类",
+          prop: "Checktypecode",
           colvisible: true
         },
         {
@@ -203,7 +203,7 @@ export default {
         "物料编码",
         "客户件号",
         "物料描述",
-        "批次",
+        "盘点分类",
         "数量",
         "寄售"
       ],
@@ -214,7 +214,7 @@ export default {
         "Materialno",
         "Cusmaterialno",
         "Materialdesc",
-        "Batchno",
+        "Checktypecode",
         "Qty",
         "Specialstock"
       ]
