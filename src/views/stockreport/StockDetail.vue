@@ -68,11 +68,20 @@
             
           </el-row>
           <el-row>
-            <el-col :span="5">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input
                   v-model="queryParam.Checktypecode"
                   placeholder="盘点分类"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Creater"
+                  placeholder="创建人"
                   clearable
                 ></el-input>
               </el-form-item>
@@ -214,7 +223,8 @@ export default {
         Strongholdcode: "",
         Serialno:"",
         Barcode:"",
-        Checktypecode:""
+        Checktypecode:"",
+        Creater:""
       },
       Operate: { Areano: 9,Towarehouseno: 9, Materialno: 9, Batchno: 9, Cusmaterialno: 9,Serialno:9 },
       outerVisible: false,
@@ -438,7 +448,7 @@ export default {
       }
     },
     Exp(){
-    
+
       if(this.queryParam.Towarehouseno=='' 
         && this.queryParam.Areano==''
         && this.queryParam.Materialno==''
@@ -447,7 +457,9 @@ export default {
         && this.queryParam.Cusmaterialno==''
         && this.queryParam.Strongholdcode==''
         && this.queryParam.Serialno==''
-        && this.queryParam.Barcode=='' )
+        && this.queryParam.Barcode==''
+        && this.queryParam.Checktypecode==''
+        && this.queryParam.Creater=='' )
       {
          this.$message({
           message: "请输入条件后，在进行导出！",
