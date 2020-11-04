@@ -131,7 +131,7 @@
         >
           <el-table-column prop="Towarehouseno" label="仓库编码"></el-table-column>
           <el-table-column prop="Arrvoucherno" label="生产订单号" width="200"></el-table-column>
-          <el-table-column prop="Materialno" label="物料编码"></el-table-column>
+          <el-table-column prop="Materialno" :sortable="true" label="物料编码"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称"></el-table-column>
           <el-table-column prop="Unitname" label="单位名称"></el-table-column>
           <el-table-column prop="Voucherqty" label="领料数量"></el-table-column>
