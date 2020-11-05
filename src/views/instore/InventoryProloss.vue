@@ -119,7 +119,7 @@ export default {
       DifferenceList:[{
       
         id:1,
-        name:'赢'
+        name:'盈'
       },{
         id:2,
         name:'亏'
@@ -217,7 +217,7 @@ export default {
       });
     },
     exportToExcel() {
-      this.getInfo();
+     // this.getInfo();
       debugger;
       require.ensure([], () => {
         const { export_json_to_excel } = require("exportexcel/Export2Excel");

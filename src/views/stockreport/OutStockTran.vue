@@ -190,7 +190,7 @@ export default {
         Strongholdcode: "",
         Towarehouseno: "",
         Erpvoucherno: "",
-   
+        Serialno:"",
         Materialno: "",
         Batchno: "",
         Barcode: "",

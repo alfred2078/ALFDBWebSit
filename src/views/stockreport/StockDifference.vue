@@ -6,7 +6,7 @@
         :model="queryParam"
         label-width="0px"
         size="small "
-        @keyup.enter.native="getModelListPage"
+        @keyup.enter.native="getInfo"
       >
         <el-row>
           
@@ -40,13 +40,29 @@
               ></el-input>
             </el-form-item>
           </el-col> -->
-
+          <el-col :span="5">
+              <el-form-item>
+                <el-select v-model="Differencevalues" placeholder="盈亏类型" multiple clearable>
+                  <el-option
+                    v-for="item in DifferenceList"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+            <el-form-item label="">
+              <el-checkbox v-model="Erpvoucherno" label="批次分组" border size="medium"></el-checkbox>
+            </el-form-item>
+          </el-col>
           <el-col :span="5">
             <el-form-item label-width="0">
               <el-button
                 icon="el-icon-search"
                 type="primary"
-                @click="getModelListPage"
+                @click="getInfo"
               >查询</el-button>
             </el-form-item>
           </el-col>
@@ -63,7 +79,7 @@
         </el-col> -->
         <el-col :span="2">
           <el-button
-            @click="handleExportXls"
+            @click="exportToExcel"
             size="small "
             icon="el-icon-download"
             type="primary"
@@ -84,29 +100,38 @@
         :cell-style="{ padding: '2px' }"
         style="width: 100%;"
         height="auto"
-            class="layout-table"
+        class="layout-table"
+        :row-class-name="tableRowClassName"
+      
       >
-        <template v-for="item in columns">
-          <el-table-column
-            :key="item.prop"
-            :prop="item.prop"
-            :label="item.label"
-            :width="item.width"
-            v-if="item.colvisible"
-            show-overflow-tooltip
-          >
-          </el-table-column>
-        </template>
+      <el-table-column
+        label="序号"
+        type="index"
+        width="60"
+        align="center">
+    <template slot-scope="scope">
+        <span>{{scope.$index + 1}}</span>
+    </template>
+    </el-table-column>
+        <el-table-column prop="Difference" width="80" :sortable="true" label="盈亏"> </el-table-column>
+        <el-table-column prop="Strongholdcode" label="据点" width="80"> </el-table-column>
+        <el-table-column prop="Towarehouseno" label="仓库编码" width="100"> </el-table-column>
+        <el-table-column prop="Batchno" label="批次" width="100"> </el-table-column>
+        <el-table-column prop="Materialno" label="物料编码" width="120"> </el-table-column>
+        <el-table-column prop="Materialdesc" label="物料名称" width="300"> </el-table-column>
+        <el-table-column prop="Wqty" label="WMS数量"></el-table-column>
+        <el-table-column prop="Eqty" label="ERP数量"></el-table-column>
+        <el-table-column prop="WEqty" label="差异数量"></el-table-column>
       </el-table>
 
 
     <!-- 分页区域 -->
-    <pagination
+ <!--    <pagination
       :total="PageData.totalCount"
       :fpage-size.sync="PageData.pageSize"
       :fcurrent-page.sync="PageData.currentPage"
       @pagination="getModelList"
-    />
+    /> -->
    </el-container>
       </el-main>
     </el-row>
@@ -115,8 +140,15 @@
 <style lang="scss" scoped>
 @import "@/styles/layout.scss";
 </style>
-
+<style>
+  .warning-row {
+    background-color: rgba(247, 7, 7, 0.685) !important;
+  }
+</style>
 <script>
+import {
+  getStockDifferenceWmsAndErp
+} from "@/api/api";
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
 export default {
@@ -127,130 +159,124 @@ export default {
   },
   data() {
     return {
+      loading: false,
       xlsname: "库存差异",
       queryParam: {
-      
+        
         Towarehouseno: "",
-        Materialno: ""
+        Materialno: "",
+        Difference:""
       },
-      Operate:{Materialno:9},
+      Erpvoucherno:false,
+      Differencevalues:[],
+      DifferenceList:[{
+      
+        id:1,
+        name:'盈'
+      },{
+        id:2,
+        name:'亏'
+      },{
+        id:3,
+        name:'平'
+      }],
+     // Operate:{Materialno:9},
       apiUrl: {
         query: "/Stock/Get_StockDifferenceWmsAndErp",
-        exportXls: "/Stock/GetT_StockListByExp"
+        exportXls: "/Stock/Get_StockDifferenceWmsAndErp"
       },
-      columns: [
-        {
-          label: "据点",
-          prop: "Strongholdcode",
-          colvisible: true
-        },
-        {
-          label: "仓库编码",
-          prop: "Towarehouseno",
-          colvisible: true
-        },
-        {
-          label: "仓库名称",
-          prop: "Warehousename",
-          colvisible: true
-        },
-        {
-          label: "物料编码",
-          prop: "Materialno",
-          colvisible: true
-        },
-        // {
-        //   label: "客户件号",
-        //   prop: "Cusmaterialno",
-        //   colvisible: true
-        // },
-        {
-          label: "物料描述",
-          prop: "Materialdesc",
-          colvisible: true
-        },
-       /*  {
-          label: "批次",
-          prop: "Batchno",
-          colvisible: true
-        }, */
-        {
-          label: "数量",
-          prop: "Sumqty",
-          colvisible: true
-        }
-        // {
-        //   label: "寄售",
-        //   prop: "Specialstock",
-        //   colvisible: true
-        // }
-      ],
+      Data: [],
       tHeader: [
+        "盈亏",
         "据点",
         "仓库编码",
-        "仓库名称",
         "物料编码",
-        "客户件号",
-        "物料描述",
+        "物料名称",
+        "WMS数量",
+        "ERP数量",
       /*   "批次", */
-        "数量",
-        "寄售"
+        "差异数量"
       ],
       filterVal: [
+        "Difference",
         "Strongholdcode",
         "Towarehouseno",
-        "Warehousename",
         "Materialno",
-        "Cusmaterialno",
         "Materialdesc",
+        "Wqty",
         /* "Batchno", */
-        "Qty",
-        "Specialstock"
+        "Eqty",
+        "WEqty"
       ]
     };
   },
   methods: {
+    tableRowClassName({row, rowIndex}) {
+        if (row.Difference != "平") {
+          return 'warning-row';
+        } 
+        return '';
+      },
+ 
    //查询
     getInfo() {
        
-   
-     /*  var min = this;
-      min.model = {};
-      var erpvoucherno = { Field: "Erpvoucherno", Value: min.Erpvoucherno };
-      var checkstatus = { Field: "Checkstatus", Value: min.selectvalue };
-      var cbegintime = { Field: "cbegintime", Value: min.datetime[0] };
-      var cdonetime = { Field: "cdonetime", Value: min.datetime[1] };
-      var Isdel = { Field: "Isdel", Value: 1 };
-      min.Rules.push(erpvoucherno);
-      min.Rules.push(checkstatus);
-      min.Rules.push(cbegintime);
-      min.Rules.push(cdonetime);
-      min.Rules.push(Isdel);
-      min.FilterGroup.Rules = min.Rules;
-      min.pageReuquest.FilterGroup = min.FilterGroup;
-      min.pageReuquest.PageNumber = 1;
-      min.pageReuquest.PageSize = 10;
-      min.model.pageReuquest = min.pageReuquest;
-      getTCheckListByPage(min.model).then(res => {
+     var min = this;
+     if(min.queryParam.Towarehouseno==""){
+       this.$message({
+          message: "请输入仓库编码",
+          type: "warning"
+        });
+        return;
+     }
+     if(min.Erpvoucherno)
+     {
+       min.queryParam.Erpvoucherno='1';
+     }else
+     {
+       min.queryParam.Erpvoucherno='0';
+     }
+    min.queryParam.Difference = min.Differencevalues.join(',');
+    min.loading=true;
+     getStockDifferenceWmsAndErp(min.queryParam).then(res => {
         if (res.Result == 1) {
-          min.model = {};
-          min.model.Groupname = "Check_Status";
-          res.Data.forEach(t => {
-            min.options.forEach(it => {
-              if (t.Checkstatus == it.Parameterid) {
-                t.Checkstatus = it.Parametername;
-              }
-            });
-          });
-
-          min.GetCheck = res.Data;
-
-          console.log(min.GetCheck);
+          min.loading=false;
+         /*  res.Data.forEach(t => {
+            if (t.Difference==0){
+              t.Difference ="平"
+            }else if(t.Difference==1){
+               t.Difference ="盈"
+            }else{
+              t.Difference ="亏"
+            }
+            
+          }); */
+          min.Data = res.Data;
         } else {
+          min.loading=false;
           min.$message.error(res.ResultValue);
         }
-      }); */
+      });
+   
     },
+    exportToExcel() {
+     // this.getInfo();
+      debugger;
+      this.loading=true;
+      require.ensure([], () => {
+        const { export_json_to_excel } = require("exportexcel/Export2Excel");
+
+        const xlsdata = this.formatJson(this.filterVal, this.Data);
+        console.log(this.exportList);
+
+        export_json_to_excel(this.tHeader, xlsdata, this.xlsname);
+      });
+      this.loading=false;
+    },
+    formatJson(filterVal, jsonData) {
+      debugger;
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    }
   }
 };
 </script>

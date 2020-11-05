@@ -103,6 +103,7 @@
             :label="item.label"
             :width="item.width"
             v-if="item.colvisible"
+            :sortable="item.sortable"
             show-overflow-tooltip
           >
           </el-table-column>
@@ -168,6 +169,7 @@ export default {
         {
           label: "物料编码",
           prop: "Materialno",
+          sortable:true,
           colvisible: true
         },
         // {
