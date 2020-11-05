@@ -2,7 +2,9 @@ import axios from "axios";
 
 const service = new axios.create({  
   baseURL: "https://localhost:44394/api",  
-  // baseURL: "http://172.19.106.230:5001/api",
+  //baseURL: "http://172.19.106.230:5001/api",
+  
+  //baseURL: "http://172.19.106.190:7001/weatherforecast",  
   timeout: 50000,
   withCredentials: false, 
   headers: {
@@ -12,6 +14,7 @@ const service = new axios.create({
 
 const err = error => {  
   if (error && error.response) {    
+
     let data = error.response.data;    
     console.log("------异常响应------", error.response.status);
     switch (error.response.status) {

@@ -98,6 +98,8 @@ const getVOtherOutDetail =(params)=>postAction("OtherOut/Get_VOtherOutDetail",pa
 //托运单
 const getWayBillDetailHeaderidsub =(params)=>postAction("WayBill/Get_WayBillDetailHeaderidsub",params);//查询托运单id
 const getWayBillDetail =(params)=>postAction("WayBill/Get_WayBillDetail",params);//查询托运单表体
+//库存差异
+const getStockDifferenceWmsAndErp =(params)=>postAction("Stock/Get_StockDifferenceWmsAndErp",params);//查询库存差异
 export{
     saveWarehouse,
     updateWarehouse,
@@ -162,7 +164,8 @@ export{
     getVTransferinDetail,
     getVOtherOutDetail,
     getWayBillDetailHeaderidsub,
-    getWayBillDetail
+    getWayBillDetail,
+    getStockDifferenceWmsAndErp
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
