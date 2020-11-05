@@ -142,7 +142,7 @@
 </style>
 <style>
   .warning-row {
-    background-color: rgba(247, 7, 7, 0.685) !important;
+    color: rgba(247, 7, 7, 0.685) !important;
   }
 </style>
 <script>
