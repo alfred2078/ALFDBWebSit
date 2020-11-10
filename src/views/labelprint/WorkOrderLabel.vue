@@ -6,13 +6,31 @@
           <el-col :span="6">
             <el-form-item label="">
               <el-input v-model="queryParam.Erpvoucherno" placeholder="成品订单号" clearable></el-input>
+           
             </el-form-item>
           </el-col>
+            <el-col :span="3">
+            <el-form-item label="">
+           <el-select
+              v-model="printType"
+              placeholder="打印类型"
+            >
+              <el-option
+                v-for="item in printTypeList"
+                :key="item.printTypeid"
+                :label="item.printTypename"
+                :value="item.printTypeid"
+              ></el-option>
+            </el-select>
+            </el-form-item>
+          </el-col>
+
           <!-- <el-col :span="6">
             <el-form-item label="">
               <el-input  v-on:keyup.enter="SelectList"  v-model="queryParam.Materialno"  placeholder="物料编码" clearable ></el-input>
             </el-form-item>
           </el-col> -->
+          
           <el-col :span="8">
             <el-form-item>
               <el-button icon="el-icon-search" type="primary"  @click="SelectList()">查询</el-button>
@@ -68,6 +86,11 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
            PcOrPda:1
         },
         DataList:[],
+                     printTypeList: [
+        { printTypeid: 1, printTypename: "工单无物料标签" },
+        { printTypeid: 2, printTypename: "工单有物料标签" }
+              ],
+                printType: 1,
         // idshow: false,
         // apiUrl: {
         //   query: "/Purchase/GetT_PurchaseOrderListADFAsync",
@@ -142,6 +165,10 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
             label:"包装量",
               prop:"PackQty",
               colvisible:false
+            }, {
+              label:"打印类型",
+              prop:"Printertype",
+              colvisible:false
             }
             ]
       }
@@ -164,7 +191,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         }
       },
       PrintLabel:function (record) {
-          var userinfo=Vue.ls.get(USER_INFO);
+          record.Printertype = this.printType
+        var userinfo=Vue.ls.get(USER_INFO);
         record.UserName=userinfo.Username;
         record.Remainqty=record.Voucherqty;
         record.Vouchertype=45;
@@ -173,9 +201,9 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
           record.PackQty=0;
         }
       if(record.PackQty==0){
-            record.Printqty=record.Remainqty;
+            record.Printqty= Math.ceil(record.Remainqty);
         }else{
-           record.Printqty=record.Remainqty%record.PackQty;
+           record.Printqty= Math.ceil(record.Remainqty%record.PackQty);
         }
         record.PrintRemainqty=record.Remainqty;
         this.$refs.purchaseDialog.print(record,this.dialogtitle);
