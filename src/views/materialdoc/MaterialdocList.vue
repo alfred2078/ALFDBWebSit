@@ -59,6 +59,28 @@
                 </el-select>
               </el-form-item>
             </el-col>
+            
+          </el-row>
+          <el-row>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Materialno"
+                  placeholder="物料编码"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Batchno"
+                  placeholder="批次"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="3">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
@@ -135,7 +157,9 @@ export default {
         GUID: "",
         Towarehouseno: "",
         Vouchertype: "",
-        Poststatus: ""
+        Poststatus: "",
+        Materialno:"",
+        Batchno:""
       },
       splace: "",
       voucherTyleListAll: [],
