@@ -87,8 +87,8 @@ import  purchaseLabel from  "./PurchaseLabelDialog"
         },
         DataList:[],
                      printTypeList: [
-        { printTypeid: 1, printTypename: "工单无物料标签" },
-        { printTypeid: 2, printTypename: "工单有物料标签" }
+          { printTypeid: 1, printTypename: "工单标签" },
+        { printTypeid: 2, printTypename: "无物料奶精标签" }
               ],
                 printType: 1,
         // idshow: false,
