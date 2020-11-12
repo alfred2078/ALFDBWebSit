@@ -256,6 +256,9 @@ export default {
         "批次",
         "序列号",
         "数量",
+        "单位",
+        "单位名称",
+        "规格",
         "效期",
         "69码",
         "质检状态",
@@ -280,6 +283,9 @@ export default {
         "Batchno",
         "Serialno",
         "Qty",
+        "Unit",
+        "Unitname",
+        "Spec",
         "Edate",
         "Watercode",
         "Strstatus",
@@ -359,6 +365,24 @@ export default {
           prop: "Qty",
           colvisible: true,
           width: 100
+        },
+        {
+          label: "单位",
+          prop: "Unit",
+          colvisible: true,
+          width: 100
+        },
+        {
+          label: "单位名称",
+          prop: "Unitname",
+          colvisible: true,
+          width: 100
+        },
+        {
+          label: "规格",
+          prop: "Spec",
+          colvisible: true,
+          width: 150
         },
         {
           label: "效期",
