@@ -21,12 +21,12 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
               </el-form-item>
@@ -43,25 +43,45 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialdesc" placeholder="物料名称" clearable></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
-            <el-col :span="4">
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Supplierno" placeholder="供应商编号" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Suppliername" placeholder="供应商名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Serialno" placeholder="序列号" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="9">
+            <el-col :span="2">
+              <el-form-item label>
+                <el-input v-model="queryParam.Struserno" placeholder="创建人" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
               <el-form-item label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
@@ -74,7 +94,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="3">
+            <el-col :span="1">
               <el-form-item>
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
@@ -163,9 +183,13 @@ export default {
         Barcode: "",
         Createtime: "",
         Vouchertype: "",
-        Serialno:""
+        Serialno:"",
+        Supplierno:"",
+        Suppliername:"",
+        Materialdesc:"",
+        Struserno:""
       },
-      Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 ,Serialno:9},
+      Operate: { Erpvoucherno: 9, Materialno: 9,Materialdesc:9, Batchno: 9, Barcode: 9 ,Serialno:9,Suppliername:9},
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
       apiUrl: {
@@ -182,10 +206,22 @@ export default {
           width: 60
         },
         {
+          label: "据点名称",
+          prop: "Strongholdname",
+          colvisible: true,
+          width: 160
+        },
+        {
           label: "仓库",
           prop: "Towarehouseno",
           colvisible: true,
           width: 60
+        },
+        {
+          label: "仓库名称",
+          prop: "Strtowarehouseno",
+          colvisible: true,
+          width: 160
         },
         {
           label: "库位",
@@ -251,7 +287,14 @@ export default {
           label: "数量",
           prop: "Qty",
           colvisible: true,
-          width: 150
+          width: 100
+        },
+        
+        {
+          label: "删除标记",
+          prop: "Isdelname",
+          colvisible: true,
+          width: 120
         },
         {
           label: "收货人",
@@ -267,8 +310,10 @@ export default {
         }
       ],
       tHeader: [
-        "工厂",
+        "据点",
+        "据点名称",
         "仓库",
+        "仓库名称",
         "库位",
         "单据名称",
         "ERP单号",
@@ -281,12 +326,15 @@ export default {
         "批次",
         "数量",
         "寄售",
+        "删除标记",
         "收货人",
         "收货时间"
       ],
       filterVal: [
         "Strongholdcode",
+        "Strongholdname",
         "Towarehouseno",
+        "Strtowarehouseno",
         "Toareano",
         "StrVoucherType",
         "Erpvoucherno",
@@ -299,6 +347,7 @@ export default {
         "Batchno",
         "Qty",
         "Specialstock",
+        "Isdelname",
         "Struserno",
         "Createtime"
       ]

@@ -20,12 +20,12 @@
                 <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
               </el-form-item>
             </el-col>
-
             <el-col :span="3">
               <el-form-item label-width label>
-                <el-input v-model="queryParam.PackageSeq" placeholder="箱号" clearable></el-input>
+                <el-input v-model="queryParam.Customername" placeholder="客户名称" clearable></el-input>
               </el-form-item>
             </el-col>
+            
 
             <el-col :span="8">
               <el-form-item label-width label>
@@ -40,6 +40,41 @@
               </el-form-item>
             </el-col>
 
+            
+          </el-row>
+          <el-row>
+            <el-col :span="4">
+              <el-form-item label-width label>
+                <el-input v-model="queryParam.PackageSeq" placeholder="箱号" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Materialno"
+                  placeholder="物料编码"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Materialdesc"
+                  placeholder="物料名称"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Creater"
+                  placeholder="创建人"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="1">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
@@ -92,12 +127,14 @@
             class="layout-table"
            
           >
-            <el-table-column prop="Erpvoucherno" label="发货通知单号" width="180"></el-table-column>
+            <el-table-column prop="Erpvoucherno" label="发货通知单号" width="180" :sortable="true"></el-table-column>
             <el-table-column prop="PackageSeq" label="箱号" width="80"></el-table-column>
             <el-table-column prop="Customerno" label="客户编码" width="120"></el-table-column>
             <el-table-column prop="Customername" label="客户名称" width="180"></el-table-column>
             <el-table-column prop="Materialno" label="物料编码" width="120"></el-table-column>
             <el-table-column prop="Materialdesc" label="物料名称" width="200"></el-table-column>
+            <el-table-column prop="Unit" label="单位" width="80"></el-table-column>
+            <el-table-column prop="Spec" label="规格" width="80"></el-table-column>
             <el-table-column prop="Batchno" label="批次" width="120"></el-table-column>
             <el-table-column prop="Qty" label="数量" width="80"></el-table-column>
             <el-table-column prop="ZQty" label="整箱个数" width="100"></el-table-column>
@@ -142,11 +179,15 @@ export default {
         Erpvoucherno: "",
         PackageCode:"",
         Customerno: "",
+        Customername:"",
         Createtime: "",
         PackageSeq:"",
-        Towarehouseno:""
+        Towarehouseno:"",
+        Materialno:"",
+        Materialdesc:"",
+        Creater:""
       },
-      Operate: { Erpvoucherno: 9,PackageCode:9, Customerno: 9 },
+      Operate: { Erpvoucherno: 9,PackageCode:9, Customerno: 9 ,Customername:9,Materialdesc:9},
       apiUrl: {
         query: "/PackageCarton/Get_PackageCartonListByPage",
         exportXls: "/PackageCarton/Get_PackageCartonListExp"
@@ -158,6 +199,8 @@ export default {
         "客户名称",
         "物料编码",
         "物料名称",
+        "单位",
+        "规格",
         "批次",
         "数量",
         "创建人",
@@ -170,6 +213,8 @@ export default {
         "Customername",
         "Materialno",
         "Materialdesc",
+        "Unit",
+        "Spec",
         "Batchno",
         "Qty",
         "Creater",

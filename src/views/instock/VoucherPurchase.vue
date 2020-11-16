@@ -9,13 +9,21 @@
                 <el-input v-model="queryParam.Erpvoucherno" clearable placeholder="采购订单号"></el-input>
               </el-form-item>
             </el-col>
-
-            <el-col :span="5">
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Supplierno" clearable placeholder="供应商编码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Suppliername" clearable placeholder="供应商名称"></el-input>
               </el-form-item>
             </el-col>
-
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Creater" clearable placeholder="创建人"></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="9">
               <el-form-item label>
                 <el-date-picker
@@ -29,7 +37,26 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            
+          </el-row>
+          <el-row>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Towarehouseno" clearable placeholder="仓库编码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialno" clearable placeholder="物料编码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialdesc" clearable placeholder="物料名称"></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="4">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
@@ -159,16 +186,17 @@
           
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-          <el-table-column prop="Towarehouseno" label="仓库编码"></el-table-column>
+          <el-table-column prop="Towarehouseno" label="仓库编码" width="120"></el-table-column>
+          <el-table-column prop="Towarehousename" label="仓库名称" width="140"></el-table-column>
           <el-table-column prop="Rowno" label="项次"></el-table-column>
           <el-table-column prop="Rownodel" label="项序"></el-table-column>
-          <el-table-column prop="Materialno" label="物料编码"></el-table-column>
+          <el-table-column prop="Materialno" label="物料编码" width="120"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称" width="180"></el-table-column>
 
-          <el-table-column prop="Voucherqty" label="订单数量"></el-table-column>
-          <el-table-column prop="Receiveqty" label="已收数量"></el-table-column>
-          <el-table-column prop="Remainqty" label="未收数量"></el-table-column>
-          <el-table-column prop="Creater" label="创建人"></el-table-column>
+          <el-table-column prop="Voucherqty" label="订单数量" width="100"></el-table-column>
+          <el-table-column prop="Receiveqty" label="已收数量" width="100"></el-table-column>
+          <el-table-column prop="Remainqty" label="未收数量" width="100"></el-table-column>
+          <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
           <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
         </el-table>
       </div>
@@ -198,7 +226,11 @@ export default {
         Erpvoucherno: "",
         Suppliername: "",
         Createtime: "",
-        Towarehouseno:""
+        Towarehouseno:"",
+        Supplierno:"",
+        Creater:"",
+        Materialno:"",
+        Materialdesc:""
       },
       Operate: { Erpvoucherno: 9, Suppliername: 9 },
       apiUrl: {
@@ -230,6 +262,7 @@ export default {
         "供应商名称",
         "ERP制单人",
         "仓库",
+        "仓库名称",
         "项次",
         "项序",
         "物料编码",
@@ -250,6 +283,7 @@ export default {
         "Suppliername",
         "Vouuser",
         "Towarehouseno",
+        "Towarehousename",
         "Rowno",
         "Rownodel",
         "Materialno",

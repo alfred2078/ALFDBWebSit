@@ -10,7 +10,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            <el-col :span="4">
               <el-form-item label-width label>
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="托运单号" clearable></el-input>
               </el-form-item>
@@ -18,11 +18,15 @@
 
             <el-col :span="4">
               <el-form-item label-width label>
-                <el-input v-model="queryParam.Customerno" placeholder="客户" clearable></el-input>
+                <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
               </el-form-item>
             </el-col>
-
-            <el-col :span="8">
+            <el-col :span="4">
+              <el-form-item label-width label>
+                <el-input v-model="queryParam.Customername" placeholder="客户名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
               <el-form-item label-width label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
@@ -32,6 +36,72 @@
                   end-placeholder="结束日期"
                   value-format="yyyy-MM-dd"
                 ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            
+          </el-row>
+          <el-row>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialno" clearable placeholder="物料编码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialdesc" clearable placeholder="物料名称"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input v-model="queryParam.Trackingnumber" clearable placeholder="物流单号"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.LogisticsCompany" clearable placeholder="物流公司"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="2">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Creater"
+                  placeholder="创建人"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item>
+                <el-select
+                  style="width:100%"
+                  v-model="queryParam.SettlementMethod"
+                  clearable
+                  placeholder="结算方式"
+                >
+                  <el-option
+                    v-for="item in SettlementMethodListAll"
+                    :key="item.Parameterid"
+                    :label="item.Parametername"
+                    :value="item.Parameterid"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item>
+                <el-select
+                  style="width:100%"
+                  v-model="queryParam.SendMethod"
+                  clearable
+                  placeholder="提货方式"
+                >
+                  <el-option
+                    v-for="item in SendMethodListAll"
+                    :key="item.Parameterid"
+                    :label="item.Parametername"
+                    :value="item.Parameterid"
+                  ></el-option>
+                </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="1">
@@ -159,9 +229,12 @@
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
         <el-table-column prop="Arrvoucherno" label="发货通知单号" width="180"></el-table-column>
-        <el-table-column prop="Materialno" label="物料编码"></el-table-column>
+        <el-table-column prop="Materialno" label="物料编码"  width="120"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称" width="220"></el-table-column>
-          <el-table-column prop="Parametername" label="业务类型"></el-table-column>
+          <el-table-column prop="Parametername" label="业务类型" width="120"></el-table-column>
+          <el-table-column prop="ProvinceName" label="所属省" width="100"></el-table-column>
+          <el-table-column prop="CityName" label="所属市" width="100"></el-table-column>
+          <el-table-column prop="RegionName" label="所属区" width="140"></el-table-column>
           <el-table-column prop="Qty" label="数量"></el-table-column>
           <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
@@ -177,7 +250,7 @@
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
-import { getWayBillDetailHeaderidsub, getWayBillDetail,windowpost } from "@/api/api";
+import { getWayBillDetailHeaderidsub, getWayBillDetail,windowpost ,getParameterList} from "@/api/api";
 import Vue from "vue";
 import store from "@/store";
 export default {
@@ -196,10 +269,19 @@ export default {
         Erpvoucherno: "",
         Customerno: "",
         Createtime: "",
-        Towarehouseno: ""
+        Towarehouseno: "",
+        Customername:"",
+        Materialno:"",
+        Materialdesc:"",
+        LogisticsCompany:"",
+        Trackingnumber:"",
+        SettlementMethod:"",
+        SendMethod:""
       },
+      SettlementMethodListAll:[],
+      SendMethodListAll:[],
       Arrvoucherno: "",
-      Operate: {Arrvoucherno:9, Erpvoucherno: 9, customerno: 9 },
+      Operate: {Arrvoucherno:9, Erpvoucherno: 9, customerno: 9 ,Customername:9,LogisticsCompany:9},
       apiUrl: {
         query: "/WayBill/Get_WayBillListByPage",
         exportXls: "/WayBill/GetWayBillDetailExp"
@@ -212,6 +294,9 @@ export default {
         "托运单号",
         "客户编码",
         "客户名称",
+        "所属省",
+        "所属市",
+        "所属区",
         "物流单号",
         "发货物流",
         "到站",
@@ -241,6 +326,9 @@ export default {
         "Erpvoucherno",
         "Customerno",
         "Customername",
+        "ProvinceName",
+        "CityName",
+        "RegionName",
         "Trackingnumber",
         "LogisticsCompany",
         "Address",
@@ -267,7 +355,31 @@ export default {
       ]
     };
   },
+  created() {
+    this.getSettlementMethodListAll();
+    this.getSendMethodListAll();
+  },
   methods: {
+    getSettlementMethodListAll() {
+      // queryParam.Groupname = "VoucherRec_Type"
+      let type = "WayBill_SettlementMethod_Name";
+      getParameterList({ Groupname: type }).then(res => {
+        if (res.Result === 1) {
+          // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
+          this.SettlementMethodListAll = res.Data;
+        }
+      });
+    },
+    getSendMethodListAll() {
+      // queryParam.Groupname = "VoucherRec_Type"
+      let type = "WayBill_SendMethod_Name";
+      getParameterList({ Groupname: type }).then(res => {
+        if (res.Result === 1) {
+          // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
+          this.SendMethodListAll = res.Data;
+        }
+      });
+    },
     getInfo(){
       this.PageData.currentPage=1;
       this.search();
