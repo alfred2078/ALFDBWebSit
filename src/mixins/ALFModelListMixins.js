@@ -153,14 +153,14 @@ export const ALFModelListMixins = {
            
             
           }
-          if (key !== "Createtime") {
+          if (key !== "Createtime" &&key !== "Postdate") {
             Rules.push({
               Field: key,
               Value: queryParam[key]+'',
               Operate: Operates
 
             });
-          } else {
+          } else{
             let disArr = Array.from(new Set(queryParam[key]));
             for (let j = 0, len = disArr.length; j < len; j++) {
              

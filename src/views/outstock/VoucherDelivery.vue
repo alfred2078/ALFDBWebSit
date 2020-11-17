@@ -10,12 +10,25 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            <el-col :span="3">
               <el-form-item label-width label>
                 <el-input v-model="queryParam.Customerno" placeholder="客户编码" clearable></el-input>
               </el-form-item>
             </el-col>
-
+            <el-col :span="4">
+              <el-form-item label-width label>
+                <el-input v-model="queryParam.Customername" placeholder="客户名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+             <el-col :span="3">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Towarehousenodecs"
+                  placeholder="仓库"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="9">
               <el-form-item label-width label>
                 <el-date-picker
@@ -29,11 +42,49 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+            
+          </el-row>
+          <el-row>
+          <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Postuser"
+                  placeholder="过账人"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-select v-model="queryParam.PostStatus" placeholder="过账状态" clearable>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.id"
+                    :label="item.value"
+                    :value="item.id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label>
+                <el-date-picker
+                  v-model="queryParam.Postdate"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="过账日期"
+                  end-placeholder="过账结束日期"
+                  value-format="yyyy-MM-dd"
+                  
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="2">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
               </el-form-item>
             </el-col>
+          
           </el-row>
         </el-form>
       </el-card>
@@ -79,13 +130,13 @@
             height="auto"
             class="layout-table"
           >
-            <el-table-column prop="Erpvoucherno" label="发货通知单号" width="180"></el-table-column>
-            <el-table-column prop="Parametername" label="单据名称" width="120"></el-table-column>
-            <el-table-column prop="Customerno" label="客户编码" width="120"></el-table-column>
-            <el-table-column prop="Customername" label="客户名称" width="180"></el-table-column>
-            <el-table-column prop="Voudate" label="通知日期" width="180"></el-table-column>
-            <el-table-column prop="Erpnote" label="备注" width="180"></el-table-column>
-            <el-table-column prop="Address" label="送货地址" width="250"></el-table-column>
+            <el-table-column prop="Erpvoucherno" label="发货通知单号" width="180" fixed></el-table-column>
+            <el-table-column prop="Parametername" label="单据名称" width="120" fixed></el-table-column>
+            <el-table-column prop="Customerno" label="客户编码" width="120" fixed></el-table-column>
+            <el-table-column prop="Customername" label="客户名称" width="180" fixed></el-table-column>
+            <el-table-column prop="Voudate" label="通知日期" width="180" ></el-table-column>
+            <el-table-column prop="Erpnote" label="备注" width="180" ></el-table-column>
+            <el-table-column prop="Address" label="送货地址" width="250" ></el-table-column>
             <el-table-column prop="Contacts" label="客户联络人姓名" width="150"></el-table-column>
             <el-table-column prop="Tel" label="联络人电话" width="150"></el-table-column>
             <el-table-column prop="LineNo" label="月台" width="150"></el-table-column>
@@ -143,11 +194,12 @@
           <el-table-column prop="Remainqty" label="未发货数量" width="100"></el-table-column>
           <el-table-column prop="Postqty" label="已发货数量" width="100"></el-table-column>
           <el-table-column prop="Outstockqty" label="已拣货数量" width="100"></el-table-column>
-
+          <el-table-column prop="PackageNum" label="件数" width="100"></el-table-column>
           <el-table-column prop="Unit" label="单位"></el-table-column>
           <el-table-column prop="Spec" label="规格型号" width="100"></el-table-column>
           <el-table-column prop="Creater" label="创建人" width="120"></el-table-column>
           <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
+          <el-table-column sortable prop="Postdate" label="过账时间" width="180"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -175,13 +227,28 @@ export default {
       queryParam: {
         Erpvoucherno: "",
         Customerno: "",
-        Createtime: ""
+        Customername:"",
+        Createtime: "",
+        Postuser:"",
+        PostStatus:"",
+        Postdate:"",
+        Towarehousenodecs:""
       },
-      Operate: { Erpvoucherno: 9, Customerno: 9 },
+      Operate: { Erpvoucherno: 9, Customerno: 9 ,Customername:9},
       apiUrl: {
         query: "/OutStock/GetV_OutStockListByPage",
         exportXls: "/OutStock/GetV_OutStockDetailListExp"
       },
+       options: [{
+          id: '0',
+          value: '未过账'
+        }, {
+          id: '2',
+          value: '部分过账'
+        }, {
+          id: '3',
+          value: '已过帐'
+        }],
       OutStockDetailList: [],
       outerVisible: false,
 
@@ -209,10 +276,12 @@ export default {
         "未发货数量",
         "已发货数量",
         "已拣货数量",
+        "件数",
         "单位",
         "规格型号",
         "创建人",
-        "创建时间"
+        "创建时间",
+        "过账时间"
       ],
       filterVal: [
         "Erpvoucherno",
@@ -238,10 +307,12 @@ export default {
         "Remainqty",
         "Postqty",
         "Outstockqty",
+        "PackageNum",
         "Unit",
         "Spec",
         "Creater",
-        "Createtime"
+        "Createtime",
+        "Postdate"
       ]
     };
   },

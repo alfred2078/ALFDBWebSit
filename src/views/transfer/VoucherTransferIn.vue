@@ -69,13 +69,13 @@
             <el-col :span="8">
               <el-form-item label>
                 <el-date-picker
-                  v-model="Postdate"
+                  v-model="queryParam.Postdate"
                   type="daterange"
                   range-separator="至"
                   start-placeholder="过账日期"
                   end-placeholder="过账结束日期"
                   value-format="yyyy-MM-dd"
-                   @change="psotdatechange"
+                  
                 ></el-date-picker>
               </el-form-item>
             </el-col>
@@ -218,7 +218,7 @@ export default {
   data() {
     return {
       xlsname: "调拨入单",
-      Postdate:"",
+
       queryParam: {
         Erpvoucherno: "",
         Createtime: "",
@@ -227,8 +227,7 @@ export default {
         PostStatus:"",
         Materialno:"",
         Materialdesc:"",
-        Postdatebigin:"",
-        Postdatend:""
+        Postdate:""
       },
       
       options: [{
@@ -319,7 +318,7 @@ export default {
         }
       });
     },
-    psotdatechange(){
+   /*  psotdatechange(){
       debugger;
       if(this.Postdate!=""&&this.Postdate!=null&&this.Postdate!=undefined)
       {
@@ -330,7 +329,7 @@ export default {
         this.queryParam.Postdatebigin="";
         this.queryParam.Postdatend="";
       }
-    }
+    } */
   }
 };
 </script>

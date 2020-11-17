@@ -9,8 +9,37 @@
                 <el-input v-model="queryParam.Erpvoucherno" placeholder="调拨单号" clearable></el-input>
               </el-form-item>
             </el-col>
-
-            <el-col :span="9">
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Towarehouseno"
+                  placeholder="仓库"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Creater"
+                  placeholder="创建人"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label>
+                <el-select v-model="queryParam.PostStatus" placeholder="过账状态" clearable>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.id"
+                    :label="item.value"
+                    :value="item.id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
               <el-form-item label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
@@ -23,12 +52,40 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="5">
+  
+          </el-row>
+          <el-row>
+
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialno" clearable placeholder="物料编码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input v-model="queryParam.Materialdesc" clearable placeholder="物料名称"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label>
+                <el-date-picker
+                  v-model="queryParam.Postdate"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="过账日期"
+                  end-placeholder="过账结束日期"
+                  value-format="yyyy-MM-dd"
+                 
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1">
               <el-form-item label-width="0">
                 <el-button icon="el-icon-search" type="primary" @click="getModelListPage">查询</el-button>
                 <!--  <el-button icon="el-icon-refresh-right" type="primary">重置</el-button> -->
               </el-form-item>
             </el-col>
+
           </el-row>
         </el-form>
       </el-card>
@@ -81,7 +138,7 @@
             <el-table-column prop="Departmentname" label="部门名称" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column prop="Erpnote" label="备注"></el-table-column>
             <el-table-column prop="Creater" label="创建人"></el-table-column>
-            <el-table-column sortable prop="Createtime" label="创建时间"></el-table-column>
+            <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
             <el-table-column  label="操作">
               <template slot-scope="scope">
                 <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
@@ -120,18 +177,22 @@
           
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-          <el-table-column prop="Fromwarehouseno" label="拨出仓库"></el-table-column>
-          <el-table-column prop="Towarehouseno" label="拨入仓库"></el-table-column>
+          <el-table-column prop="Fromwarehouseno" label="拨出仓库" width="100"></el-table-column>
+          <el-table-column prop="Fromwarehousename" label="拨出仓库名称" width="120"></el-table-column>
+          <el-table-column prop="Towarehouseno" label="拨入仓库" width="100"></el-table-column>
+          <el-table-column prop="Towarehousename" label="拨入仓库名称" width="120"></el-table-column>
           <el-table-column prop="Rowno" label="项次"></el-table-column>
           <el-table-column prop="Rownodel" label="项序"></el-table-column>
           <el-table-column prop="Materialno" label="物料编码" width="100"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称" width="180"></el-table-column>
-          <el-table-column prop="Unitname" label="单位名称"></el-table-column>
-          <el-table-column prop="Voucherqty" label="调拨数量"></el-table-column>
+          <el-table-column prop="Unitname" label="单位名称" width="100"></el-table-column>
+          <el-table-column prop="Spec" label="物料规格"  width="120"></el-table-column>
+          <el-table-column prop="Voucherqty" label="调拨数量" width="100"></el-table-column>
           <el-table-column prop="Outstockqty" label="实际调拨数量" width="120"></el-table-column>
-          <el-table-column prop="Postqty" label="过账数量"></el-table-column>
-          <el-table-column prop="Batchno" label="拨入批次"></el-table-column>
-          <el-table-column prop="Batchno" label="拨出批次"></el-table-column>
+          <el-table-column prop="Postqty" label="过账数量" width="100"></el-table-column>
+          <el-table-column prop="Batchno" label="拨入批次" width="100"></el-table-column>
+          <el-table-column prop="Batchno" label="拨出批次" width="100"></el-table-column>
+          <el-table-column sortable prop="Postdate" label="过账时间" width="220"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -158,12 +219,30 @@ export default {
   data() {
     return {
       xlsname: "调拨出单",
+ 
+
       queryParam: {
         Erpvoucherno: "",
         Createtime: "",
-        Towarehouseno:""
+        Towarehouseno:"",
+        Creater:"",
+        PostStatus:"",
+        Materialno:"",
+        Materialdesc:"",
+        Postdate:"",
+   
       },
-      Operate: { Erpvoucherno: 11 },
+      options: [{
+          id: '0',
+          value: '未过账'
+        }, {
+          id: '2',
+          value: '部分过账'
+        }, {
+          id: '3',
+          value: '已过帐'
+        }],
+      Operate: { Erpvoucherno: 9 },
       apiUrl: {
         query: "/TransferOut/Get_VTransferoutListByPage",
         exportXls: "/TransferOut/Get_TransferoutdetailListByExp"
@@ -177,19 +256,23 @@ export default {
         "部门名称",
         "备注",
         "拨出仓库",
+        "拨出仓库名称",
         "拨入仓库",
+        "拨出仓库名称",
         "项次",
         "项序",
         "物料编码",
         "物料名称",
         "单位名称",
+        "物料规格",
         "调拨数量",
         "实际调拨数量",
         "过账数量",
         "拨入批次",
         "拨出批次",
         "创建人",
-        "创建时间"
+        "创建时间",
+        "过账时间"
       ],
       filterVal: [
         "Erpvoucherno",
@@ -198,19 +281,23 @@ export default {
         "Departmentname",
         "Erpnote",
         "Fromwarehouseno",
+        "Fromwarehousename",
         "Towarehouseno",
+        "Towarehousename",
         "Rowno",
         "Rownodel",
         "Materialno",
         "Materialdesc",
         "Unitname",
+        "Spec",
         "Voucherqty",
         "Outstockqty",
         "Postqty",
         "Batchno",
         "Batchno",
         "Creater",
-        "Createtime"
+        "Createtime",
+        "Postdate"
       ]
     };
   },
@@ -230,7 +317,8 @@ export default {
           min.$message.error(res.ResultValue);
         }
       });
-    }
+    },
+
   }
 };
 </script>
