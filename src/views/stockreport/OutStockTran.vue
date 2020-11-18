@@ -298,7 +298,19 @@ export default {
           colvisible: true,
           width: 60
         },
-       
+        {
+          label: "删除标记",
+          prop: "Isdelname",
+          colvisible: true,
+          width: 120
+        },
+        {
+          
+          label: "出库类型",
+          prop: "Typename",
+          colvisible: true,
+          width: 120
+        },
         {
          
           label: "出库人",
@@ -328,7 +340,8 @@ export default {
         "条码",
         "批次",
         "数量",
-      
+        "删除标记",
+        "出库类型",
         "出库人",
         "出货时间"
       ],
@@ -346,7 +359,8 @@ export default {
         "Barcode",
         "Batchno",
         "Qty",
-     
+        "Isdelname",
+        "Typename",
         "Struserno",
         "Createtime"
       ]

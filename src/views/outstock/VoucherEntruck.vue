@@ -151,6 +151,7 @@
             :cell-style="{ padding: '2px' }"
             :header-row-style="{ height: '30', font: 'normal' }"
             :data="Data"
+            v-loading="loading"
             @selection-change="GetCheckChange"
             ref="Table"
             @current-change="chooseMcaterialChange"
@@ -178,6 +179,7 @@
             <el-table-column prop="OutCostTotal" label="送货费" width="80"></el-table-column>
             <el-table-column prop="CostTotal" label="运费" width="80"></el-table-column>
             <el-table-column prop="SettlementMethodName" label="结算方式" width="100"></el-table-column>
+            <el-table-column prop="SumPackageNum" label="总件数" width="80"></el-table-column>
             <el-table-column prop="SendMethodName" label="提货方式" width="100"></el-table-column>
             <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
             <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
@@ -231,6 +233,7 @@
         <el-table-column prop="Arrvoucherno" label="发货通知单号" width="180"></el-table-column>
         <el-table-column prop="Materialno" label="物料编码"  width="120"></el-table-column>
           <el-table-column prop="Materialdesc" label="物料名称" width="220"></el-table-column>
+          <el-table-column prop="Sumqty" label="件数" width="80"></el-table-column>
           <el-table-column prop="Parametername" label="业务类型" width="120"></el-table-column>
           <el-table-column prop="ProvinceName" label="所属省" width="100"></el-table-column>
           <el-table-column prop="CityName" label="所属市" width="100"></el-table-column>
@@ -238,7 +241,8 @@
           <el-table-column prop="Qty" label="数量"></el-table-column>
           <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
-          <el-table-column prop="Sumqty" label="总件数" width="80"></el-table-column>
+          <el-table-column prop="Creater" label="配货人" width="100"></el-table-column>
+          <el-table-column prop="Postuser" label="过账人" width="100"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -294,6 +298,8 @@ export default {
         "托运单号",
         "客户编码",
         "客户名称",
+        "件数",
+        "总件数",
         "所属省",
         "所属市",
         "所属区",
@@ -317,8 +323,9 @@ export default {
         "数量",
         "项次",
         "项序",
-        "总件数",
-        "创建人",
+        
+        "配货人",
+        "过账人",
         "创建时间"
       ],
       filterVal: [
@@ -326,6 +333,8 @@ export default {
         "Erpvoucherno",
         "Customerno",
         "Customername",
+        "Sumqty",
+        "SumPackageNum",
         "ProvinceName",
         "CityName",
         "RegionName",
@@ -349,8 +358,9 @@ export default {
         "Qty",
         "Rowno",
         "Rownodel",
-        "Sumqty",
+        
         "Creater",
+        "Postuser",
         "Createtime"
       ]
     };
