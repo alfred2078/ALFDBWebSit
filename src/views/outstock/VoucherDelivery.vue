@@ -20,7 +20,7 @@
                 <el-input v-model="queryParam.Customername" placeholder="客户名称" clearable></el-input>
               </el-form-item>
             </el-col>
-             <el-col :span="3">
+            <!--  <el-col :span="3">
               <el-form-item label>
                 <el-input
                   v-model="queryParam.Towarehousenodecs"
@@ -28,7 +28,7 @@
                   clearable
                 ></el-input>
               </el-form-item>
-            </el-col>
+            </el-col> -->
             <el-col :span="9">
               <el-form-item label-width label>
                 <el-date-picker
