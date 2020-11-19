@@ -140,9 +140,9 @@
             <el-table-column prop="Contacts" label="客户联络人姓名" width="150"></el-table-column>
             <el-table-column prop="Tel" label="联络人电话" width="150"></el-table-column>
             <el-table-column prop="LineNo" label="月台" width="150"></el-table-column>
-            <el-table-column prop="Weighttotal" label="总重量" width="100"></el-table-column>
-            <el-table-column prop="Costtotal" label="总费用" width="100"></el-table-column>
-            <el-table-column prop="Outcosttotal" label="送货上门费" width="100"></el-table-column>
+            <el-table-column prop="WeightTotal" label="总重量" width="100"></el-table-column>
+            <el-table-column prop="CostTotal" label="总费用" width="100"></el-table-column>
+            <el-table-column prop="OutCostTotal" label="送货上门费" width="100"></el-table-column>
             <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
             <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
 
@@ -294,9 +294,9 @@ export default {
         "Contacts",
         "Tel",
         "LineNo",
-        "Weighttotal",
-        "Costtotal",
-        "Outcosttotal",
+        "WeightTotal",
+        "CostTotal",
+        "OutCostTotal",
         "Towarehouseno",
         "Rowno",
         "Rownodel",
