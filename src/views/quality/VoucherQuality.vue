@@ -123,9 +123,11 @@
             <el-table-column prop="Unqualityqty" label="不合格数量" width="120"></el-table-column>
             <el-table-column prop="Batchno" label="批次" width="150"></el-table-column>
             <el-table-column prop="Erpstatuscodedesc" label="判断结果" width="120"></el-table-column>
-
             <el-table-column prop="Creater" label="创建人"></el-table-column>
             <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
+            
+            <el-table-column prop="Postuser" label="过账人"></el-table-column>
+            <el-table-column sortable prop="Postdate" label="过账时间" width="190"></el-table-column>
           </el-table>
 
           <!-- 分页区域 -->
@@ -211,7 +213,9 @@ export default {
         "批次",
         "判断结果",
         "创建人",
-        "创建时间"
+        "创建时间",
+        "过账人",
+        "过账时间"
       ],
       filterVal: [
         "Qualityno",
@@ -230,7 +234,9 @@ export default {
         "Batchno",
         "Erpstatuscodedesc",
         "Creater",
-        "Createtime"
+        "Createtime",
+        "Postuser",
+        "Postdate"
       ]
     };
   },

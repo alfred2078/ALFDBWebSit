@@ -110,7 +110,7 @@ export const ALFModelListMixins = {
     },
     getQueryField(queryParam) {      
       let Rules = [];
-  
+  debugger;
       let objKeys = Object.keys(queryParam);
       let OperateLike =  Object.keys(this.Operate);
       let userInfo =Vue.ls.get(USER_INFO);
@@ -161,19 +161,19 @@ export const ALFModelListMixins = {
 
             });
           } else{
-            let disArr = Array.from(new Set(queryParam[key]));
+            let disArr = Array.from(queryParam[key]);
             for (let j = 0, len = disArr.length; j < len; j++) {
-             
+             debugger;
               if (j === 0) {
                 Rules.push({
                   Field: key,
-                  Value: queryParam[key][j],
+                  Value: queryParam[key][j]+'T00:00:00',
                   Operate: 8
                 });
               } else {
                 Rules.push({
                   Field: key,
-                  Value: queryParam[key][j],
+                  Value: queryParam[key][j]+'T23:59:59',
                   Operate: 6
                 });
               }

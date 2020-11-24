@@ -33,8 +33,8 @@
                   v-model="queryParam.Createtime"
                   type="daterange"
                   range-separator="至"
-                  start-placeholder="创建开始日期"
-                  end-placeholder="创建结束日期"
+                  start-placeholder="拼箱开始日期"
+                  end-placeholder="拼箱结束日期"
                   value-format="yyyy-MM-dd"
                 ></el-date-picker>
               </el-form-item>
@@ -70,7 +70,7 @@
               <el-form-item label>
                 <el-input
                   v-model="queryParam.Creater"
-                  placeholder="创建人"
+                  placeholder="拼箱人"
                   clearable
                 ></el-input>
               </el-form-item>
@@ -139,8 +139,8 @@
             <el-table-column prop="Qty" label="数量" width="80"></el-table-column>
             <el-table-column prop="ZQty" label="整箱个数" width="100"></el-table-column>
             <el-table-column prop="SQty" label="散箱个数" width="100"></el-table-column>
-            <el-table-column prop="Creater" label="创建人" width="100"></el-table-column>
-            <el-table-column sortable prop="Createtime" label="创建时间" width="190"></el-table-column>
+            <el-table-column prop="Creater" label="拼箱人" width="100"></el-table-column>
+            <el-table-column sortable prop="Createtime" label="拼箱时间" width="190"></el-table-column>
           </el-table>
 
           <!-- 分页区域 -->
@@ -203,8 +203,8 @@ export default {
         "规格",
         "批次",
         "数量",
-        "创建人",
-        "创建时间"
+        "拼箱人",
+        "拼箱时间"
       ],
       filterVal: [
         "Erpvoucherno",

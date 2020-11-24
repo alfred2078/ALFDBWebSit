@@ -131,6 +131,9 @@
             row-key="id"
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           >
+          <el-table-column prop="Fromwarehouseno" label="拨出仓库" width="100"></el-table-column>
+
+          <el-table-column prop="Towarehouseno" label="拨入仓库" width="100"></el-table-column>
             <el-table-column prop="Erpvoucherno" label="调拨单号" width="180"></el-table-column>
             <el-table-column prop="Parametername" label="单据名称"></el-table-column>
             <!--  <el-table-column prop="code" label="单据日期"> </el-table-column> -->
