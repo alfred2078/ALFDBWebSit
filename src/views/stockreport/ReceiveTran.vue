@@ -22,11 +22,28 @@
               </el-form-item>
             </el-col>
             <el-col :span="3">
+              <el-form-item>
+                <el-select
+                  style="width:100%"
+                  v-model="queryParam.Isdelname"
+                  clearable
+                  placeholder="删除标记"
+                >
+                  <el-option
+                    v-for="item in IsdelnameListAll"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="2">
               <el-form-item label>
                 <el-input v-model="queryParam.Strongholdcode" placeholder="据点" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="3">
+            <el-col :span="2">
               <el-form-item label>
                 <el-input v-model="queryParam.Towarehouseno" placeholder="仓库" clearable></el-input>
               </el-form-item>
@@ -48,7 +65,7 @@
                 <el-input v-model="queryParam.Materialno" placeholder="物料编码" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Materialdesc" placeholder="物料名称" clearable></el-input>
               </el-form-item>
@@ -187,11 +204,22 @@ export default {
         Supplierno:"",
         Suppliername:"",
         Materialdesc:"",
-        Struserno:""
+        Struserno:"",
+        Isdelname:""
       },
       Operate: { Erpvoucherno: 9, Materialno: 9,Materialdesc:9, Batchno: 9, Barcode: 9 ,Serialno:9,Suppliername:9},
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
+      IsdelnameListAll:[
+        {
+          id:0,
+          name:'已删除'
+        },
+        {
+          id:1,
+          name:'未删除'
+        }
+      ],
       apiUrl: {
         query: "/ReceiveTran/GetT_ReceiveTranListByPage",
         save: "",

@@ -50,8 +50,41 @@
           </el-row>
 
           <el-row>
-           
-            <el-col :span="4">
+            <el-col :span="3">
+              <el-form-item>
+                <el-select
+                  style="width:100%"
+                  v-model="queryParam.Tasktype"
+                  clearable
+                  placeholder="出库类型"
+                >
+                  <el-option
+                    v-for="item in TypenameListAll"
+                    :key="item.Parameterid"
+                    :label="item.Parametername"
+                    :value="item.Parameterid"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item>
+                <el-select
+                  style="width:100%"
+                  v-model="queryParam.Isdelname"
+                  clearable
+                  placeholder="删除标记"
+                >
+                  <el-option
+                    v-for="item in IsdelnameListAll"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
               <el-form-item label>
                 <el-input v-model="queryParam.Batchno" placeholder="批次" clearable></el-input>
               </el-form-item>
@@ -61,7 +94,7 @@
                 <el-input v-model="queryParam.Serialno" placeholder="序列号" clearable></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="9">
+            <el-col :span="8">
               <el-form-item label>
                 <el-date-picker
                   v-model="queryParam.Createtime"
@@ -195,11 +228,24 @@ export default {
         Batchno: "",
         Barcode: "",
         Createtime: "",
-        Vouchertype: ""
+        Vouchertype: "",
+        Tasktype:"",
+        Isdelname:""
       },
       Operate: { Erpvoucherno: 9, Materialno: 9, Batchno: 9, Barcode: 9 },
+      IsdelnameListAll:[
+        {
+          id:0,
+          name:'已删除'
+        },
+        {
+          id:1,
+          name:'未删除'
+        }
+      ],
       voucherTyleListAll: [],
       voucherTyleListSelect: [],
+      TypenameListAll:[],
       apiUrl: {
         query: "/OutStockTran/GetT_OutStockTranListByPage",
         save: "",
@@ -378,6 +424,16 @@ export default {
         }
       });
     },
+    getParameterTypenameList() {
+      // queryParam.Groupname = "VoucherRec_Type"
+      let type = "Outstocktran_Type";
+      getParameterList({ Groupname: type }).then(res => {
+        if (res.Result === 1) {
+          // this.ruleListSelect = res.Data.map(item=>item.Ruleid)
+          this.TypenameListAll = res.Data;
+        }
+      });
+    },
     customColumns(){
       this.showData=[];
       var keyList ={};
@@ -416,6 +472,7 @@ export default {
   created() {
     this.getParameterList();
     this.customColumns();
+    this.getParameterTypenameList();
   }
 };
 </script>
