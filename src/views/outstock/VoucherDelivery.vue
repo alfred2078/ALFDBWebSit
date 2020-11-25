@@ -50,6 +50,15 @@
             
           </el-row>
           <el-row>
+            <el-col :span="4">
+              <el-form-item label>
+                <el-input
+                  v-model="queryParam.Creater"
+                  placeholder="配货人"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
           <el-col :span="4">
               <el-form-item label>
                 <el-input
@@ -95,6 +104,7 @@
       </el-card>
     </el-row>
     <el-row>
+      
       <el-card body-style="padding:10px;" type="flex">
         <el-row>
           <el-col :span="2">
@@ -215,6 +225,7 @@
           <el-table-column prop="Spec" label="规格型号" width="100"></el-table-column>
           <el-table-column prop="Creater" label="创建人" width="120"></el-table-column>
           <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
+          <el-table-column prop="Postuser" label="过账人" width="100"></el-table-column>
           <el-table-column sortable prop="Postdate" label="过账时间" width="180"></el-table-column>
         </el-table>
       </div>
@@ -249,7 +260,8 @@ export default {
         PostStatus:"",
         Postdate:"",
         Towarehousenodecs:"",
-        Contacts:""
+        Contacts:"",
+        Creater:""
       },
       Operate: { Erpvoucherno: 9, Customerno: 9 ,Customername:9},
       apiUrl: {
@@ -270,66 +282,10 @@ export default {
       outerVisible: false,
 
       tHeader: [
-        "发货通知单号",
-        "单据名称",
-        "客户编码",
-        /* "客户名称",
-        "通知日期", */
-        "备注",
-        "送货地址",
-        "客户联络人姓名",
-        "联络人电话",
-        "月台",
-        "总重量",
-        "总费用",
-        "送货上门费",
-        "仓库",
-        "项次",
-        "项序",
-        "物料编码",
-        "物料名称",
-        "批次",
-        "订单数量",
-        "未发货数量",
-        "已发货数量",
-        "已拣货数量",
-        /* "件数", */
-        "单位",
-        "规格型号",
-        "配货人",
-        "配货时间",
-        "过账时间"
+   
       ],
       filterVal: [
-        "Erpvoucherno",
-        "Parametername",
-        "Customerno",
-        /* "Customername",
-        "Voudate", */
-        "Erpnote",
-        "Address",
-        "Contacts",
-        "Tel",
-        "LineNo",
-        "WeightTotal",
-        "CostTotal",
-        "OutCostTotal",
-        "Towarehouseno",
-        "Rowno",
-        "Rownodel",
-        "Materialno",
-        "Materialdesc",
-        "Batchno",
-        "Voucherqty",
-        "Remainqty",
-        "Postqty",
-        "Outstockqty",
-       /*  "PackageNum", */
-        "Unit",
-        "Spec",
-        "Creater",
-        "Createtime",
-        "Postdate"
+    
       ]
     };
   },
@@ -429,6 +385,7 @@ export default {
         "规格型号",
         "配货人",
         "配货时间",
+        "过账人",
         "过账时间"
         ];
         this.filterVal=[
@@ -460,6 +417,7 @@ export default {
         "Spec",
         "Creater",
         "Createtime",
+        "Postuser",
         "Postdate"
         
         ];
