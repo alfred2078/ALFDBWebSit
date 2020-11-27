@@ -121,6 +121,9 @@
           <el-table-column prop="Voucherqty" label="验退数量"></el-table-column>
           <el-table-column prop="Unitname" label="单位名称"></el-table-column>
           <el-table-column prop="Batchno" label="批次"></el-table-column>
+          <el-table-column prop="Postuser" label="过账人"></el-table-column>
+          <el-table-column prop="Postdate" label="过账时间"></el-table-column>
+          <el-table-column prop="Poststatusname" label="过账状态"></el-table-column>
         </el-table>
       </div>
     </el-dialog>

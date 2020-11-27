@@ -134,8 +134,16 @@
           <el-col :span="2">
             <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
 
-            <el-button size="small" type="primary" @click="handleExportXls">
-              导出
+            <el-button size="small" type="primary" @click="expOutStock(1)">
+              导出表头
+              <i class="el-icon-download"></i>
+            </el-button>
+          </el-col>
+          <el-col :span="2">
+            <!-- <el-button size="small " icon="el-icon-download" type="primary">导出</el-button> -->
+
+            <el-button size="small" type="primary" @click="expOutStock(2)">
+              导出表体
               <i class="el-icon-download"></i>
             </el-button>
           </el-col>
@@ -471,6 +479,139 @@ export default {
         var Erpvoucherno = this.CheckChangeData[0].Erpvoucherno;
         windowpost(Erpvoucherno, "TWayBill");
       }
+    },
+    expOutStock(expType){
+      debugger;
+      if(expType==1){
+        this.apiUrl.exportXls="/WayBill/Get_WayBillExp";
+        this.tHeader=[
+        "发货通知单号",
+        "托运单号",
+        "客户编码",
+        "客户名称",
+        "物流单号",
+        "发货物流",
+        "到站",
+        "收货人",
+        "收货电话",
+        "备注",
+        "装车发货人",
+        "单价",
+        "重量",
+        "保费",
+        "送货费",
+        "运费",
+        "总件数",
+        "结算方式",
+        "提货方式",
+        "创建人",
+        "创建时间"
+        ];
+        this.filterVal=[
+        "Arrvoucherno",
+        "Erpvoucherno",
+        "Customerno",
+        "Customername",
+        
+        "Trackingnumber",
+        "LogisticsCompany",
+        "Address",
+        "Contacts",
+        "Tel",
+        "Note",
+        "Creater",
+        "PrePrice",
+        "WeightTotal",
+        "InsuranceCost",
+        "OutCostTotal",
+        "CostTotal",
+        "SumPackageNum",
+        "SettlementMethodName",
+        "SendMethodName",   
+        "Creater",
+        "Createtime"
+      
+        ];
+      }else{
+        this.apiUrl.exportXls="/WayBill/GetWayBillDetailExp";
+        this.tHeader=[
+        "发货通知单号",
+        "托运单号",
+        "客户编码",
+        "客户名称",
+        "件数",
+        "总件数",
+        "所属省",
+        "所属市",
+        "所属区",
+        "物流单号",
+        "发货物流",
+        "到站",
+        "收货人",
+        "收货电话",
+        "备注",
+        "装车发货人",
+        "单价",
+        "重量",
+        "保费",
+        "送货费",
+        "运费",
+        "运费盈利",
+        "供应商结算运费",
+        "结算方式",
+        "提货方式",
+        "物料编码",
+        "物料名称",
+        "业务类型",
+        "数量",
+        "项次",
+        "项序",
+        
+        "配货人",
+        "过账人",
+        "创建时间"
+        ];
+        this.filterVal=[
+        "Arrvoucherno",
+        "Erpvoucherno",
+        "Customerno",
+        "Customername",
+        "Sumqty",
+        "SumPackageNum",
+        "ProvinceName",
+        "CityName",
+        "RegionName",
+        "Trackingnumber",
+        "LogisticsCompany",
+        "Address",
+        "Contacts",
+        "Tel",
+        "Note",
+        "Creater",
+        "WeightPrice",
+        "PreWeight",
+        "InsuranceCost",
+        "OutCostTotal",
+        "CostTotal",
+        "FreightProfit",
+        "SullpierSettlementFreight",
+        "SettlementMethodNames",
+        "SendMethodNames",
+        "Materialno",
+        "Materialdesc",
+        "Parametername",
+        "Qty",
+        "Rowno",
+        "Rownodel",
+        
+        "Creater",
+        "Postuser",
+        "Createtime"
+        
+        ];
+      }
+      this.handleExportXls();
+
     }
   }
 };

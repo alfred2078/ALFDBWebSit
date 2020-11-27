@@ -128,6 +128,10 @@
             
             <el-table-column prop="Postuser" label="过账人"></el-table-column>
             <el-table-column sortable prop="Postdate" label="过账时间" width="190"></el-table-column>
+            <el-table-column prop="Posttranqty" label="调拨数量" width="120"></el-table-column>
+            <el-table-column  prop="Posttranstatusname" label="调拨状态" width="120"></el-table-column>
+            <el-table-column prop="Posttranuserno" label="调拨人"></el-table-column>
+            <el-table-column sortable prop="Posttrandate" label="调拨时间" width="190"></el-table-column>
           </el-table>
 
           <!-- 分页区域 -->
@@ -215,7 +219,12 @@ export default {
         "创建人",
         "创建时间",
         "过账人",
-        "过账时间"
+        "过账时间",
+        "调拨数量",
+        "调拨状态",
+        "调拨人",
+        "调拨时间"
+
       ],
       filterVal: [
         "Qualityno",
@@ -236,7 +245,13 @@ export default {
         "Creater",
         "Createtime",
         "Postuser",
-        "Postdate"
+        "Postdate",
+        "Posttranqty",
+        "Posttranstatusname",
+        "Posttranuserno",
+        "Posttrandate"
+
+        
       ]
     };
   },
