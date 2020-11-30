@@ -100,7 +100,8 @@
           Modifyer: "",
           Isdefault:""
         };
-        this.disabled = false
+        this.disabled = false;
+        this.checked=false;
       },
       add() {
         this.resetTempForm();
@@ -109,14 +110,17 @@
         });
       },
       edit(record) {
-        this.visible = true;
-        this.checked = this.tempForm.Isdefault == 2 ? true : false;
+        
+        
         this.tempForm = Object.assign({}, record);        
         this.$nextTick(() => {
           this.$refs["tempForm"].clearValidate();
         });
+        this.checked = this.tempForm.Isdefault == 2 ? true : false;
+        this.visible = true;
       },
       SaveModel() {
+        debugger;
         delete this.tempForm.Createtime; 
         this.$refs["tempForm"].validate(valid => {
           if (valid) {
