@@ -83,8 +83,10 @@
             <el-table-column prop="Strongholdcode" label="据点" width="80"></el-table-column>
             <el-table-column prop="Serialno" label="序列号" width="120"></el-table-column>
             <el-table-column prop="Areano" label="实盘库位" width="100"></el-table-column>
+            <el-table-column prop="Batchno" label="实盘批次" width="100"></el-table-column>
             <el-table-column prop="Qty" label="实盘数量" width="100"></el-table-column>
             <el-table-column prop="Sareano" label="帐存库位" width="100"></el-table-column>
+            <el-table-column prop="Sbatchno" label="帐存批次" width="100"></el-table-column>
             <el-table-column prop="Bqty" label="帐存数量" width="100"></el-table-column>
             <el-table-column prop="Yqty" label="盘盈数量" width="100"></el-table-column>
             <el-table-column prop="Kqty" label="盘亏数量" width="100"></el-table-column>
@@ -138,8 +140,10 @@ export default {
         "Strongholdcode",
         "Serialno",
         "Areano",
+        "Batchno",
         "Qty",
         "Sareano",
+        "Sbatchno",
         "Bqty",
         "Yqty",
         "Kqty",
@@ -155,8 +159,10 @@ export default {
         "据点",
         "序列号",
         "实盘库位",
+        "实盘批次",
         "实盘数量",
         "帐存库位",
+        "帐存批次",
         "帐存数量",
         "盘盈数量",
         "盘亏数量",
