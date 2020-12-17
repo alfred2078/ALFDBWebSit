@@ -364,7 +364,7 @@ export default {
         "Towarehouseno",
         "Strtowarehouseno",
         "Toareano",
-        "StrVoucherType",
+        "Strvouchertype",
         "Erpvoucherno",
         "Supplierno",
         "Suppliername",
