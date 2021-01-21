@@ -40,7 +40,7 @@ const getWorkOrderList= (params)=>postAction("WorkOrder/GetT_WorkOrderHeadListAD
 
 
 const  UploadFile= (params)=>postAction("Print/InitialPrint",params); //期初打印
-const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8011/Main.aspx",params,name);//正式预览打印地址
+const windowpost=(params,name)=>openPostWindow("http://172.19.106.190:7004/Main.aspx",params,name);//正式预览打印地址
 // const windowpost=(params,name)=>openPostWindow("http://localhost:34590/Main.aspx",params,name);// 本地预览打印地址
 //const windowpost=(params,name)=>openPostWindow("http://172.19.106.230:8055/Main.aspx",params,name);// 用户测试预览打印地址
 
@@ -61,6 +61,7 @@ const getOutStockGroupByWarehou =(params)=>postAction("OutStockTran/GetT_OutStoc
 const GetOutStockGroupByMaterialno =(params)=>postAction("OutStockTran/GetT_OutStockGroupByMaterialno",params);//首页统计出库前10的物料数量
 //盘点管理
 const getTCheckListByPage =(params)=>postAction("Check/GetT_CheckListByPage",params);//查询盘点
+const getTCheckListEX =(params)=>postAction("Check/GetV_CheckDetailsListEx",params);//导出盘点
 const getTCheckDetails =(params)=>postAction("Check/GetT_CheckDetails",params);//查询盘点详细
 const reSaveTCheck =(params)=>postAction("Check/ReSaveT_Check",params);//新增复盘
 const updateTCheckAsync =(params)=>postAction("Check/UpdateT_CheckAsync",params);//修改
@@ -165,7 +166,8 @@ export{
     getVOtherOutDetail,
     getWayBillDetailHeaderidsub,
     getWayBillDetail,
-    getStockDifferenceWmsAndErp
+    getStockDifferenceWmsAndErp,
+    getTCheckListEX
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 

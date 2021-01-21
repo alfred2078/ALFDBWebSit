@@ -98,6 +98,12 @@
             <el-button size="small" icon type="primary" @click="Proloss">盈亏分析</el-button>
           </el-col>
           <el-col :span="2">
+            <el-button size="small" type="primary" @click="getTCheckListEX">
+              导出
+              <i class="el-icon-download"></i>
+            </el-button>
+          </el-col>
+          <el-col :span="2">
            <!--  <el-popconfirm title="您确定要对此盘点单进行差异复盘吗？" @onConfirm="ReCheck">
               <el-button size="small" type="primary" slot="reference">差异复盘</el-button>
             </el-popconfirm> -->
@@ -112,7 +118,7 @@
             :data="Data"
             @selection-change="GetCheckChange"
             ref="Table"
-            @current-change="chooseMcaterialChange"
+           
             border
             :row-style="{ height: '30' }"
             :cell-style="{ padding: '2px' }"
@@ -208,8 +214,10 @@ import {
   reSaveTCheck,
   getTCheckDetails,
   updateTCheckAsync,
-  getTParameterList
+  getTParameterList,
+  getTCheckListEX
 } from "@/api/api";
+import { postAction } from "@/api/manage";
 import { USER_NAME,USER_INFO } from "@/store/mutation-types";
 import Vue from "vue";
 import store from "@/store";
@@ -247,9 +255,47 @@ export default {
         Towarehouseno:""
       },
       Operate: { Erpvoucherno: 9 ,Towarehouseno:9},
+      xlsname: "table单号",
       apiUrl: {
-        query: "/Check/GetT_CheckListByPage"
+        query: "/Check/GetT_CheckListByPage",
+        exportXls: "/Check/GetV_CheckDetailsListEx"
       },
+      tHeader: [
+        "盘点单号",
+        "仓库编码",
+        "仓库名称",
+        "库区编码",
+        "实盘库位",
+        "实盘数量",
+        "物料编码",
+        "物料名称",
+        "69码",
+        "批次",
+        "盘点人",
+        "盘点时间",
+        "状态",
+        "备注",
+        "创建人",
+        "创建时间"
+      ],
+      filterVal: [
+        "Erpvoucherno",
+        "Warehouseno",
+        "Warehousename",
+        "Houseno",
+        "Areano",
+        "Qty",
+        "Materialno",
+        "Materialdesc",
+        "Watercode",
+        "Batchno",
+        "Checkname",
+        "Checktiem",
+        "Parametername",
+        "Remarks",
+        "Creater",
+        "Createtime"
+      ],
       columns: [
         {
           label: "盘点单号",
@@ -293,7 +339,8 @@ export default {
           colvisible: true,
           width: 180
         }
-      ]
+      ],
+      tableData: [],
     };
   },
   created() {
@@ -302,12 +349,7 @@ export default {
     this.UserId();
   },
 
-  /*    beforeRouteLeave (to, from, next) {
-      
-   // 销毁组件，避免通过vue-router再次进入时，仍是上次的history缓存的状态
-   this.$destroy(true)
-   next()
- }　　, */
+
   methods: {
     SaveT_Check() {},
     UserId(){
@@ -325,7 +367,15 @@ export default {
     },
     //盈亏分析跳转页面
     Proloss() {
-       
+       if (
+        this.CheckChangeData.length > 1 
+      ) {
+        this.$message({
+          message: "只能勾选一张盘点单进行盈亏分析",
+          type: "warning"
+        });
+        return;
+      }
       store.dispatch("getErpvoucherno", this.CheckChangeData[0].Erpvoucherno);
       this.$router.push({
         path: "/instore/inventoryproloss"
@@ -462,8 +512,9 @@ export default {
     },
     //table选中，只能选中一行 不能多选
     GetCheckChange(val) {
-       
-      if (val.length > 1) {
+       debugger;
+       //只能选中一行
+      /* if (val.length > 1) {
         this.$refs.Table.clearSelection();
         this.$refs.Table.toggleRowSelection(val.pop());
         //return;
@@ -471,9 +522,14 @@ export default {
         this.CheckChangeData = {};
         this.CheckChangeData = val;
         console.log(this.CheckChangeData);
-      }
+      } */
+      //导出需要选中多行
+      this.CheckChangeData = {};
+      this.CheckChangeData = val;
     },
     chooseMcaterialChange(val) {
+      // @current-change="chooseMcaterialChange"   table注释@current-change事件
+      debugger;
       this.$refs.Table.toggleRowSelection(val);
     },
     //复盘
@@ -500,6 +556,14 @@ export default {
           type: "warning"
         });
         return;
+      }else if (
+        min.CheckChangeData.length > 1 
+      ) {
+        min.$message({
+          message: "一次只能复盘一张盘点单",
+          type: "warning"
+        });
+        return;
       }
        
       min.CheckChangeData[0].Creater = Vue.ls.get(USER_NAME);
@@ -515,6 +579,55 @@ export default {
           min.$message.error(res.ResultValue);
         }
       });
+    },
+    getTCheckListEX(){
+      var min =this;
+      if (
+        min.CheckChangeData.length == 0 ||
+        min.CheckChangeData.length == undefined
+      ) {
+        min.$message({
+          message: "请勾选需要导出的盘点单号",
+          type: "warning"
+        });
+        return;
+      }
+      
+      min.CheckChangeData.forEach(
+        t=>{
+          var model={};
+          model.Erpvoucherno=t.Erpvoucherno;
+          getTCheckListEX(model).then(res => {
+            debugger;
+            if (res.Result == 1) {
+              
+              min.tableData = res.Data;
+              min.xlsname = t.Erpvoucherno;
+              min.exportToExcel();
+            } else {
+              min.$message.error(res.ResultValue);
+            }
+          });
+
+      });
+      
+
+    },
+    exportToExcel() {
+     // this.getInfo();
+      debugger;
+      require.ensure([], () => {
+        const { export_json_to_excel } = require("exportexcel/Export2Excel");
+
+        const xlsdata = this.formatJson(this.filterVal, this.tableData);
+        console.log(this.exportList);
+
+        export_json_to_excel(this.tHeader, xlsdata, this.xlsname);
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      debugger;
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
   }
 };
