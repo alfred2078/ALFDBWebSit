@@ -220,13 +220,16 @@
           <el-table-column prop="Remainqty" label="未发货数量" width="100"></el-table-column>
           <el-table-column prop="Postqty" label="已发货数量" width="100"></el-table-column>
           <el-table-column prop="Outstockqty" label="已拣货数量" width="100"></el-table-column>
-          <el-table-column prop="PackageNum" label="件数" width="100"></el-table-column>
+          <el-table-column prop="PackageNum" label="总件数" width="100"></el-table-column>
+          <el-table-column prop="SystemCartonNum" label="整箱数" width="100"></el-table-column>
+          <el-table-column prop="SystemPackageCartonNum" label="散件数" width="100"></el-table-column>
+          <el-table-column prop="PackageCode" label="拼箱码" width="155"></el-table-column>
           <el-table-column prop="Unit" label="单位"></el-table-column>
           <el-table-column prop="Spec" label="规格型号" width="100"></el-table-column>
           <el-table-column prop="Creater" label="创建人" width="120"></el-table-column>
-          <el-table-column sortable prop="Createtime" label="创建时间" width="180"></el-table-column>
+          <el-table-column sortable prop="Createtime" label="创建时间" width="210"></el-table-column>
           <el-table-column prop="Postuser" label="过账人" width="100"></el-table-column>
-          <el-table-column sortable prop="Postdate" label="过账时间" width="180"></el-table-column>
+          <el-table-column sortable prop="Postdate" label="过账时间" width="210"></el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -300,6 +303,7 @@ export default {
       getOutStockDetail(model).then(res => {
         debugger;
         if (res.Result == 1) {
+          debugger;
           min.OutStockDetailList = res.Data;
         } else {
           min.$message.error(res.ResultValue);
@@ -380,7 +384,10 @@ export default {
         "未发货数量",
         "已发货数量",
         "已拣货数量",
-        /* "件数", */
+        "总件数", 
+        "整箱数",
+        "散件数",
+        "拼箱码",
         "单位",
         "规格型号",
         "配货人",
@@ -412,7 +419,10 @@ export default {
         "Remainqty",
         "Postqty",
         "Outstockqty",
-       /*  "PackageNum", */
+        "PackageNum",
+        "SystemCartonNum",
+        "SystemPackageCartonNum",
+        "PackageCode",
         "Unit",
         "Spec",
         "Creater",
