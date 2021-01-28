@@ -99,7 +99,7 @@
           </el-col>
           <el-col :span="2">
             <el-button size="small" type="primary" @click="getTCheckListEX">
-              导出
+              导出 
               <i class="el-icon-download"></i>
             </el-button>
           </el-col>

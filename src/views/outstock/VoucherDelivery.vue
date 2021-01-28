@@ -221,7 +221,7 @@
           <el-table-column prop="Postqty" label="已发货数量" width="100"></el-table-column>
           <el-table-column prop="Outstockqty" label="已拣货数量" width="100"></el-table-column>
           <el-table-column prop="PackageNum" label="总件数" width="100"></el-table-column>
-          <el-table-column prop="SystemCartonNum" label="整箱数" width="100"></el-table-column>
+          <el-table-column prop="SystemCartonNum" label="整箱数"  width="100"></el-table-column>
           <el-table-column prop="SystemPackageCartonNum" label="散件数" width="100"></el-table-column>
           <el-table-column prop="PackageCode" label="拼箱码" width="155"></el-table-column>
           <el-table-column prop="Unit" label="单位"></el-table-column>
