@@ -186,6 +186,11 @@
                 show-overflow-tooltip
               ></el-table-column>
             </template>
+            <el-table-column fixed="right" label="操作">
+              <template slot-scope="scope">
+                <el-button @click="detail(scope.row)" type="text" size="mini">详情</el-button>
+              </template>
+            </el-table-column>
           </el-table>
 
           <pagination
@@ -197,6 +202,50 @@
         </el-container>
       </el-main>
     </el-row>
+    <el-dialog title="盘点单---详情" width="90%"  :show-close="true" :visible.sync="outerVisible">
+      <div
+        :style="{          
+          border: '1px solid #e9e9e9',
+          padding: '5px 10px',
+          background: '#fff',
+          
+        }"
+      >
+        <el-table
+          :data="detailsData"
+          border
+          :row-style="{ height: '30' }"
+          :cell-style="{ padding: '2px' }"
+          :header-row-style="{ height: '30', font: 'normal' }"
+          :header-cell-style="{ padding: '2px', background: '#f6f6f6' }"
+          style="width: 100%"
+          height="500"
+          row-key="id"
+          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+        >
+
+          <el-table-column prop="Rowno" label="行号"></el-table-column>
+          <el-table-column prop="Towarehouseno" label="仓库编号" width="100"></el-table-column>
+          <el-table-column prop="Materialno" label="物料编码" width="120"></el-table-column>
+          <el-table-column prop="Materialdesc" label="物料名称" width="120"></el-table-column>
+          <el-table-column prop="Batchno" label="批次" width="120"></el-table-column>
+          <el-table-column prop="Barcode" label="条码" width="280"></el-table-column>
+          <el-table-column prop="Serialno" label="序列号" width="120"></el-table-column>
+          <el-table-column prop="Erpvoucherno" label="单号" width="180"></el-table-column>
+          <el-table-column prop="Parametername" label="单据类型" width="120"></el-table-column>
+          <el-table-column prop="Qty" label="数量" width="80"></el-table-column>
+          
+          <el-table-column prop="Strongholdcode" label="据点编号" width="120"></el-table-column>
+          <el-table-column prop="Strongholdname" label="据点名称" width="120"></el-table-column>
+          
+          <el-table-column prop="Unit" label="单位" width="80"></el-table-column>
+          <el-table-column prop="Spec" label="规格" width="120"></el-table-column>
+          <el-table-column prop="Edate" label="有效期" width="120"></el-table-column>
+          <el-table-column prop="Username" label="创建人" width="120"></el-table-column>
+          <el-table-column prop="Createtime" label="创建时间" width="220"></el-table-column>
+        </el-table>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -206,7 +255,7 @@
 <script>
 import { ALFModelListMixins } from "@/mixins/ALFModelListMixins";
 import Pagination from "@/components/Pagination";
-import { windowpost } from "@/api/api";
+import { windowpost,getTScanDetailSub } from "@/api/api";
 export default {
   name: "stockreport-stockdetail",
   mixins: [ALFModelListMixins],
@@ -216,6 +265,8 @@ export default {
   },
   data() {
     return {
+      detailsData:[],
+      outerVisible: false,
       xlsname: "库存明细",
       queryParam: {
         Towarehouseno: "",
@@ -496,6 +547,24 @@ this.$nextTick(() => {
       });
       return sums;
     }, */
+    //详情
+    detail(val) {
+       
+      var min = this;
+      min.outerVisible = true;
+      min.detailsData = [];
+      min.model = {};
+      min.model.Towarehouseno = val.Towarehouseno;
+      min.model.Materialno = val.Materialno;
+      getTScanDetailSub(min.model).then(res => {
+        if (res.Result == 1) {
+          min.detailsData = res.Data;
+          console.log(min.detailsData);
+        } else {
+          min.$message.error(res.ResultValue);
+        }
+      });
+    },
     changeFun(val) {
       this.multipleSelection = val;
     },

@@ -13,7 +13,7 @@ const saveArea = (params)=>postAction("Area/SaveT_AreaAsync",params);
 const updateArea = (params)=>postAction("Area/UpdateT_AreaAsync",params);
 const getWarehouseListAll = (params)=>postAction("Warehouse/GetT_WarehouseListAll",params);
 const getWarehouseListByUserID = (params)=>postAction("Warehouse/GetT_WarehouseListByUserIDAsync",params);
-
+const getTScanDetailSub = (params)=>postAction("Stock/GetT_ScanDetailSub",params);
 //角色管理
 const saveRule = (params)=>postAction("Rule/SaveT_RuleAsync",params);
 const updateRule = (params)=>postAction("Rule/UpdateT_RuleAsync",params);
@@ -167,7 +167,8 @@ export{
     getWayBillDetailHeaderidsub,
     getWayBillDetail,
     getStockDifferenceWmsAndErp,
-    getTCheckListEX
+    getTCheckListEX,
+    getTScanDetailSub
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 
