@@ -342,7 +342,7 @@ export default {
         "Customerno",
        /*  "Customername",
         "Voudate", */
-        "Erpnote",
+        "Erpnote", 
         "Address",
         "Contacts",
         "Tel",
