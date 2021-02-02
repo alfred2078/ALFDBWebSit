@@ -302,7 +302,7 @@ export default {
           prop: "Erpvoucherno",
           colvisible: true,
           width: 145
-        },
+        }, 
         {
           label: "仓库编码",
           prop: "Warehouseno",
