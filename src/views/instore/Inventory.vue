@@ -357,7 +357,7 @@ export default {
       var userInfo =Vue.ls.get(USER_INFO);
       var modelListWarehouse = userInfo.modelListWarehouse;
       console.log(modelListWarehouse);
-      //this.queryParam.Userid=userid;
+     /*  //this.queryParam.Userid=userid; */
 
     },
     //重置
