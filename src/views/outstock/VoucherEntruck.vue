@@ -539,7 +539,7 @@ export default {
         "托运单号",
         "客户编码",
         "客户名称",
-        "件数",
+        /* "件数", */
         "总件数",
         "所属省",
         "所属市",
@@ -576,7 +576,7 @@ export default {
         "Erpvoucherno",
         "Customerno",
         "Customername",
-        "Sumqty",
+        /* "Sumqty", */
         "SumPackageNum",
         "ProvinceName",
         "CityName",
