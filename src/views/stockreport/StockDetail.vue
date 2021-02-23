@@ -202,7 +202,7 @@
         </el-container>
       </el-main>
     </el-row>
-    <el-dialog title="盘点单---详情" width="90%"  :show-close="true" :visible.sync="outerVisible">
+    <el-dialog title="库存明细---详情" width="90%"  :show-close="true" :visible.sync="outerVisible">
       <div
         :style="{          
           border: '1px solid #e9e9e9',
