@@ -105,7 +105,7 @@
           </el-col>
           <el-col :span="2">
             <el-button size="small" type="primary" @click="expOutStock(2)">
-              财务盘点导出
+              汇总导出
               <i class="el-icon-download"></i>
             </el-button>
           </el-col>
