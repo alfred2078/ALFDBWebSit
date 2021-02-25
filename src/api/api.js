@@ -62,6 +62,7 @@ const GetOutStockGroupByMaterialno =(params)=>postAction("OutStockTran/GetT_OutS
 //盘点管理
 const getTCheckListByPage =(params)=>postAction("Check/GetT_CheckListByPage",params);//查询盘点
 const getTCheckListEX =(params)=>postAction("Check/GetV_CheckDetailsListEx",params);//导出盘点 
+const getFinanceTCheckAnalyzeEx =(params)=>postAction("Check/GetFinanceTCheckAnalyzeEx",params);//财务导出盘点 
 const getTCheckDetails =(params)=>postAction("Check/GetT_CheckDetails",params);//查询盘点详细
 const reSaveTCheck =(params)=>postAction("Check/ReSaveT_Check",params);//新增复盘
 const updateTCheckAsync =(params)=>postAction("Check/UpdateT_CheckAsync",params);//修改
@@ -168,7 +169,8 @@ export{
     getWayBillDetail,
     getStockDifferenceWmsAndErp,
     getTCheckListEX,
-    getTScanDetailSub
+    getTScanDetailSub,
+    getFinanceTCheckAnalyzeEx
 }
 //post 表单提交
 function openPostWindow(url, data,name) { 

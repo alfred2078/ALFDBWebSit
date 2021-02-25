@@ -98,8 +98,14 @@
             <el-button size="small" icon type="primary" @click="Proloss">盈亏分析</el-button>
           </el-col>
           <el-col :span="2">
-            <el-button size="small" type="primary" @click="getTCheckListEX">
-              导出 
+            <el-button size="small" type="primary" @click="expOutStock(1)">
+              导出详情
+              <i class="el-icon-download"></i>
+            </el-button>
+          </el-col>
+          <el-col :span="2">
+            <el-button size="small" type="primary" @click="expOutStock(2)">
+              财务盘点导出
               <i class="el-icon-download"></i>
             </el-button>
           </el-col>
@@ -215,7 +221,8 @@ import {
   getTCheckDetails,
   updateTCheckAsync,
   getTParameterList,
-  getTCheckListEX
+  getTCheckListEX,
+  getFinanceTCheckAnalyzeEx
 } from "@/api/api";
 import { postAction } from "@/api/manage";
 import { USER_NAME,USER_INFO } from "@/store/mutation-types";
@@ -247,6 +254,7 @@ export default {
       GetCheck: [],
       detailsData: [],
       CheckChangeData: {},
+      expType:1,
       queryParam: {
         Erpvoucherno: "",
         Checkstatus: "",
@@ -597,18 +605,34 @@ export default {
         t=>{
           var model={};
           model.Erpvoucherno=t.Erpvoucherno;
-          getTCheckListEX(model).then(res => {
-            debugger;
-            if (res.Result == 1) {
-              
-              min.tableData = res.Data;
-              min.xlsname = t.Erpvoucherno;
-              min.exportToExcel();
-            } else {
-              min.$message.error(res.ResultValue);
-            }
-          });
-
+          if(this.expType==1)
+          {
+            getTCheckListEX(model).then(res => {
+              debugger;
+              if (res.Result == 1) {
+                
+                min.tableData = res.Data;
+                min.xlsname = t.Erpvoucherno;
+                min.exportToExcel();
+              } else {
+                min.$message.error(res.ResultValue);
+              }
+            });
+          }
+          else
+          {
+            getFinanceTCheckAnalyzeEx(model).then(res => {
+              debugger;
+              if (res.Result == 1) {
+                
+                min.tableData = res.Data;
+                min.xlsname = t.Erpvoucherno;
+                min.exportToExcel();
+              } else {
+                min.$message.error(res.ResultValue);
+              }
+            });
+          }
       });
       
 
@@ -628,6 +652,85 @@ export default {
     formatJson(filterVal, jsonData) {
       debugger;
       return jsonData.map(v => filterVal.map(j => v[j]));
+    },
+    expOutStock(expType){
+      this.expType=expType;
+      if(this.expType==1)
+      {
+        this.tHeader= [
+        "盘点单号",
+        "仓库编码",
+        "仓库名称",
+        "库区编码",
+        "物料编码",
+        "物料名称",
+        "实盘库位",
+        "实盘数量",
+        "69码",
+        "批次",
+        "盘点人",
+        "盘点时间",
+        "状态",
+        "备注",
+        "创建人", 
+        "创建时间"
+        ];
+       this.filterVal=[
+        "Erpvoucherno",
+        "Warehouseno",
+        "Warehousename",
+        "Houseno",
+        "Materialno",
+        "Materialdesc",
+        "Areano",
+        "Qty",
+        
+        "Watercode",
+        "Batchno",
+        "Checkname",
+        "Checktiem",
+        "Parametername",
+        "Remarks",
+        "Creater",
+        "Createtime"
+        ];
+      }
+      else
+      {
+        this.tHeader= [
+        "盘点单号",
+        "仓库编码",
+        "物料编码",
+        "物料名称",
+        "实盘库位",
+        "实盘数量",
+        "账存库位",
+        "账存数量",
+        
+        "69码",
+        "状态",
+        "备注",
+        "创建人", 
+        "创建时间"
+        ];
+       this.filterVal=[
+        "Erpvoucherno",
+        "Warehouseno",
+        "Materialno",
+        "Materialdesc",
+        "Areano",
+        "Qty",
+        "Sareano",
+        "Sqty",
+        
+        "Watercode",
+        "Parametername",
+        "Remarks",
+        "Creater",
+        "Createtime"
+        ];
+      }
+      this.getTCheckListEX();
     }
   }
 };
