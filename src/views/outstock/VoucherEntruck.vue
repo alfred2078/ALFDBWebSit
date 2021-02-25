@@ -185,7 +185,7 @@
             <el-table-column prop="WeightTotal" label="重量" width="80"></el-table-column>
             <el-table-column prop="InsuranceCost" label="保费" width="80"></el-table-column>
             <el-table-column prop="OutCostTotal" label="送货费" width="80"></el-table-column>
-            <el-table-column prop="CostTotal" label="运费" width="80"></el-table-column>
+            <el-table-column prop="CostTotal" label="总运费" width="80"></el-table-column>
             <el-table-column prop="SettlementMethodName" label="结算方式" width="100"></el-table-column>
             <el-table-column prop="SumPackageNum" label="总件数" width="80"></el-table-column>
             <el-table-column prop="SendMethodName" label="提货方式" width="100"></el-table-column>
@@ -250,7 +250,7 @@
           <el-table-column prop="Rowno" label="项次" width="80"></el-table-column>
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
           <el-table-column prop="OutCostTotal" label="送货费" width="80"></el-table-column>
-          <el-table-column prop="CostTotal" label="运费" width="80"></el-table-column>
+          <el-table-column prop="CostTotal" label="总运费" width="80"></el-table-column>
            <el-table-column prop="FreightProfit" label="运费盈利" width="100"></el-table-column>
           <el-table-column prop="WeightPrice" label="单价" width="80"></el-table-column>
          
@@ -500,7 +500,7 @@ export default {
         "重量",
         "保费",
         "送货费",
-        "运费",
+        "总运费",
         "总件数",
         "结算方式",
         "提货方式",
@@ -555,7 +555,7 @@ export default {
         "重量",
         "保费",
         "送货费",
-        "运费",
+        "总运费",
         "运费盈利",
         "供应商结算运费",
         "结算方式",
