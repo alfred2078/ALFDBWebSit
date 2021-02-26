@@ -602,13 +602,12 @@ export default {
       }
       
       min.CheckChangeData.forEach(
-        t=>{
+       t =>{
           var model={};
           model.Erpvoucherno=t.Erpvoucherno;
           if(this.expType==1)
           {
             getTCheckListEX(model).then(res => {
-              debugger;
               if (res.Result == 1) {
                 
                 min.tableData = res.Data;
@@ -621,33 +620,48 @@ export default {
           }
           else
           {
-            getFinanceTCheckAnalyzeEx(model).then(res => {
-              debugger;
+
+             getFinanceTCheckAnalyzeEx(model).then( res => {
               if (res.Result == 1) {
                 
                 min.tableData = res.Data;
                 min.xlsname = t.Erpvoucherno;
+                //setTimeout(min.exportToExcel(), 2000)
                 min.exportToExcel();
               } else {
                 min.$message.error(res.ResultValue);
               }
-            });
+            })
           }
       });
+
+     
       
 
     },
+    
     exportToExcel() {
-     // this.getInfo();
-      debugger;
-      require.ensure([], () => {
+
+     
+      /* require.ensure([], () => {
+        debugger;
+        console.log('打印了');
         const { export_json_to_excel } = require("exportexcel/Export2Excel");
 
         const xlsdata = this.formatJson(this.filterVal, this.tableData);
         console.log(this.exportList);
 
         export_json_to_excel(this.tHeader, xlsdata, this.xlsname);
-      });
+      }); */
+      import("exportexcel/Export2Excel").then(s=>{
+         console.log('打印了');
+        const { export_json_to_excel } = require("exportexcel/Export2Excel");
+
+        const xlsdata = this.formatJson(this.filterVal, this.tableData);
+        console.log(this.exportList);
+
+        export_json_to_excel(this.tHeader, xlsdata, this.xlsname);
+      })
     },
     formatJson(filterVal, jsonData) {
       debugger;
