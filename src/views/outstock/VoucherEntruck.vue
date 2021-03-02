@@ -251,10 +251,10 @@
           <el-table-column prop="Rownodel" label="项序" width="80"></el-table-column>
           <el-table-column prop="OutCostTotal" label="送货费" width="80"></el-table-column>
           <el-table-column prop="CostTotal" label="总运费" width="80"></el-table-column>
-           <el-table-column prop="FreightProfit" label="运费盈利" width="100"></el-table-column>
+           <el-table-column prop="FreightProfit" label="费用YL" width="100"></el-table-column>
           <el-table-column prop="WeightPrice" label="单价" width="80"></el-table-column>
          
-          <el-table-column prop="SullpierSettlementFreight" label="供应商结算运费" width="140"></el-table-column>
+          <el-table-column prop="SullpierSettlementFreight" label="费用CB" width="140"></el-table-column>
           <el-table-column prop="PreWeight" label="商品重量" width="100"></el-table-column>
           <el-table-column prop="Creater" label="配货人" width="100"></el-table-column>
           <el-table-column prop="Postuser" label="过账人" width="100"></el-table-column>
@@ -330,8 +330,8 @@ export default {
         "保费",
         "送货费",
         "运费",
-        "运费盈利",
-        "供应商结算运费",
+        "费用YL",
+        "费用CB",
         "结算方式",
         "提货方式",
         "物料编码",
@@ -556,8 +556,8 @@ export default {
         "保费",
         "送货费",
         "总运费",
-        "运费盈利",
-        "供应商结算运费",
+        "费用YL",
+        "费用CB",
         "结算方式",
         "提货方式",
         "物料编码",
